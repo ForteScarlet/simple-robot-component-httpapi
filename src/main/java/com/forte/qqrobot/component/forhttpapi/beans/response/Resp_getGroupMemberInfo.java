@@ -1,14 +1,28 @@
 package com.forte.qqrobot.component.forhttpapi.beans.response;
 
+import com.forte.qqrobot.beans.messages.types.PowerType;
+import com.forte.qqrobot.beans.messages.types.SexType;
+
 /**
  * @author Ricardo
  * @create 2019-03-22 16:44
  **/
 
-public class Resp_getGroupMemberInfo implements RespBean<Resp_getGroupMemberInfo.GroupMemberInfo> {
+public class Resp_getGroupMemberInfo implements com.forte.qqrobot.beans.messages.result.GroupMemberInfo,  RespBean<Resp_getGroupMemberInfo.GroupMemberInfo> {
     private Integer status;
     private GroupMemberInfo result;
     private String errMsg;
+    private String originalData;
+
+    @Override
+    public String getOriginalData() {
+        return originalData;
+    }
+
+    public void setOriginalData(String originalData) {
+        this.originalData = originalData;
+    }
+
 
     @Override
     public String getErrMsg() {
@@ -35,6 +49,146 @@ public class Resp_getGroupMemberInfo implements RespBean<Resp_getGroupMemberInfo
     @Override
     public GroupMemberInfo getResult() {
         return result;
+    }
+
+    /**
+     * 获取群号
+     */
+    @Override
+    public String getCode() {
+        return result.getGroup();
+    }
+
+    /**
+     * 成员QQ号
+     */
+    @Override
+    public String getQQ() {
+        return result.getQq();
+    }
+
+    /**
+     * qq昵称
+     */
+    @Override
+    public String getName() {
+        return result.getName();
+    }
+
+    /**
+     * 群昵称
+     */
+    @Override
+    public String getNickName() {
+        return result.getName();
+    }
+
+    /**
+     * 群名片
+     */
+    @Override
+    public String getCard() {
+        return result.getCard();
+    }
+
+    /**
+     * 获取性别 -1:男，1:女，0:未知
+     */
+    @Override
+    public SexType getSex() {
+        Integer gender = result.getGender();
+        return gender == 0 ? SexType.MALE : gender == 1 ? SexType.FEMALE : SexType.UNKNOWN;
+    }
+
+    /**
+     * 所在城市
+     */
+    @Override
+    public String getCity() {
+        return result.getCity();
+    }
+
+    /**
+     * 加群时间
+     */
+    @Override
+    public Long getJoinTime() {
+        return Long.parseLong(result.getJoinTime());
+    }
+
+    /**
+     * 最后一次发言时间
+     */
+    @Override
+    public Long getLastTime() {
+        return Long.parseLong(result.getLastTime());
+    }
+
+    /**
+     * 权限类型
+     */
+    @Override
+    public PowerType getPowerType() {
+        Integer power = result.getPower();
+        return power == 1 ? PowerType.MEMBER : power == 2 ? PowerType.MEMBER : PowerType.OWNER;
+    }
+
+    /**
+     * 获取专属头衔
+     */
+    @Override
+    public String getExTitle() {
+        return result.getTip();
+    }
+
+    /**
+     * 群成员等级名称
+     */
+    @Override
+    public String getLevelName() {
+        return result.getLevel();
+    }
+
+    /**
+     * 是否为不良用户
+     * 1为不良用户
+     */
+    @Override
+    public Boolean isBlack() {
+        return result.getInBlackList() == 1;
+    }
+
+    /**
+     * 是否允许修改群昵称
+     * 1为允许
+     */
+    @Override
+    public Boolean isAllowChangeNick() {
+        return result.getAllowChangeCard() == 1;
+    }
+
+    /**
+     * 头衔的有效期
+     */
+    @Override
+    public Long getExTitleTime() {
+        return result.getTipExpireTime().longValue();
+    }
+
+    /**
+     * 头像地址
+     */
+    @Override
+    public String getHeadImgUrl() {
+        return result.getHeadimg();
+    }
+
+    /**
+     * 禁言剩余时间
+     */
+    @Override
+    public Long getBanTime() {
+        return -1L;
     }
 
     /*

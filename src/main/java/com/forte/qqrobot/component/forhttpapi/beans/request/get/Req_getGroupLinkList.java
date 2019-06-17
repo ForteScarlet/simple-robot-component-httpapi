@@ -1,6 +1,8 @@
 package com.forte.qqrobot.component.forhttpapi.beans.request.get;
 
-import com.forte.forhttpapi.beans.response.Resp_getGroupLinkList;
+
+import com.forte.qqrobot.beans.messages.get.GetGroupLinkList;
+import com.forte.qqrobot.component.forhttpapi.beans.response.Resp_getGroupLinkList;
 
 /**
  * 「取群链接列表」
@@ -8,7 +10,7 @@ import com.forte.forhttpapi.beans.response.Resp_getGroupLinkList;
  * @date Created in 2019/3/22 16:53
  * @since JDK1.8
  **/
-public class Req_getGroupLinkList implements ReqGetBean<Resp_getGroupLinkList> {
+public class Req_getGroupLinkList implements GetGroupLinkList, ReqGetBean<Resp_getGroupLinkList> {
 
     private final String fun = "getGroupLinkList";
 
@@ -22,6 +24,7 @@ public class Req_getGroupLinkList implements ReqGetBean<Resp_getGroupLinkList> {
         return fun;
     }
 
+    @Override
     public String getGroup() {
         return group;
     }
@@ -42,4 +45,13 @@ public class Req_getGroupLinkList implements ReqGetBean<Resp_getGroupLinkList> {
     public Class<Resp_getGroupLinkList> getResponseType() {
         return Resp_getGroupLinkList.class;
     }
+
+    /**
+     * 请求的时候都应该有一个参数标识
+     */
+    @Override
+    public String getId() {
+        return fun;
+    }
+
 }

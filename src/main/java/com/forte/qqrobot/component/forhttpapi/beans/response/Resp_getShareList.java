@@ -1,14 +1,27 @@
 package com.forte.qqrobot.component.forhttpapi.beans.response;
 
+import com.forte.qqrobot.beans.messages.result.ShareList;
+
 /**
  * @author Ricardo
  * @create 2019-03-22 16:44
  **/
 
-public class Resp_getShareList implements RespBean<Resp_getShareList.ShareList[]> {
+public class Resp_getShareList implements ShareList, RespBean<Resp_getShareList.ShareList[]> {
     private Integer status;
     private ShareList[] result;
     private String errMsg;
+    private String originalData;
+
+    @Override
+    public String getOriginalData() {
+        return originalData;
+    }
+
+    public void setOriginalData(String originalData) {
+        this.originalData = originalData;
+    }
+
 
     @Override
     public String getErrMsg() {
@@ -35,6 +48,15 @@ public class Resp_getShareList implements RespBean<Resp_getShareList.ShareList[]
     @Override
     public ShareList[] getResult() {
         return result;
+    }
+
+    /**
+     * 获取列表, 极度不建议返回为null
+     * non-null
+     */
+    @Override
+    public Share[] getList() {
+        return new Share[0];
     }
 
     /*
@@ -81,7 +103,7 @@ result[i].uploadnick	string	上传者的群名片
 result[i].uploadsize	number	上传的文件大小
 result[i].uploaduin	number	上传者的QQ
      */
-    public static class ShareList {
+    public static class ShareList implements Share {
         private String auditflag;
         private Integer busid;
         private String createtime;
@@ -110,8 +132,81 @@ result[i].uploaduin	number	上传者的QQ
             this.auditflag = auditflag;
         }
 
-        public Integer getBusid() {
-            return busid;
+        @Override
+        public String getBusid() {
+            return String.valueOf(busid);
+        }
+
+        /**
+         * 创建时间
+         */
+        @Override
+        public Long getCreateTime() {
+            return Long.parseLong(createtime);
+        }
+
+        /**
+         * 上传完成时间
+         */
+        @Override
+        public Long getModiflyTime() {
+            return Long.parseLong(modifytime);
+        }
+
+        /**
+         * 下载次数
+         */
+        @Override
+        public Integer getDLTimes() {
+            return downloadtimes;
+        }
+
+        /**
+         * 文件名
+         */
+        @Override
+        public String getName() {
+            return filename;
+        }
+
+        /**
+         * 文件路径
+         */
+        @Override
+        public String getFilePath() {
+            return filepath;
+        }
+
+        /**
+         * 文件大小
+         */
+        @Override
+        public Long getSize() {
+            return filesize;
+        }
+
+        /**
+         * 本地文件名
+         */
+        @Override
+        public String getLocalName() {
+            return localname;
+        }
+
+        /**
+         * 上传者群昵称
+         */
+        @Override
+        public String getNick() {
+            return ownernick;
+        }
+
+        /**
+         * 上传者QQ号
+         */
+        @Override
+        public String getQQ() {
+            return owneruin;
         }
 
         public void setBusid(Integer busid) {

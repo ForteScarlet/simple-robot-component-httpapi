@@ -1,6 +1,7 @@
 package com.forte.qqrobot.component.forhttpapi.beans.request.get;
 
-import com.forte.forhttpapi.beans.response.Resp_getRecord;
+
+import com.forte.qqrobot.component.forhttpapi.beans.response.Resp_getRecord;
 
 /**
  * 「接收语音文件」

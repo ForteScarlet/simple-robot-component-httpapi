@@ -12,6 +12,11 @@ public class HttpConfiguration extends BaseConfiguration {
 
 
     /**
+     * 服务器ip，默认为127.0.0.1
+     */
+    private String ip = "127.0.0.1";
+
+    /**
      * 服务器请求地址，默认为/coolq
      */
     private String serverPath = "/coolq";
@@ -26,6 +31,10 @@ public class HttpConfiguration extends BaseConfiguration {
      */
     private String[] method = {"post"};
 
+    public String getHttpRequestUrl(){
+        //服务器IP+端口+请求路径
+        return getIp() + ":" + getPort() + getServerPath();
+    }
 
     /* —————————————— getter && setter ———————————— */
 
@@ -51,5 +60,13 @@ public class HttpConfiguration extends BaseConfiguration {
 
     public void setMethod(String[] method) {
         this.method = method;
+    }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
     }
 }

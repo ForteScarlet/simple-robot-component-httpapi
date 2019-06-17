@@ -1,18 +1,34 @@
 package com.forte.qqrobot.component.forhttpapi.beans.response;
 
+import com.forte.qqrobot.beans.messages.result.GroupNoteList;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 /**
+ * TODO ※ 可能会有问题
  * @author Ricardo
  * @create 2019-03-22 16:44
  **/
 
-public class Resp_getGroupNoteList implements RespBean<Resp_getGroupNoteList.GroupNoteList[]> {
+public class Resp_getGroupNoteList implements GroupNoteList,  RespBean<Resp_getGroupNoteList.GroupNoteList[]> {
     private Integer status;
     private GroupNoteList[] result;
     private String errMsg;
+
+    private String originalData;
+
+    @Override
+    public String getOriginalData() {
+        return originalData;
+    }
+
+    public void setOriginalData(String originalData) {
+        this.originalData = originalData;
+    }
+
 
     @Override
     public String getErrMsg() {
@@ -38,6 +54,15 @@ public class Resp_getGroupNoteList implements RespBean<Resp_getGroupNoteList.Gro
 
     @Override
     public GroupNoteList[] getResult() {
+        return result;
+    }
+
+    /**
+     * 获取列表, 极度不建议返回为null
+     * non-null
+     */
+    @Override
+    public GroupNote[] getList() {
         return result;
     }
 
@@ -84,16 +109,16 @@ result[i].settings.is_show_edit_card	int	提醒群成员修改名片，1/提醒�
 result[i].type	int	公告类型ID
 result[i].u	number	发布人QQ
      */
-    public static class GroupNoteList {
+    public static class GroupNoteList implements GroupNote {
         private String cn;
         private String fid;
         private String fn;
         // TODO 公告信息数组
-        private List<Map<String, Object>> msg = new ArrayList<>();
+        private Map<String, Object> msg = new HashMap<>();
         private String pubt;
         private Integer read_num;
         // TODO 公告附带的信息
-        private List<Map<String, Object>> settings = new ArrayList<>();
+        private Map<String, Object> settings = new HashMap<>();
         private Integer type;
         private String u;
         private String vn;
@@ -122,11 +147,76 @@ result[i].u	number	发布人QQ
             this.fn = fn;
         }
 
-        public List<Map<String, Object>> getMsg() {
-            return msg;
+        /**
+         * ID
+         */
+        @Override
+        public String getId() {
+            return fid;
         }
 
-        public void setMsg(List<Map<String, Object>> msg) {
+        @Override
+        public String getMsg() {
+            return msg.toString();
+        }
+
+        /**
+         * 预览文
+         */
+        @Override
+        public String getFaceMsg() {
+            return msg.toString();
+        }
+
+        /**
+         * 标题
+         */
+        @Override
+        public String getTitle() {
+            return msg.toString();
+        }
+
+        /**
+         * 发布时间
+         */
+        @Override
+        public Long getTime() {
+            return Long.parseLong(pubt);
+        }
+
+        /**
+         * 已读人数数量
+         */
+        @Override
+        public Integer getReadNum() {
+            return read_num;
+        }
+
+        /**
+         * 是否提醒群员修改群名片
+         */
+        @Override
+        public Boolean isShowEditCard() {
+            return Integer.parseInt(settings.get("is_show_edit_card")+"") == 1;
+        }
+
+        /**
+         * 发布者QQ
+         */
+        @Override
+        public String getQQ() {
+            return u;
+        }
+
+        /**
+         * 公告类型ID
+         */
+        @Override
+        public String getTypeId() {
+            return String.valueOf(type);
+        }
+
+        public void setMsg(Map<String, Object> msg) {
             this.msg = msg;
         }
 
@@ -146,11 +236,11 @@ result[i].u	number	发布人QQ
             this.read_num = read_num;
         }
 
-        public List<Map<String, Object>> getSettings() {
+        public Map<String, Object> getSettings() {
             return settings;
         }
 
-        public void setSettings(List<Map<String, Object>> settings) {
+        public void setSettings(Map<String, Object> settings) {
             this.settings = settings;
         }
 
@@ -177,6 +267,9 @@ result[i].u	number	发布人QQ
         public void setVn(String vn) {
             this.vn = vn;
         }
+
+
+
     }
 
 }

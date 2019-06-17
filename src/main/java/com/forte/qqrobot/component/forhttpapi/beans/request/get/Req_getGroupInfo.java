@@ -1,7 +1,8 @@
 package com.forte.qqrobot.component.forhttpapi.beans.request.get;
 
 
-import com.forte.forhttpapi.beans.response.Resp_getGroupInfo;
+import com.forte.qqrobot.beans.messages.get.GetGroupInfo;
+import com.forte.qqrobot.component.forhttpapi.beans.response.Resp_getGroupInfo;
 
 /**
  * 「取群详细信息」
@@ -9,7 +10,7 @@ import com.forte.forhttpapi.beans.response.Resp_getGroupInfo;
  * @date Created in 2019/3/22 16:52
  * @since JDK1.8
  **/
-public class Req_getGroupInfo implements ReqGetBean<Resp_getGroupInfo> {
+public class Req_getGroupInfo implements GetGroupInfo, ReqGetBean<Resp_getGroupInfo> {
 
     private final String fun = "getGroupInfo";
     /** 群号 */
@@ -32,4 +33,13 @@ public class Req_getGroupInfo implements ReqGetBean<Resp_getGroupInfo> {
     public Class<Resp_getGroupInfo> getResponseType() {
         return Resp_getGroupInfo.class;
     }
+
+    /**
+     * 请求的时候都应该有一个参数标识
+     */
+    @Override
+    public String getId() {
+        return fun;
+    }
+
 }

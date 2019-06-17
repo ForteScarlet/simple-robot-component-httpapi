@@ -1,6 +1,7 @@
 package com.forte.qqrobot.component.forhttpapi.beans.request.get;
 
-import com.forte.forhttpapi.beans.response.Resp_getVersion;
+
+import com.forte.qqrobot.component.forhttpapi.beans.response.Resp_getVersion;
 
 /**
  * 获取版本？

@@ -20,6 +20,7 @@ import java.util.function.Function;
  **/
 public class QQHttpHandler implements HttpHandler {
 
+    /** 编码格式 */
     private final String ENCODING;
 
     /** 接收到消息JSON字符串后的消息处理类 */
@@ -28,6 +29,7 @@ public class QQHttpHandler implements HttpHandler {
     /** 可以接受的请求方式 */
     private final String[] METHODS;
 
+    /** 构造 */
     public QQHttpHandler(String encode, Function<String, Resp> msgConsumer, String[] methods){
         this.ENCODING = encode;
         this.JSON_PARAM_CONSUMER = msgConsumer;

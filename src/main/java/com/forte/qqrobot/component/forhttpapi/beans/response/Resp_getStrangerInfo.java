@@ -1,14 +1,27 @@
 package com.forte.qqrobot.component.forhttpapi.beans.response;
 
+import com.forte.qqrobot.beans.messages.result.StrangerInfo;
+import com.forte.qqrobot.beans.messages.types.SexType;
+
 /**
  * @author Ricardo
  * @create 2019-03-22 16:44
  **/
 
-public class Resp_getStrangerInfo implements RespBean<Resp_getStrangerInfo.StrangerInfo> {
+public class Resp_getStrangerInfo implements StrangerInfo, RespBean<Resp_getStrangerInfo.StrangerInfo> {
     private Integer status;
     private StrangerInfo result;
     private String errMsg;
+    private String originalData;
+
+    @Override
+    public String getOriginalData() {
+        return originalData;
+    }
+
+    public void setOriginalData(String originalData) {
+        this.originalData = originalData;
+    }
 
     @Override
     public String getErrMsg() {
@@ -35,6 +48,47 @@ public class Resp_getStrangerInfo implements RespBean<Resp_getStrangerInfo.Stran
     @Override
     public StrangerInfo getResult() {
         return result;
+    }
+
+    /**
+     * QQ号
+     */
+    @Override
+    public String getQQ() {
+        return result.getQq();
+    }
+
+    /**
+     * 性别
+     */
+    @Override
+    public SexType getSex() {
+        Integer gender = result.getGender();
+        return gender == 0 ? SexType.MALE : gender == 1 ? SexType.FEMALE : SexType.UNKNOWN;
+    }
+
+    /**
+     * 年龄
+     */
+    @Override
+    public Integer getAge() {
+        return result.getOld();
+    }
+
+    /**
+     * 头像地址
+     */
+    @Override
+    public String headUrl() {
+        return result.getHeadimg();
+    }
+
+    /**
+     * 等级
+     */
+    @Override
+    public Integer getLevel() {
+        return result.getLevel();
     }
 
     /*

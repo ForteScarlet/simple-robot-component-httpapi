@@ -5,10 +5,23 @@ package com.forte.qqrobot.component.forhttpapi.beans.response;
  * @create 2019-03-22 16:44
  **/
 
-public class Resp_getImageInfo implements RespBean<Resp_getImageInfo.ImageInfo> {
+public class Resp_getImageInfo implements com.forte.qqrobot.beans.messages.result.ImageInfo,  RespBean<Resp_getImageInfo.ImageInfo> {
     private Integer status;
     private ImageInfo result;
     private String errMsg;
+    private String originalData;
+
+    @Override
+    public String getOriginalData() {
+        return originalData;
+    }
+
+    public void setOriginalData(String originalData) {
+        this.originalData = originalData;
+    }
+
+
+
 
     @Override
     public String getErrMsg() {
@@ -37,6 +50,62 @@ public class Resp_getImageInfo implements RespBean<Resp_getImageInfo.ImageInfo> 
         return result;
     }
 
+    /**
+     * 取图片的MD5值
+     */
+    @Override
+    public String getMD5() {
+        return result.getMd5();
+    }
+
+    /**
+     * 图片宽
+     */
+    @Override
+    public Double getWidth() {
+        return result.getWidth();
+    }
+
+    /**
+     * 图片长
+     */
+    @Override
+    public Double getHeight() {
+        return result.getHeight();
+    }
+
+    /**
+     * 获取图片大小 字节
+     */
+    @Override
+    public Long getSize() {
+        return result.getSize();
+    }
+
+    /**
+     * 图片路径
+     */
+    @Override
+    public String getUrl() {
+        return result.getUrl();
+    }
+
+    /**
+     * 图片上传到腾讯时候的时间
+     */
+    @Override
+    public Long getTime() {
+        return Long.parseLong(result.getAddTime());
+    }
+
+    /**
+     * 图片Base64编码内容
+     */
+    @Override
+    public String getFileBase64() {
+        return result.getFile();
+    }
+
 
     /*
 {
@@ -62,9 +131,9 @@ result.file	string	图片文件内容，已Base64编码
      */
     public static class ImageInfo {
         private String md5;
-        private Integer width;
-        private String height;
-        private Integer size;
+        private Double width;
+        private Double height;
+        private Long size;
         private String url;
         private String addTime;
         private String file;
@@ -77,27 +146,27 @@ result.file	string	图片文件内容，已Base64编码
             this.md5 = md5;
         }
 
-        public Integer getWidth() {
+        public Double getWidth() {
             return width;
         }
 
-        public void setWidth(Integer width) {
+        public void setWidth(Double width) {
             this.width = width;
         }
 
-        public String getHeight() {
+        public Double getHeight() {
             return height;
         }
 
-        public void setHeight(String height) {
+        public void setHeight(Double height) {
             this.height = height;
         }
 
-        public Integer getSize() {
+        public Long getSize() {
             return size;
         }
 
-        public void setSize(Integer size) {
+        public void setSize(Long size) {
             this.size = size;
         }
 

@@ -1,14 +1,27 @@
 package com.forte.qqrobot.component.forhttpapi.beans.response;
 
+import com.forte.qqrobot.beans.messages.result.GroupList;
+
 /**
  * @author Ricardo
  * @create 2019-03-22 16:44
  **/
 
-public class Resp_getGroupList implements RespBean<Resp_getGroupList.getGroupList[]> {
+public class Resp_getGroupList implements GroupList, RespBean<Resp_getGroupList.getGroupList[]> {
     private Integer status;
     private getGroupList[] result;
     private String errMsg;
+
+    private String originalData;
+
+    @Override
+    public String getOriginalData() {
+        return originalData;
+    }
+
+    public void setOriginalData(String originalData) {
+        this.originalData = originalData;
+    }
 
     @Override
     public String getErrMsg() {
@@ -37,6 +50,16 @@ public class Resp_getGroupList implements RespBean<Resp_getGroupList.getGroupLis
         return result;
     }
 
+    /**
+     * 获取列表, 极度不建议返回为null
+     * non-null
+     */
+    @Override
+    public Group[] getList() {
+        return result;
+    }
+
+
     /*
     *    "status":0,
     "result":[
@@ -54,13 +77,30 @@ result[i].name	string	群名，url编码
 result[i].group	number	群号
 result[i].headimg	string	群头像链接
      */
-    public static class getGroupList {
+    public static class getGroupList implements Group {
         private String name;
         private String group;
         private String headimg;
 
+        @Override
         public String getName() {
             return name;
+        }
+
+        /**
+         * 群号
+         */
+        @Override
+        public String getCode() {
+            return group;
+        }
+
+        /**
+         * 群头像地址
+         */
+        @Override
+        public String getHeadUrl() {
+            return headimg;
         }
 
         public void setName(String name) {

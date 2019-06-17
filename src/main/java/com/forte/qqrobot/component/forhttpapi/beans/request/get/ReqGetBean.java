@@ -1,8 +1,8 @@
 package com.forte.qqrobot.component.forhttpapi.beans.request.get;
 
 import com.alibaba.fastjson.JSON;
-import com.forte.forhttpapi.beans.request.ReqBean;
-import com.forte.forhttpapi.beans.response.RespBean;
+import com.forte.qqrobot.component.forhttpapi.beans.request.ReqBean;
+import com.forte.qqrobot.component.forhttpapi.beans.response.RespBean;
 
 /**
  * @author ForteScarlet <[163邮箱地址]ForteScarlet@163.com>

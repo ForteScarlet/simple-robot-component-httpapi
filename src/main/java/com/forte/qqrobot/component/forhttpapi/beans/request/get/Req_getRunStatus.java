@@ -1,6 +1,7 @@
 package com.forte.qqrobot.component.forhttpapi.beans.request.get;
 
-import com.forte.forhttpapi.beans.response.Resp_getRunStatus;
+
+import com.forte.qqrobot.component.forhttpapi.beans.response.Resp_getRunStatus;
 
 /**
  * 「取运行状态」

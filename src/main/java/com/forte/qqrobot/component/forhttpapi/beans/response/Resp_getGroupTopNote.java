@@ -9,10 +9,22 @@ import java.util.Map;
  * @create 2019-03-22 16:44
  **/
 
-public class Resp_getGroupTopNote implements RespBean<Resp_getGroupTopNote.GroupTopNote> {
+public class Resp_getGroupTopNote implements com.forte.qqrobot.beans.messages.result.GroupTopNote, RespBean<Resp_getGroupTopNote.GroupTopNote> {
     private Integer status;
     private GroupTopNote result;
     private String errMsg;
+
+    private String originalData;
+
+    @Override
+    public String getOriginalData() {
+        return originalData;
+    }
+
+    public void setOriginalData(String originalData) {
+        this.originalData = originalData;
+    }
+
 
     @Override
     public String getErrMsg() {
@@ -39,6 +51,78 @@ public class Resp_getGroupTopNote implements RespBean<Resp_getGroupTopNote.Group
     @Override
     public GroupTopNote getResult() {
         return result;
+    }
+
+    /**
+     * ID
+     */
+    @Override
+    public String getId() {
+        return result.getFid();
+    }
+
+    /**
+     * 完整正文
+     */
+    @Override
+    public String getMsg() {
+        return result.getMsg().toString();
+    }
+
+    /**
+     * 预览文
+     */
+    @Override
+    public String getFaceMsg() {
+        return result.getMsg().toString();
+    }
+
+    /**
+     * 标题
+     */
+    @Override
+    public String getTitle() {
+        return result.getMsg().toString();
+    }
+
+    /**
+     * 发布时间
+     */
+    @Override
+    public Long getTime() {
+        return Long.parseLong(result.getPubt());
+    }
+
+    /**
+     * 已读人数数量
+     */
+    @Override
+    public Integer getReadNum() {
+        return result.getRead_num();
+    }
+
+    /**
+     * 是否提醒群员修改群名片
+     */
+    @Override
+    public Boolean isShowEditCard() {
+        return false;
+    }
+
+    /**
+     * 发布者QQ
+     */
+    @Override
+    public String getQQ() {
+        return result.getU();
+    }
+
+    /**
+     * 公告类型ID
+     */
+    @Override
+    public String getTypeId() {
+        return String.valueOf(result.getType());
     }
 
     /*

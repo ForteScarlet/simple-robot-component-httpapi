@@ -2,17 +2,16 @@ package com.forte.qqrobot.component.forhttpapi.http;
 
 
 import com.alibaba.fastjson.JSON;
-import com.forte.forhttpapi.beans.request.get.Req_getRecord;
-import com.forte.forhttpapi.beans.response.*;
-import com.forte.forlemoc.SocketResourceDispatchCenter;
-import com.forte.forlemoc.socket.QQJSONMsgCreator;
-import com.forte.qqrobot.BaseConfiguration;
+import com.forte.qqrobot.component.forhttpapi.HttpApiResourceDispatchCenter;
+import com.forte.qqrobot.component.forhttpapi.HttpConfiguration;
+import com.forte.qqrobot.component.forhttpapi.beans.request.get.Req_getRecord;
+import com.forte.qqrobot.component.forhttpapi.beans.response.*;
 import com.forte.qqrobot.utils.HttpClientUtil;
 
 import java.util.Optional;
 
 /**
- *
+ * http送信器
  * @author ForteScarlet <[163邮箱地址]ForteScarlet@163.com>
  * @date Created in 2019/3/30 10:32
  * @since JDK1.8
@@ -28,11 +27,19 @@ public class QQHttpMsgSender {
     }
 
     /**
-     * 工厂方法
+     * 工厂方法, 依靠启动器的初始化方法
      * @return QQWebSocketMsgSender实例对象
      */
     public static QQHttpMsgSender build(){
-        return new QQHttpMsgSender(SocketResourceDispatchCenter.getQQJSONMsgCreator());
+        return new QQHttpMsgSender(HttpApiResourceDispatchCenter.getQQJSONMsgCreator());
+    }
+
+    /**
+     * 工厂方法
+     * @return QQWebSocketMsgSender实例对象
+     */
+    public static QQHttpMsgSender build(QQJSONMsgCreator qqjsonMsgCreator){
+        return new QQHttpMsgSender(qqjsonMsgCreator);
     }
     
     //**************** 信息获取方法 ****************//
@@ -272,7 +279,8 @@ public class QQHttpMsgSender {
      */
     public <T extends RespBean> Optional<T> get(String json, Class<T> beanType){
         //获取HTTP API请求地址参数
-        String url = BaseConfiguration.getHttpRequestUrl();
+        HttpConfiguration httpConfiguration = HttpApiResourceDispatchCenter.getHttpConfiguration();
+        String url = httpConfiguration.getHttpRequestUrl();
         //返回参数
         String response = HttpClientUtil.sendHttpPost(url, json);
         //转化为bean对象，并做防止空指针的处理

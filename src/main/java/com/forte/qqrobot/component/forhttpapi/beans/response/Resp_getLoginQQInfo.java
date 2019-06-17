@@ -5,10 +5,22 @@ package com.forte.qqrobot.component.forhttpapi.beans.response;
  * @create 2019-03-22 16:44
  **/
 
-public class Resp_getLoginQQInfo implements RespBean<Resp_getLoginQQInfo.LoginQQInfo> {
+public class Resp_getLoginQQInfo implements com.forte.qqrobot.beans.messages.result.LoginQQInfo, RespBean<Resp_getLoginQQInfo.LoginQQInfo> {
     private Integer status;
     private LoginQQInfo result;
     private String errMsg;
+    private String originalData;
+
+    @Override
+    public String getOriginalData() {
+        return originalData;
+    }
+
+    public void setOriginalData(String originalData) {
+        this.originalData = originalData;
+    }
+
+
 
     @Override
     public String getErrMsg() {
@@ -35,6 +47,38 @@ public class Resp_getLoginQQInfo implements RespBean<Resp_getLoginQQInfo.LoginQQ
     @Override
     public LoginQQInfo getResult() {
         return result;
+    }
+
+    /**
+     * 昵称
+     */
+    @Override
+    public String getName() {
+        return result.getNick();
+    }
+
+    /**
+     * QQ号
+     */
+    @Override
+    public String getQQ() {
+        return result.getQq();
+    }
+
+    /**
+     * 头像地址
+     */
+    @Override
+    public String getHeadUrl() {
+        return result.getHeadimg();
+    }
+
+    /**
+     * 等级
+     */
+    @Override
+    public Integer getLevel() {
+        return result.getLevel();
     }
 
     /*

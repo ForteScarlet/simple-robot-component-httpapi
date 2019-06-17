@@ -1,6 +1,8 @@
 package com.forte.qqrobot.component.forhttpapi.beans.request.get;
 
-import com.forte.forhttpapi.beans.response.Resp_getAuthInfo;
+
+import com.forte.qqrobot.beans.messages.get.GetAuthInfo;
+import com.forte.qqrobot.component.forhttpapi.beans.response.Resp_getAuthInfo;
 
 /**
  * 「取权限信息」
@@ -8,7 +10,7 @@ import com.forte.forhttpapi.beans.response.Resp_getAuthInfo;
  * @date Created in 2019/3/22 15:31
  * @since JDK1.8
  **/
-public class Req_getAuthInfo implements ReqGetBean<Resp_getAuthInfo> {
+public class Req_getAuthInfo implements GetAuthInfo, ReqGetBean<Resp_getAuthInfo> {
     /*
     {
     "fun":"getAuthInfo"
@@ -26,4 +28,13 @@ public class Req_getAuthInfo implements ReqGetBean<Resp_getAuthInfo> {
     public Class<Resp_getAuthInfo> getResponseType() {
         return Resp_getAuthInfo.class;
     }
+
+    /**
+     * 请求的时候都应该有一个参数标识
+     */
+    @Override
+    public String getId() {
+        return fun;
+    }
+
 }

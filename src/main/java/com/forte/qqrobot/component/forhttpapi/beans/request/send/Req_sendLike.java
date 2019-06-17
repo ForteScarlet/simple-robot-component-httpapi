@@ -14,7 +14,7 @@ public class Req_sendLike implements ReqSendBean {
     /** QQ */
     private String qq;
     /** 次数 */
-    private String msg;
+    private String number;
 
     @Override
     public String getFun() {
@@ -29,13 +29,23 @@ public class Req_sendLike implements ReqSendBean {
         this.qq = qq;
     }
 
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String msg) {
+        this.number = msg;
+    }
+
+    /**
+     * 增加一个获取信息
+     */
     @Override
     public String getMsg() {
-        return msg;
+        return null;
     }
 
     @Override
     public void setMsg(String msg) {
-        this.msg = msg;
     }
 }

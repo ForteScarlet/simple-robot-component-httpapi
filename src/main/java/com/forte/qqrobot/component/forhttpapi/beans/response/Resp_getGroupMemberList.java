@@ -1,14 +1,30 @@
 package com.forte.qqrobot.component.forhttpapi.beans.response;
 
+import com.forte.qqrobot.beans.messages.types.PowerType;
+import com.forte.qqrobot.beans.messages.types.SexType;
+
 /**
  * @author Ricardo
  * @create 2019-03-22 16:44
  **/
 
-public class Resp_getGroupMemberList implements RespBean<Resp_getGroupMemberList.GroupMemberList[]> {
+public class Resp_getGroupMemberList implements com.forte.qqrobot.beans.messages.result.GroupMemberList, RespBean<Resp_getGroupMemberList.GroupMemberList[]> {
     private Integer status;
     private GroupMemberList[] result;
     private String errMsg;
+
+    private String originalData;
+
+    @Override
+    public String getOriginalData() {
+        return originalData;
+    }
+
+    public void setOriginalData(String originalData) {
+        this.originalData = originalData;
+    }
+
+
 
     @Override
     public String getErrMsg() {
@@ -34,6 +50,15 @@ public class Resp_getGroupMemberList implements RespBean<Resp_getGroupMemberList
 
     @Override
     public GroupMemberList[] getResult() {
+        return result;
+    }
+
+    /**
+     * 获取列表, 极度不建议返回为null
+     * non-null
+     */
+    @Override
+    public GroupMember[] getList() {
         return result;
     }
 
@@ -79,7 +104,8 @@ result[i].allowChangeCard	int	允许修改名片，0/不允许，1/允许
 result[i].tipExpireTime	int	头衔有效期，时间戳形式，-1为永不到期
 result[i].headimg	string	QQ头像
      */
-    public static class GroupMemberList {
+    public static class GroupMemberList implements GroupMember {
+        private String group;
         private String qq;
         private String name;
         private String card;
@@ -95,6 +121,9 @@ result[i].headimg	string	QQ头像
         private Integer tipExpireTime;
         private String headimg;
 
+        public void setGroup(String group) {
+            this.group = group;
+        }
 
         public String getQq() {
             return qq;
@@ -104,8 +133,41 @@ result[i].headimg	string	QQ头像
             this.qq = qq;
         }
 
+        /**
+         * 群号
+         */
+        @Override
+        public String getGroup() {
+            return group;
+        }
+
+        /**
+         * QQ号
+         */
+        @Override
+        public String getQQ() {
+            return qq;
+        }
+
+        @Override
         public String getName() {
             return name;
+        }
+
+        /**
+         * 获取群昵称
+         */
+        @Override
+        public String getNickName() {
+            return card;
+        }
+
+        /**
+         * 获取性别
+         */
+        @Override
+        public SexType getSex() {
+            return gender == 0 ? SexType.MALE : gender == 1 ? SexType.FEMALE : SexType.UNKNOWN;
         }
 
         public void setName(String name) {
@@ -128,6 +190,7 @@ result[i].headimg	string	QQ头像
             this.gender = gender;
         }
 
+        @Override
         public String getCity() {
             return city;
         }
@@ -136,24 +199,75 @@ result[i].headimg	string	QQ头像
             this.city = city;
         }
 
-        public String getJoinTime() {
-            return joinTime;
+        @Override
+        public Long getJoinTime() {
+            return Long.parseLong(joinTime);
         }
 
         public void setJoinTime(String joinTime) {
             this.joinTime = joinTime;
         }
 
-        public String getLastTime() {
-            return lastTime;
+        @Override
+        public Long getLastTime() {
+            return Long.parseLong(lastTime);
         }
 
         public void setLastTime(String lastTime) {
             this.lastTime = lastTime;
         }
 
-        public Integer getPower() {
-            return power;
+        @Override
+        public PowerType getPower() {
+            return power == 1 ? PowerType.MEMBER : power == 2 ? PowerType.ADMIN : PowerType.OWNER;
+        }
+
+        /**
+         * 获取专属头衔
+         */
+        @Override
+        public String getExTitle() {
+            return tip;
+        }
+
+        /**
+         * 等级对应名称
+         */
+        @Override
+        public String getLevelName() {
+            return level;
+        }
+
+        /**
+         * 是否为不良用户
+         */
+        @Override
+        public Boolean isBlack() {
+            return inBlackList == 1;
+        }
+
+        /**
+         * 是否允许修改群名片
+         */
+        @Override
+        public Boolean isAllowChangeNick() {
+            return allowChangeCard == 1;
+        }
+
+        /**
+         * 头衔到期时间
+         */
+        @Override
+        public Long getExTitleTime() {
+            return tipExpireTime.longValue();
+        }
+
+        /**
+         * 头像
+         */
+        @Override
+        public String getHeadUrl() {
+            return headimg;
         }
 
         public void setPower(Integer power) {
