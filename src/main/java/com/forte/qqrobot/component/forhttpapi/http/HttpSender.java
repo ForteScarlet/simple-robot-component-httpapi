@@ -1,13 +1,10 @@
 package com.forte.qqrobot.component.forhttpapi.http;
 
 
-import com.forte.qqrobot.beans.messages.get.InfoGet;
 import com.forte.qqrobot.beans.messages.result.*;
 import com.forte.qqrobot.beans.messages.types.GroupAddRequestType;
 import com.forte.qqrobot.component.forhttpapi.HttpApiResourceDispatchCenter;
-import com.forte.qqrobot.sender.senderlist.RootSender;
-
-import java.util.Map;
+import com.forte.qqrobot.sender.senderlist.RootSenderList;
 
 /**
  * http送信器，此送信器不依赖于连接，使用httpclient即可
@@ -15,18 +12,20 @@ import java.util.Map;
  * @date Created in 2019/3/30 11:16
  * @since JDK1.8
  **/
-public class HttpSender implements RootSender {
+public class HttpSender implements RootSenderList {
 
     /** 真正的送信器 */
-    private final QQHttpMsgSender qqHttpMsgSender;
+    private final QQHttpMsgSender msgSender;
 
+    /** 有些接口（获取列表的）需要传入获取数量，此处为默认数量 */
+    private static final Integer NUMBER = 99;
 
     /**
      * 构造
      * @param qqHttpMsgSender 真正的送信器
      */
     private HttpSender(QQHttpMsgSender qqHttpMsgSender){
-        this.qqHttpMsgSender = qqHttpMsgSender;
+        this.msgSender = qqHttpMsgSender;
     }
 
     /**
@@ -46,17 +45,6 @@ public class HttpSender implements RootSender {
 
 
     /**
-     * 通过定义好返回值的InfoGet对象获取返回值
-     *
-     * @param infoGet InfoGet对象
-     * @return 响应数据封装类
-     */
-    @Override
-    public <RESULT extends InfoResult> RESULT get(InfoGet<RESULT> infoGet) {
-        return null;
-    }
-
-    /**
      * 取匿名成员信息
      * 一般是使用匿名标识来获取
      *
@@ -65,7 +53,7 @@ public class HttpSender implements RootSender {
      */
     @Override
     public AnonInfo getAnonInfo(String flag) {
-        return null;
+        return msgSender.getAnonymousInfo(flag).orElse(null);
     }
 
     /**
@@ -76,7 +64,7 @@ public class HttpSender implements RootSender {
      */
     @Override
     public AuthInfo getAuthInfo() {
-        return null;
+        return msgSender.getAuthInfo().orElse(null);
     }
 
     /**
@@ -87,7 +75,7 @@ public class HttpSender implements RootSender {
      */
     @Override
     public BanList getBanList(String group) {
-        return null;
+        return msgSender.getBanList(group).orElse(null);
     }
 
     /**
@@ -98,7 +86,7 @@ public class HttpSender implements RootSender {
      */
     @Override
     public FileInfo getFileInfo(String flag) {
-        return null;
+        return msgSender.getFileInfo(flag).orElse(null);
     }
 
     /**
@@ -108,18 +96,17 @@ public class HttpSender implements RootSender {
      */
     @Override
     public FriendList getFriendList() {
-        return null;
+        return msgSender.getFriendList().orElse(null);
     }
 
     /**
      * 取群作业列表
-     *
      * @param group 群号
      * @return 群作业列表
      */
     @Override
     public GroupHomeworkList getGroupHomeworkList(String group) {
-        return null;
+        return msgSender.getGroupHomeworkList(group, NUMBER).orElse(null);
     }
 
     /**
@@ -130,7 +117,7 @@ public class HttpSender implements RootSender {
      */
     @Override
     public GroupInfo getGroupInfo(String group) {
-        return null;
+        return msgSender.getGroupInfo(group).orElse(null);
     }
 
     /**
@@ -141,7 +128,7 @@ public class HttpSender implements RootSender {
      */
     @Override
     public GroupLinkList getGroupLinkList(String group) {
-        return null;
+        return msgSender.getGroupLinkList(group, NUMBER).orElse(null);
     }
 
     /**
@@ -151,7 +138,7 @@ public class HttpSender implements RootSender {
      */
     @Override
     public GroupList getGroupList() {
-        return null;
+        return msgSender.getGroupList().orElse(null);
     }
 
     /**
@@ -163,7 +150,7 @@ public class HttpSender implements RootSender {
      */
     @Override
     public GroupMemberInfo getGroupMemberInfo(String group, String QQ) {
-        return null;
+        return msgSender.getGroupMemberInfo(QQ, group, 0).orElse(null);
     }
 
     /**
@@ -174,7 +161,7 @@ public class HttpSender implements RootSender {
      */
     @Override
     public GroupMemberList getGroupMemberList(String group) {
-        return null;
+        return msgSender.getGroupMemberList(group).orElse(null);
     }
 
     /**
@@ -185,7 +172,7 @@ public class HttpSender implements RootSender {
      */
     @Override
     public GroupNoteList getGroupNoteList(String group) {
-        return null;
+        return msgSender.getGroupNoteList(group, NUMBER).orElse(null);
     }
 
     /**
@@ -196,7 +183,7 @@ public class HttpSender implements RootSender {
      */
     @Override
     public GroupTopNote getGroupTopNote(String group) {
-        return null;
+        return msgSender.getGroupTopNote(group).orElse(null);
     }
 
     /**
@@ -207,7 +194,7 @@ public class HttpSender implements RootSender {
      */
     @Override
     public ImageInfo getImageInfo(String flag) {
-        return null;
+        return msgSender.getImageInfo(flag, false).orElse(null);
     }
 
     /**
@@ -217,7 +204,7 @@ public class HttpSender implements RootSender {
      */
     @Override
     public LoginQQInfo getLoginQQInfo() {
-        return null;
+        return msgSender.getLoginQQInfo().orElse(null);
     }
 
     /**
@@ -228,7 +215,7 @@ public class HttpSender implements RootSender {
      */
     @Override
     public ShareList getShareList(String group) {
-        return null;
+        return msgSender.getShareList(group).orElse(null);
     }
 
     /**
@@ -239,19 +226,13 @@ public class HttpSender implements RootSender {
      */
     @Override
     public StrangerInfo getStrangerInfo(String QQ) {
-        return null;
+        return msgSender.getStrangerInfo(QQ, false).orElse(null);
     }
 
-    /**
-     * 消息发送
-     *
-     * @param params 参数键值对
-     * @return 是否成功
-     */
-    @Override
-    public boolean send(Map<String, String> params) {
-        return false;
-    }
+    //**************************************
+    //*             消息发送
+    //**************************************
+
 
     /**
      * 发送讨论组消息
@@ -261,7 +242,7 @@ public class HttpSender implements RootSender {
      */
     @Override
     public boolean sendDiscussMsg(String group, String msg) {
-        return false;
+        return msgSender.sendDiscussMsg(group, msg);
     }
 
     /**
@@ -272,7 +253,7 @@ public class HttpSender implements RootSender {
      */
     @Override
     public boolean sendGroupMsg(String group, String msg) {
-        return false;
+        return msgSender.sendGroupMsg(group, msg);
     }
 
     /**
@@ -283,7 +264,7 @@ public class HttpSender implements RootSender {
      */
     @Override
     public boolean sendPrivateMsg(String QQ, String msg) {
-        return false;
+        return msgSender.sendPrivateMsg(QQ, msg);
     }
 
     /**
@@ -294,7 +275,7 @@ public class HttpSender implements RootSender {
      */
     @Override
     public boolean sendFlower(String group, String QQ) {
-        return false;
+        return msgSender.sendFlower(group, QQ);
     }
 
     /**
@@ -305,18 +286,7 @@ public class HttpSender implements RootSender {
      */
     @Override
     public boolean sendLike(String QQ, int times) {
-        return false;
-    }
-
-    /**
-     * 设置类型接口汇总方法
-     *
-     * @param params 参数键值对
-     * @return 成功与否
-     */
-    @Override
-    public boolean set(Map<String, String> params) {
-        return false;
+        return msgSender.sendLike(QQ, times);
     }
 
     /**
@@ -328,7 +298,7 @@ public class HttpSender implements RootSender {
      */
     @Override
     public boolean setFriendAddRequest(String flag, String friendName, boolean agree) {
-        return false;
+        return msgSender.setFriendAddRequest(flag, friendName, agree);
     }
 
     /**
@@ -341,7 +311,7 @@ public class HttpSender implements RootSender {
      */
     @Override
     public boolean setGroupAddRequest(String flag, GroupAddRequestType requestType, boolean agree, String why) {
-        return false;
+        return msgSender.setGroupAddRequest(flag, requestType, agree, why);
     }
 
     /**
@@ -353,7 +323,7 @@ public class HttpSender implements RootSender {
      */
     @Override
     public boolean setGroupAdmin(String group, String QQ, boolean set) {
-        return false;
+        return msgSender.setGroupAdmin(group, QQ, set);
     }
 
     /**
@@ -364,7 +334,7 @@ public class HttpSender implements RootSender {
      */
     @Override
     public boolean setGroupAnonymous(String group, boolean agree) {
-        return false;
+        return msgSender.setGroupAnonymous(group, agree);
     }
 
     /**
@@ -376,7 +346,7 @@ public class HttpSender implements RootSender {
      */
     @Override
     public boolean setGroupAnonymousBan(String group, String flag, Long time) {
-        return false;
+        return msgSender.setGroupAnonymousBan(group, flag, time);
     }
 
     /**
@@ -388,7 +358,7 @@ public class HttpSender implements RootSender {
      */
     @Override
     public boolean setGroupBan(String group, String QQ, Long time) {
-        return false;
+        return msgSender.setGroupBan(group, QQ, time);
     }
 
     /**
@@ -400,8 +370,10 @@ public class HttpSender implements RootSender {
      */
     @Override
     public boolean setGroupCard(String group, String QQ, String card) {
-        return false;
+        return msgSender.setGroupCard(group, QQ, card);
     }
+
+
 
     /**
      * 删除群文件<br>
@@ -412,7 +384,7 @@ public class HttpSender implements RootSender {
      */
     @Override
     public boolean setGroupFileDelete(String group, String flag) {
-        return false;
+        return msgSender.setGroupFileDelete(group, flag);
     }
 
     /**
@@ -422,7 +394,7 @@ public class HttpSender implements RootSender {
      */
     @Override
     public boolean setDiscussLeave(String group) {
-        return false;
+        return msgSender.setDiscussLeave(group);
     }
 
     /**
@@ -432,7 +404,7 @@ public class HttpSender implements RootSender {
      */
     @Override
     public boolean setGroupLeave(String group) {
-        return false;
+        return msgSender.setGroupLeave(group);
     }
 
     /**
@@ -444,7 +416,7 @@ public class HttpSender implements RootSender {
      */
     @Override
     public boolean setGroupMemberKick(String group, String QQ, boolean dontBack) {
-        return false;
+        return msgSender.setGroupMemberKick(group, QQ, dontBack);
     }
 
     /**
@@ -454,7 +426,7 @@ public class HttpSender implements RootSender {
      */
     @Override
     public boolean setGroupSign(String group) {
-        return false;
+        return msgSender.setGroupSign(group);
     }
 
     /**
@@ -467,7 +439,7 @@ public class HttpSender implements RootSender {
      */
     @Override
     public boolean setGroupExclusiveTitle(String group, String QQ, String title, Long time) {
-        return false;
+        return msgSender.setGroupExclusiveTitle(group, QQ, title, time);
     }
 
     /**
@@ -478,7 +450,7 @@ public class HttpSender implements RootSender {
      */
     @Override
     public boolean setGroupWholeBan(String group, boolean in) {
-        return false;
+        return msgSender.setGroupWholeBan(group, in);
     }
 
     /**
@@ -489,7 +461,7 @@ public class HttpSender implements RootSender {
      */
     @Override
     public boolean setMsgRecall(String flag) {
-        return false;
+        return msgSender.setMsgRecall(flag);
     }
 
     /**
@@ -497,6 +469,6 @@ public class HttpSender implements RootSender {
      */
     @Override
     public boolean setSign() {
-        return false;
+        return msgSender.setSign();
     }
 }

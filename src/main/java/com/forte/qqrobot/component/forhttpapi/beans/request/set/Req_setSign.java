@@ -4,6 +4,7 @@ package com.forte.qqrobot.component.forhttpapi.beans.request.set;
 import com.forte.qqrobot.component.forhttpapi.beans.request.ReqBean;
 
 /**
+ *
  * @author ForteScarlet <[163邮箱地址]ForteScarlet@163.com>
  * @date Created in 2019/3/22 18:10
  * @since JDK1.8

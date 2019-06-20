@@ -3,15 +3,13 @@ package com.forte.qqrobot.component.forhttpapi.http;
 import com.alibaba.fastjson.JSON;
 import com.forte.qqrobot.beans.messages.types.GroupAddRequestType;
 import com.forte.qqrobot.component.forhttpapi.beans.request.get.*;
-import com.forte.qqrobot.component.forhttpapi.beans.request.send.Req_sendDiscussMsg;
-import com.forte.qqrobot.component.forhttpapi.beans.request.send.Req_sendGroupMsg;
-import com.forte.qqrobot.component.forhttpapi.beans.request.send.Req_sendLike;
-import com.forte.qqrobot.component.forhttpapi.beans.request.send.Req_sendPrivateMsg;
+import com.forte.qqrobot.component.forhttpapi.beans.request.send.*;
 import com.forte.qqrobot.component.forhttpapi.beans.request.set.*;
 import org.apache.commons.beanutils.BeanUtils;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -121,6 +119,20 @@ public class QQJSONMsgCreator {
         return mapToBeanJson(new Req_sendLike(), paramMap);
     }
 
+    /**
+     * 送花
+     * @param group 群号
+     * @param qq    qq
+     * @return 送花
+     */
+    String getResponseJson_sendFlower(String group, String qq){
+        Map<String, Object> paramMap = createParamMap(
+                new Object[]{"group", group},
+                new Object[]{"qq", qq}
+        );
+        return mapToBeanJson(new Req_sendFlower(), paramMap);
+    }
+
 
     //**************************************
     //*             设置的消息 - socket
@@ -142,6 +154,19 @@ public class QQJSONMsgCreator {
         );
 
         return mapToBeanJson(new Req_setGroupWholeBan(), paramMap);
+    }
+
+    /**
+     * 消息撤回
+     * @param msgID 消息ID
+     * @return      消息撤回
+     */
+    String getResponseJson_setMsgDelete(String msgID){
+        Map<String, Object> paramMap = createParamMap(
+                new Object[]{"msgID", msgID}
+        );
+
+        return mapToBeanJson(new Req_setMsgDelete(), paramMap);
     }
 
     /**
@@ -220,7 +245,7 @@ public class QQJSONMsgCreator {
     /**
      * 置群退出
      * @param group   群号
-     * @param disband 是否退出
+     * @param disband 解散/true, 普通的退出/false
      * @return 置群退出
      */
     String getResponseJson_setGroupExit(String group, boolean disband){
@@ -283,6 +308,20 @@ public class QQJSONMsgCreator {
     }
 
     /**
+     * 删除群文件
+     * @param group 群号
+     * @param id    文件id
+     * @return      是否成功
+     */
+    String getResponseJson_setGroupFileDelete(String group, String id){
+        Map<String, Object> paramMap = createParamMap(
+                new Object[]{"group", group},
+                new Object[]{"id", id}
+        );
+        return mapToBeanJson(new Req_setGroupFileDelete(), paramMap);
+    }
+
+    /**
      * 置群员移除
      * @param qq              移除的qq号
      * @param group          群号
@@ -296,6 +335,26 @@ public class QQJSONMsgCreator {
                 new Object[]{"refuseJoin", refuseJoin}
         );
         return mapToBeanJson(new Req_setGroupKick(), paramMap);
+    }
+
+    /**
+     * 群签到
+     * @param group 群号
+     * @return
+     */
+    String getResponseJson_setGroupSign(String group){
+        Map<String, Object> paramMap = createParamMap(
+                new Object[]{"group", group == null ? '0' : group}
+        );
+        return mapToBeanJson(new Req_setGroupSign(), paramMap);
+    }
+
+    /**
+     * 打卡
+     */
+    String getResponseJson_setSign(){
+        Map<String, Object> paramMap = Collections.emptyMap();
+        return mapToBeanJson(new Req_setGroupSign(), paramMap);
     }
 
     /**
@@ -327,6 +386,7 @@ public class QQJSONMsgCreator {
      * @param QQID 作为标记
      * @return 请求群列表信息
      */
+    @Deprecated
     String getResponseJson_InfoForLoginInGroups(String QQID){
         Map<String, Object> paramMap = createParamMap(
                 new Object[]{"QQID", QQID}
@@ -341,6 +401,7 @@ public class QQJSONMsgCreator {
      * @param cache   1或0之类的
      * @return 请求获取群中某用户信息
      */
+    @Deprecated
     String getResponseJson_InfoGroupMember(String qq, String group, int cache){
         Map<String, Object> paramMap = createParamMap(
                 new Object[]{"qq", qq},
@@ -354,6 +415,7 @@ public class QQJSONMsgCreator {
      * 请求获取当前账号的昵称
      * @return 请求获取当前账号的昵称
      */
+    @Deprecated
     String getResponseJson_LoginQQInfo(){
         return JSON.toJSONString(new Req_getLoginQQInfo());
     }
@@ -364,6 +426,7 @@ public class QQJSONMsgCreator {
      * @param cache   是否使用缓存，true/false
      * @return  请求获取陌生人信息
      */
+    @Deprecated
     String getResponseJson_InfoStranger(String qq, boolean cache){
         Map<String, Object> paramMap = createParamMap(
                 new Object[]{"qq", qq},
@@ -626,8 +689,9 @@ public class QQJSONMsgCreator {
      * @param cache 使用缓存，true/使用，false/不使用
      * @return
      */
-    String getResponseJson_Req_getStrangerInfo(Boolean cache){
+    String getResponseJson_Req_getStrangerInfo(String qq, Boolean cache){
         Map<String, Object> paramMap = createParamMap(
+                new Object[]{"qq", qq},
                 new Object[]{"cache", cache}
         );
         return mapToBeanJson(new Req_getStrangerInfo(), paramMap);

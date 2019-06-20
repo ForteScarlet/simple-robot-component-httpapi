@@ -2,10 +2,13 @@ package com.forte.qqrobot.component.forhttpapi.http;
 
 
 import com.alibaba.fastjson.JSON;
+import com.forte.qqrobot.beans.messages.types.GroupAddRequestType;
 import com.forte.qqrobot.component.forhttpapi.HttpApiResourceDispatchCenter;
 import com.forte.qqrobot.component.forhttpapi.HttpConfiguration;
 import com.forte.qqrobot.component.forhttpapi.beans.request.get.Req_getRecord;
+import com.forte.qqrobot.component.forhttpapi.beans.request.send.Req_sendDiscussMsg;
 import com.forte.qqrobot.component.forhttpapi.beans.response.*;
+import com.forte.qqrobot.log.QQLog;
 import com.forte.qqrobot.utils.HttpClientUtil;
 
 import java.util.Optional;
@@ -185,9 +188,9 @@ public class QQHttpMsgSender {
      * @param needFile 需要回传文件内容
      * @return 图片信息
      */
-    public Optional<Resp_getGroupTopNote> getResponseJson_Req_getImageInfo(String source, Boolean needFile){
+    public Optional<Resp_getImageInfo> getImageInfo(String source, Boolean needFile){
         String json = creator.getResponseJson_Req_getImageInfo(source, needFile);
-        return get(json, Resp_getGroupTopNote.class);
+        return get(json, Resp_getImageInfo.class);
     }
 
     /**
@@ -258,8 +261,8 @@ public class QQHttpMsgSender {
      * @param cache 使用缓存，true/使用，false/不使用
      * @return
      */
-    public Optional<Resp_getStrangerInfo> getStrangerInfo(Boolean cache){
-        String json = creator.getResponseJson_Req_getStrangerInfo(cache);
+    public Optional<Resp_getStrangerInfo> getStrangerInfo(String qq, Boolean cache){
+        String json = creator.getResponseJson_Req_getStrangerInfo(qq, cache);
         return get(json, Resp_getStrangerInfo.class);
     }
 
@@ -278,14 +281,275 @@ public class QQHttpMsgSender {
      * @param beanType bean类型
      */
     public <T extends RespBean> Optional<T> get(String json, Class<T> beanType){
-        //获取HTTP API请求地址参数
-        HttpConfiguration httpConfiguration = HttpApiResourceDispatchCenter.getHttpConfiguration();
-        String url = httpConfiguration.getHttpRequestUrl();
-        //返回参数
-        String response = HttpClientUtil.sendHttpPost(url, json);
-        //转化为bean对象，并做防止空指针的处理
-        return Optional.ofNullable(response).map(res -> JSON.parseObject(res, beanType));
+       try{
+           //获取HTTP API请求地址参数
+           HttpConfiguration httpConfiguration = HttpApiResourceDispatchCenter.getHttpConfiguration();
+           String url = httpConfiguration.getHttpRequestUrl();
+           //返回参数
+           String response = HttpClientUtil.post(url, json);
+           //转化为bean对象，并做防止空指针的处理
+           return Optional.ofNullable(response).map(res -> JSON.parseObject(res, beanType));
+       }catch (Exception e){
+           QQLog.error("信息获取失败!", e);
+           return Optional.empty();
+       }
+    }
+
+    //**************** 信息发送方法 ****************//
+
+    //**************************************
+    //*         发送信息-HTTP API
+    //**************************************
+
+
+    /**
+     * 发送讨论组消息
+     * @param group 群号
+     * @param msg   消息内容
+     * @return  是否成功
+     */
+    public boolean sendDiscussMsg(String group, String msg) {
+        return send(creator.getResponseJson_sendDisGroupMsg(group, msg));
+    }
+
+    /**
+     * 发送群消息
+     * @param group 群号
+     * @param msg   消息内容
+     * @return      是否成功
+     */
+    public boolean sendGroupMsg(String group, String msg) {
+        return send(creator.getResponseJson_sendGroupMsg(group, msg));
+    }
+
+    /**
+     * 发送私聊消息
+     * @param qq    qq号
+     * @param msg   消息内容
+     * @return      是否成功
+     */
+    public boolean sendPrivateMsg(String qq, String msg) {
+        return send(creator.getResponseJson_sendMsgPrivate(qq, msg));
     }
 
 
+    /**
+     * 送花
+     * @param group 群号
+     * @param qq    qq号
+     * @return      是否成功
+     */
+    public boolean sendFlower(String group, String qq) {
+        return send(creator.getResponseJson_sendFlower(group, qq));
+    }
+
+
+    /**
+     * 赞
+     * @param qq    qq号
+     * @param times 赞次数
+     * @return      是否成功
+     */
+    public boolean sendLike(String qq, int times) {
+        return send(creator.getResponseJson_sendPraise(qq, times));
+    }
+
+
+    //**************************************
+    //*             设置类型消息
+    //**************************************
+
+    /**
+     * 好友添加请求
+     * @param flag          添加请求标识
+     * @param friendName    好友备注
+     * @param agree         是否同意
+     * @return              是否成功
+     */
+    public boolean setFriendAddRequest(String flag, String friendName, boolean agree) {
+        return set(creator.getResponseJson_setFriendAddRequest(flag, agree, friendName));
+    }
+
+
+    /**
+     * 群添加请求
+     * @param flag          标识
+     * @param requestType   添加类型
+     * @param agree         是否同意
+     * @param why           为什么拒绝
+     * @return              是否成功
+     */
+    public boolean setGroupAddRequest(String flag, GroupAddRequestType requestType, boolean agree, String why) {
+        return set(creator.getResponseJson_setGroupJoinResquest(why, requestType, agree ,flag));
+    }
+
+
+    /**
+     * 设置群管理员
+     * @param group 群号
+     * @param qq    qq号
+     * @param set   是否设置为管理员
+     * @return      是否成功
+     */
+    public boolean setGroupAdmin(String group, String qq, boolean set) {
+        return set(creator.getResponseJson_setGroupAdmin(qq, group, set));
+    }
+
+    /**
+     * 是否允许群匿名聊天
+     * @param group 群号
+     * @param agree 是否开启
+     * @return      是否成功
+     */
+    public boolean setGroupAnonymous(String group, boolean agree) {
+        return set(creator.getResponseJson_setGroupAno(group, agree));
+    }
+
+    /**
+     * 匿名成员禁言
+     * @param group 群号
+     * @param flag  匿名标识
+     * @param time  时长
+     * @return      是否成功
+     */
+    public boolean setGroupAnonymousBan(String group, String flag, Long time) {
+        return set(creator.getResponseJson_setAnoGroupMemberBanned(group, flag, time));
+    }
+
+    /**
+     * 群禁言
+     * @param group 群号
+     * @param qq    qq号
+     * @param time  时长
+     * @return      是否成功
+     */
+    public boolean setGroupBan(String group, String qq, Long time) {
+        return set(creator.getResponseJson_setGroupMemberBanned(qq, group, time));
+
+    }
+
+    /**
+     * 设置群成员名片
+     * @param group
+     * @param qq
+     * @param card
+     * @return
+     */
+    public boolean setGroupCard(String group, String qq, String card) {
+        return set(creator.getResponseJson_setGroupMemberCard(qq, group, card));
+
+    }
+
+    /**
+     * 删除群文件
+     * @param group 群号
+     * @param flag  文件标识
+     * @return      是否成功
+     */
+    public boolean setGroupFileDelete(String group, String flag) {
+        return set(creator.getResponseJson_setGroupFileDelete(group, flag));
+    }
+
+
+    /**
+     * 退出讨论组
+     * @param group 讨论组号
+     * @return      是否成功
+     */
+    public boolean setDiscussLeave(String group) {
+        return set(creator.getResponseJson_setDisGroupExit(group));
+    }
+
+    /**
+     * 退出群
+     * @param group 群号
+     * @return      是否成功
+     */
+    public boolean setGroupLeave(String group) {
+        return set(creator.getResponseJson_setGroupExit(group, false));
+    }
+
+    /**
+     * 踢出群成员
+     * @param group     群号
+     * @param qq        成员qq号
+     * @param dontBack  禁止再回来了
+     * @return          是否成功
+     */
+    public boolean setGroupMemberKick(String group, String qq, boolean dontBack) {
+        return set(creator.getResponseJson_setGroupMemberRemove(qq, group, dontBack));
+    }
+
+    /**
+     * 群签到
+     * @param group 群号
+     * @return      是否成功
+     */
+    public boolean setGroupSign(String group) {
+        return set(creator.getResponseJson_setGroupSign(group));
+    }
+
+    /**
+     * 设置群成员专属头衔
+     * @param group 群号
+     * @param qq    qq号
+     * @param title 头衔
+     * @param time  时长
+     * @return
+     */
+    public boolean setGroupExclusiveTitle(String group, String qq, String title, Long time) {
+        return set(creator.getResponseJson_setGroupMemberSpecialTitle(qq, group, time, title));
+
+    }
+
+    /**
+     * 设置全群禁言
+     * @param group 群号
+     * @param in    是否开启
+     * @return      是否成功
+     */
+    public boolean setGroupWholeBan(String group, boolean in) {
+        return set(creator.getResponseJson_setAllGroupBanned(group, in));
+    }
+
+    /**
+     * 撤回消息
+     * @param flag  消息标识
+     * @return      是否成功
+     */
+    public boolean setMsgRecall(String flag) {
+        return set(creator.getResponseJson_setMsgDelete(flag));
+    }
+
+    /**
+     * 打卡
+     * @return  是否成功
+     */
+    public boolean setSign() {
+        return set(creator.getResponseJson_setSign());
+    }
+
+    /**
+     * 发送消息
+     * 用httpclient发送
+     */
+    public boolean send(String json){
+        try{
+            //获取HTTP API请求地址参数
+            HttpConfiguration httpConfiguration = HttpApiResourceDispatchCenter.getHttpConfiguration();
+            String url = httpConfiguration.getHttpRequestUrl();
+            HttpClientUtil.post(url, json);
+            return true;
+        }catch (Exception e){
+            QQLog.error("消息发送失败!", e);
+            return false;
+        }
+    }
+
+    /**
+     * 设置消息
+     */
+    public boolean set(String json){
+        return send(json);
+    }
 }

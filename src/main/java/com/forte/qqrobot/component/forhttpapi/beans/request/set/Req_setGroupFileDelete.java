@@ -1,6 +1,6 @@
 package com.forte.qqrobot.component.forhttpapi.beans.request.set;
 
-import com.forte.forhttpapi.beans.request.ReqBean;
+import com.forte.qqrobot.component.forhttpapi.beans.request.ReqBean;
 
 /**
  * 「删除群文件」
