@@ -1,6 +1,7 @@
 package com.forte.qqrobot.component.forhttpapi.beans.response;
 
 import com.forte.qqrobot.beans.messages.result.ShareList;
+import com.forte.qqrobot.beans.messages.result.inner.Share;
 
 /**
  * @author Ricardo

@@ -61,7 +61,7 @@ public enum HttpMsgGetType {
     /**
      * 根据大类型获取对应类型枚举
      */
-    public HttpMsgGetType getByType(int type){
+    public static HttpMsgGetType getByType(int type){
         for (HttpMsgGetType value : values()) {
             if(value.bigType == type){
                 return value;

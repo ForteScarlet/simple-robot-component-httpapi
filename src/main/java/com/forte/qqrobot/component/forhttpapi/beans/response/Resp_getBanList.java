@@ -1,5 +1,7 @@
 package com.forte.qqrobot.component.forhttpapi.beans.response;
 
+import com.forte.qqrobot.beans.messages.result.inner.BanInfo;
+
 /**
  * 禁言列表
  * @author ForteScarlet <[163邮箱地址]ForteScarlet@163.com>

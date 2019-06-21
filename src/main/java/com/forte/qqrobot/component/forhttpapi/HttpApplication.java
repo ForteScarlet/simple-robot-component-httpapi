@@ -1,16 +1,17 @@
 package com.forte.qqrobot.component.forhttpapi;
 
+import com.forte.plusutils.consoleplus.console.Colors;
+import com.forte.plusutils.consoleplus.console.ColorsBuilder;
 import com.forte.qqrobot.BaseApplication;
-import com.forte.qqrobot.component.forhttpapi.http.HttpSender;
-import com.forte.qqrobot.component.forhttpapi.http.QQHttpMsgSender;
-import com.forte.qqrobot.component.forhttpapi.http.QQHttpServer;
-import com.forte.qqrobot.component.forhttpapi.http.QQJSONMsgCreator;
+import com.forte.qqrobot.component.forhttpapi.http.*;
 import com.forte.qqrobot.listener.invoker.ListenerManager;
+import com.forte.qqrobot.log.QQLog;
 import com.forte.qqrobot.sender.senderlist.SenderGetList;
 import com.forte.qqrobot.sender.senderlist.SenderSendList;
 import com.forte.qqrobot.sender.senderlist.SenderSetList;
 
 import java.io.IOException;
+import java.util.function.Function;
 
 /**
  * Http连接启动器
@@ -70,7 +71,32 @@ public class HttpApplication extends BaseApplication<HttpConfiguration> {
      */
     @Override
     protected void start(ListenerManager manager) {
-        // TODO 启动服务
+        /*
+         * 开启服务
+         * @param port 端口号
+         * @param listenerPath 监听地址
+         * @param  backlog TCP连接最大并发数, 传 0 或负数表示使用默认值
+         * @param encode 编码
+         * @param msgConsumer 接收消息，然后获取返回值
+         * @param methods 可以接收的消息类型
+         */
+        HttpConfiguration configuration = getConfiguration();
+        int port = configuration.getJavaPort();
+        String listenerPath = configuration.getServerPath();
+        int backlog = configuration.getBacklog();
+        String encode = HttpConfiguration.getEncode();
+        String[] method = configuration.getMethod();
+
+        long s = System.currentTimeMillis();
+
+        try {
+            QQHttpServer.start(port, listenerPath, backlog, encode, method, manager, httpSender);
+        } catch (IOException e) {
+            throw new RuntimeException("服务端构建失败", e);
+        }
+
+        String msg = "server启动成功,耗时(" + (System.currentTimeMillis() - s) + "ms)";
+        QQLog.info(Colors.builder().add(msg, Colors.FONT.DARK_GREEN).build());
 
     }
 
@@ -97,5 +123,6 @@ public class HttpApplication extends BaseApplication<HttpConfiguration> {
      */
     @Override
     public void close() throws IOException {
+        httpServer.close();
     }
 }

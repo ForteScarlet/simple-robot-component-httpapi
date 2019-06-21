@@ -2,6 +2,7 @@ package com.forte.qqrobot.component.forhttpapi.http;
 
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.forte.qqrobot.beans.messages.types.GroupAddRequestType;
 import com.forte.qqrobot.component.forhttpapi.HttpApiResourceDispatchCenter;
 import com.forte.qqrobot.component.forhttpapi.HttpConfiguration;
@@ -288,7 +289,11 @@ public class QQHttpMsgSender {
            //返回参数
            String response = HttpClientUtil.post(url, json);
            //转化为bean对象，并做防止空指针的处理
-           return Optional.ofNullable(response).map(res -> JSON.parseObject(res, beanType));
+           return Optional.ofNullable(response).map(res -> {
+               JSONObject jsonObject = JSON.parseObject(res);
+               jsonObject.put("originalData", res);
+               return jsonObject.toJavaObject(beanType);
+           });
        }catch (Exception e){
            QQLog.error("信息获取失败!", e);
            return Optional.empty();
@@ -534,6 +539,9 @@ public class QQHttpMsgSender {
      * 用httpclient发送
      */
     public boolean send(String json){
+        if(json == null){
+            json = "null";
+        }
         try{
             //获取HTTP API请求地址参数
             HttpConfiguration httpConfiguration = HttpApiResourceDispatchCenter.getHttpConfiguration();

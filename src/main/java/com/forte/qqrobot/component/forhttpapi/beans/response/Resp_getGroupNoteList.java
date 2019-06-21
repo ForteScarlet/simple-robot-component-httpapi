@@ -1,10 +1,9 @@
 package com.forte.qqrobot.component.forhttpapi.beans.response;
 
 import com.forte.qqrobot.beans.messages.result.GroupNoteList;
+import com.forte.qqrobot.beans.messages.result.inner.GroupNote;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**

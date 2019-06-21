@@ -1,6 +1,12 @@
 package com.forte.qqrobot.component.forhttpapi.http;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.forte.qqrobot.ResourceDispatchCenter;
+import com.forte.qqrobot.beans.messages.msgget.MsgGet;
+import com.forte.qqrobot.component.forhttpapi.beans.response.msgget.HttpMsgGetType;
+import com.forte.qqrobot.listener.invoker.ListenerManager;
+import com.forte.qqrobot.sender.MsgSender;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import org.apache.commons.io.IOUtils;
@@ -24,16 +30,27 @@ public class QQHttpHandler implements HttpHandler {
     private final String ENCODING;
 
     /** 接收到消息JSON字符串后的消息处理类 */
-    private final Function<String, Resp> JSON_PARAM_CONSUMER;
+//    private final Function<String, Resp> JSON_PARAM_CONSUMER;
 
     /** 可以接受的请求方式 */
     private final String[] METHODS;
 
+    /** 监听器管理器，对消息进行处理 */
+    private final ListenerManager listenerManager;
+
+    /** 送信器 */
+    private final HttpSender httpSender;
+
     /** 构造 */
-    public QQHttpHandler(String encode, Function<String, Resp> msgConsumer, String[] methods){
+    public QQHttpHandler(String encode,
+                         String[] methods,
+                         ListenerManager listenerManager,
+                         HttpSender httpSender
+                         ){
         this.ENCODING = encode;
-        this.JSON_PARAM_CONSUMER = msgConsumer;
         this.METHODS = methods;
+        this.listenerManager = listenerManager;
+        this.httpSender = httpSender;
     }
 
     /**
@@ -62,9 +79,20 @@ public class QQHttpHandler implements HttpHandler {
                 String paramsUrl = IOUtils.toString(requestBody, ENCODING);
                 String params = URLDecoder.decode(paramsUrl, ENCODING);
 
+                //参数
+                //转化为json对象并根据type值获取封装对象
+                JSONObject jsonData = JSON.parseObject(params);
+                jsonData.put("originalData", params);
+
+                int type = jsonData.getInteger("type");
+                HttpMsgGetType byType = HttpMsgGetType.getByType(type);
+                if(byType != null){
+                    MsgGet msgGet = jsonData.toJavaObject(byType.getType());
+                    listenerManager.onMsg(msgGet, httpSender);
+                }
 
                 //将获取到的请求参数放入, 获得响应消息
-                Resp apply = JSON_PARAM_CONSUMER.apply(params);
+                Resp apply = Resp.getDefaultInstance();
                 int headerLeft = apply.getHeaderLeft();
                 long headerRight = apply.getHeaderRight();
                 String body = apply.getBody();

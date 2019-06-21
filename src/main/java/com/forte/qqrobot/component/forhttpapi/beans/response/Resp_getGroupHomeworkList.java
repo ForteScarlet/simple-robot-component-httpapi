@@ -1,8 +1,10 @@
 package com.forte.qqrobot.component.forhttpapi.beans.response;
 
+import com.forte.qqrobot.beans.messages.result.inner.Content;
+import com.forte.qqrobot.beans.messages.result.inner.GroupHomework;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * TODO ※ 本类可能存在一些问题
@@ -350,7 +352,7 @@ public class Resp_getGroupHomeworkList implements com.forte.qqrobot.beans.messag
     /**
      * 作业内容
      */
-    public static class Content implements GroupHomework.Content {
+    public static class Content implements com.forte.qqrobot.beans.messages.result.inner.Content {
 
         private String text;
         private String type;

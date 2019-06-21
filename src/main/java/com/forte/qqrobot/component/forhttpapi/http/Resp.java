@@ -17,6 +17,17 @@ public class Resp {
     /** responseBody 响应正文 默认为[] */
     private String body = "[]";
 
+    private static Resp DEFAULT = new Resp();
+
+    public static Resp getDefaultInstance(){
+        return DEFAULT;
+    }
+
+    public static Resp getInstance(int responseNum, long responseNum2, String responseBody){
+        return new Resp(responseNum, responseNum2, responseBody);
+    }
+
+
     public int getHeaderLeft() {
         return headerLeft;
     }
@@ -38,6 +49,15 @@ public class Resp {
     }
 
     public void setBody(String body) {
+        this.body = body;
+    }
+
+    public Resp() {
+    }
+
+    public Resp(int headerLeft, long headerRight, String body) {
+        this.headerLeft = headerLeft;
+        this.headerRight = headerRight;
         this.body = body;
     }
 }

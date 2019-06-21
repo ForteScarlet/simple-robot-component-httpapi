@@ -58,7 +58,7 @@ public class Resp_getFriendList implements FriendList,  RespBean<Resp_getFriendL
      * 各个分组下的好友列表
      */
     @Override
-    public Map<String, com.forte.qqrobot.beans.messages.result.FriendList.Friend[]> getFriendList() {
+    public Map<String, com.forte.qqrobot.beans.messages.result.inner.Friend[]> getFriendList() {
         Map<String, List<List<Friend>>> collect = Arrays.stream(result).collect(Collectors.groupingBy(FriendList::getGname, Collectors.mapping(FriendList::getMems, Collectors.toList())));
         return collect.entrySet().stream().map(e -> new AbstractMap.SimpleEntry<>(e.getKey(), e.getValue().toArray(new Friend[0]))).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
     }
@@ -135,7 +135,7 @@ public class Resp_getFriendList implements FriendList,  RespBean<Resp_getFriendL
     /**
      * 好友对象
      */
-    public static class Friend implements com.forte.qqrobot.beans.messages.result.FriendList.Friend {
+    public static class Friend implements com.forte.qqrobot.beans.messages.result.inner.Friend {
 
         private String name;
 

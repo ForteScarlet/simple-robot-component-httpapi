@@ -1,5 +1,6 @@
 package com.forte.qqrobot.component.forhttpapi.beans.response;
 
+import com.forte.qqrobot.beans.messages.result.inner.GroupMember;
 import com.forte.qqrobot.beans.messages.types.PowerType;
 import com.forte.qqrobot.beans.messages.types.SexType;
 
