@@ -121,7 +121,16 @@ result[i].u	number	发布人QQ
         private Integer type;
         private String u;
         private String vn;
+        private String originalData;
 
+        @Override
+        public String getOriginalData() {
+            return originalData;
+        }
+
+        public void setOriginalData(String originalData) {
+            this.originalData = originalData;
+        }
         public String getCn() {
             return cn;
         }

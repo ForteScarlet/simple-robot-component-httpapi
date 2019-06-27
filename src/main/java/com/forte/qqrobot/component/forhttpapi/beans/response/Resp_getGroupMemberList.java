@@ -121,7 +121,16 @@ result[i].headimg	string	QQ头像
         private Integer allowChangeCard;
         private Integer tipExpireTime;
         private String headimg;
+        private String originalData;
 
+        @Override
+        public String getOriginalData() {
+            return originalData;
+        }
+
+        public void setOriginalData(String originalData) {
+            this.originalData = originalData;
+        }
         public void setGroup(String group) {
             this.group = group;
         }

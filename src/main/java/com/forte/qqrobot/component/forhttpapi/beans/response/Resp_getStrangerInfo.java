@@ -19,6 +19,11 @@ public class Resp_getStrangerInfo implements StrangerInfo, RespBean<Resp_getStra
         return originalData;
     }
 
+    @Override
+    public String getName(){
+        return result.getName();
+    }
+
     public void setOriginalData(String originalData) {
         this.originalData = originalData;
     }

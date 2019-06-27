@@ -91,7 +91,6 @@ public class HttpSender implements RootSenderList {
 
     /**
      * 获取好友列表
-     *
      * @return 好友列表
      */
     @Override
@@ -150,7 +149,7 @@ public class HttpSender implements RootSenderList {
      */
     @Override
     public GroupMemberInfo getGroupMemberInfo(String group, String QQ) {
-        return msgSender.getGroupMemberInfo(QQ, group, 0).orElse(null);
+        return msgSender.getGroupMemberInfo(QQ, group, 1).orElse(null);
     }
 
     /**

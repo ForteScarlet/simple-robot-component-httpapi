@@ -54,6 +54,14 @@ public class Resp_groupMsg implements GroupMsg, Imageable, Anonable{
         return GroupMsgType.of(typeInt);
     }
 
+    /**
+     * 获取群名称
+     */
+    @Override
+    public String getName() {
+        return null;
+    }
+
     public void setType(Integer type) {
         this.type = type;
     }

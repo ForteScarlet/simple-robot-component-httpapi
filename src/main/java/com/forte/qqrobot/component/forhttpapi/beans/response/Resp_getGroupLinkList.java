@@ -91,7 +91,16 @@ public class Resp_getGroupLinkList implements GroupLinkList, RespBean<Resp_getGr
         private String time;
         private String title;
         private String uin;
+        private String originalData;
 
+        @Override
+        public String getOriginalData() {
+            return originalData;
+        }
+
+        public void setOriginalData(String originalData) {
+            this.originalData = originalData;
+        }
         public String getRaw_url() {
             return raw_url;
         }

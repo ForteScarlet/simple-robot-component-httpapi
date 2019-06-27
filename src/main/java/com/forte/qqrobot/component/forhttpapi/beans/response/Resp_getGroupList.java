@@ -82,7 +82,16 @@ result[i].headimg	string	群头像链接
         private String name;
         private String group;
         private String headimg;
+        private String originalData;
 
+        @Override
+        public String getOriginalData() {
+            return originalData;
+        }
+
+        public void setOriginalData(String originalData) {
+            this.originalData = originalData;
+        }
         @Override
         public String getName() {
             return name;

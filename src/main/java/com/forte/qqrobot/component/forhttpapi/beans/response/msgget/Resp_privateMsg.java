@@ -2,6 +2,7 @@ package com.forte.qqrobot.component.forhttpapi.beans.response.msgget;
 
 import com.forte.qqrobot.beans.messages.msgget.PrivateMsg;
 import com.forte.qqrobot.beans.messages.types.PrivateMsgType;
+import com.forte.qqrobot.component.forhttpapi.beans.response.Resp_getStrangerInfo;
 
 import java.time.Instant;
 
@@ -89,6 +90,10 @@ public class Resp_privateMsg implements PrivateMsg, MsgBean, Imageable, Anonable
      */
     private AnonMsg anonymousInfo;
 
+    /**
+     * 获取后通过qq号来反向获取到陌生人信息
+      */
+    private Resp_getStrangerInfo strangerInfo;
 
     @Override
     public PrivateMsgType getType() {
@@ -175,6 +180,14 @@ public class Resp_privateMsg implements PrivateMsg, MsgBean, Imageable, Anonable
     @Override
     public String getFont() {
         return font;
+    }
+
+    /**
+     * 获取此人的昵称
+     */
+    @Override
+    public String getName() {
+        return null;
     }
 
     /**

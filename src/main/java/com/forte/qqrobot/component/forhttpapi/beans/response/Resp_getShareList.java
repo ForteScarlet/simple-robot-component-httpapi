@@ -124,7 +124,16 @@ result[i].uploaduin	number	上传者的QQ
         private String uploadnick;
         private Integer uploadsize;
         private String uploaduin;
+        private String originalData;
 
+        @Override
+        public String getOriginalData() {
+            return originalData;
+        }
+
+        public void setOriginalData(String originalData) {
+            this.originalData = originalData;
+        }
         public String getAuditflag() {
             return auditflag;
         }

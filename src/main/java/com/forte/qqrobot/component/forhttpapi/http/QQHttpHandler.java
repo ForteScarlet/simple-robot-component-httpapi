@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.forte.qqrobot.ResourceDispatchCenter;
 import com.forte.qqrobot.beans.messages.msgget.MsgGet;
 import com.forte.qqrobot.component.forhttpapi.beans.response.msgget.HttpMsgGetType;
+import com.forte.qqrobot.component.forhttpapi.utils.ListenBeansUtil;
 import com.forte.qqrobot.listener.invoker.ListenerManager;
 import com.forte.qqrobot.sender.MsgSender;
 import com.sun.net.httpserver.HttpExchange;
@@ -80,16 +81,19 @@ public class QQHttpHandler implements HttpHandler {
                 String params = URLDecoder.decode(paramsUrl, ENCODING);
 
                 //参数
-                //转化为json对象并根据type值获取封装对象
-                JSONObject jsonData = JSON.parseObject(params);
-                jsonData.put("originalData", params);
-
-                int type = jsonData.getInteger("type");
-                HttpMsgGetType byType = HttpMsgGetType.getByType(type);
-                if(byType != null){
-                    MsgGet msgGet = jsonData.toJavaObject(byType.getType());
+                MsgGet msgGet = ListenBeansUtil.jsonToMsgGet(params);
+                if(msgGet != null){
                     listenerManager.onMsg(msgGet, httpSender);
                 }
+//                JSONObject jsonData = JSON.parseObject(params);
+//                jsonData.put("originalData", params);
+//
+//                int type = jsonData.getInteger("type");
+//                HttpMsgGetType byType = HttpMsgGetType.getByType(type);
+//                if(byType != null){
+//                    MsgGet msgGet = jsonData.toJavaObject(byType.getType());
+//                    listenerManager.onMsg(msgGet, httpSender);
+//                }
 
                 //将获取到的请求参数放入, 获得响应消息
                 Resp apply = Resp.getDefaultInstance();

@@ -79,6 +79,16 @@ public class Resp_getBanList implements com.forte.qqrobot.beans.messages.result.
         private String nick;
         private Integer t;
         private String uin;
+        private String originalData;
+
+        @Override
+        public String getOriginalData() {
+            return originalData;
+        }
+
+        public void setOriginalData(String originalData) {
+            this.originalData = originalData;
+        }
 
         public Integer getManager() {
             return manager;

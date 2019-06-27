@@ -141,6 +141,16 @@ public class Resp_getFriendList implements FriendList,  RespBean<Resp_getFriendL
 
         private String uin;
 
+        private String originalData;
+
+        @Override
+        public String getOriginalData() {
+            return originalData;
+        }
+
+        public void setOriginalData(String originalData) {
+            this.originalData = originalData;
+        }
         /**
          * 获取好友昵称
          */

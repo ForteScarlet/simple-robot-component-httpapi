@@ -1,8 +1,8 @@
 package com.forte.qqrobot.component.forhttpapi;
 
 import com.forte.plusutils.consoleplus.console.Colors;
-import com.forte.plusutils.consoleplus.console.ColorsBuilder;
 import com.forte.qqrobot.BaseApplication;
+import com.forte.qqrobot.beans.messages.result.LoginQQInfo;
 import com.forte.qqrobot.component.forhttpapi.http.*;
 import com.forte.qqrobot.listener.invoker.ListenerManager;
 import com.forte.qqrobot.log.QQLog;
@@ -11,7 +11,6 @@ import com.forte.qqrobot.sender.senderlist.SenderSendList;
 import com.forte.qqrobot.sender.senderlist.SenderSetList;
 
 import java.io.IOException;
-import java.util.function.Function;
 
 /**
  * Http连接启动器
@@ -22,7 +21,7 @@ import java.util.function.Function;
 public class HttpApplication extends BaseApplication<HttpConfiguration> {
 
     /** 送信器 */
-    private HttpSender httpSender;
+    protected HttpSender httpSender;
 
     /** http 服务器 */
     private QQHttpServer httpServer;
@@ -70,7 +69,8 @@ public class HttpApplication extends BaseApplication<HttpConfiguration> {
      * @param manager 监听管理器，用于分配获取到的消息
      */
     @Override
-    protected void start(ListenerManager manager) {
+    protected String start(ListenerManager manager) {
+        HttpConfiguration configuration = getConfiguration();
         /*
          * 开启服务
          * @param port 端口号
@@ -80,7 +80,6 @@ public class HttpApplication extends BaseApplication<HttpConfiguration> {
          * @param msgConsumer 接收消息，然后获取返回值
          * @param methods 可以接收的消息类型
          */
-        HttpConfiguration configuration = getConfiguration();
         int port = configuration.getJavaPort();
         String listenerPath = configuration.getServerPath();
         int backlog = configuration.getBacklog();
@@ -90,13 +89,28 @@ public class HttpApplication extends BaseApplication<HttpConfiguration> {
         long s = System.currentTimeMillis();
 
         try {
-            QQHttpServer.start(port, listenerPath, backlog, encode, method, manager, httpSender);
+            this.httpServer = QQHttpServer.start(port, listenerPath, backlog, encode, method, manager, httpSender);
         } catch (IOException e) {
             throw new RuntimeException("服务端构建失败", e);
         }
 
-        String msg = "server启动成功,耗时(" + (System.currentTimeMillis() - s) + "ms)";
-        QQLog.info(Colors.builder().add(msg, Colors.FONT.DARK_GREEN).build());
+        QQLog.debug("尝试获取登录QQ信息...");
+        getAndShowQQInfo(configuration);
+        return "Http Server";
+    }
+
+    /**
+     * 获取并展示登录的QQ的部分信息并在配置中记录此信息
+     * @param configuration
+     */
+    private void getAndShowQQInfo(HttpConfiguration configuration){
+        //获取登录的机器人的信息
+        LoginQQInfo loginQQInfo = httpSender.getLoginQQInfo();
+        configuration.setLoginQQInfo(loginQQInfo);
+
+        QQLog.info(Colors.builder().add("QQ    : "+loginQQInfo.getQQ(), Colors.FONT.YELLOW).build());
+        QQLog.info(Colors.builder().add("NICK  : "+loginQQInfo.getName(), Colors.FONT.YELLOW).build());
+        QQLog.info(Colors.builder().add("LEVEL : "+loginQQInfo.getLevel(), Colors.FONT.YELLOW).build());
 
     }
 

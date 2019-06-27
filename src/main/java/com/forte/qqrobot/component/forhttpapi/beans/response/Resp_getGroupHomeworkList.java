@@ -116,7 +116,7 @@ public class Resp_getGroupHomeworkList implements com.forte.qqrobot.beans.messag
             result[i].ts_create	int	该作业的创建时间，时间戳形式
                       */
     public static class GroupHomeworkList implements GroupHomework {
-        //TODO 该作业的内容信息数组 该作业的内容/该作业的内容类型
+        //该作业的内容信息数组 该作业的内容/该作业的内容类型
         private List<Content> content = new ArrayList<>();
 
         private Integer course_id;
@@ -133,7 +133,16 @@ public class Resp_getGroupHomeworkList implements com.forte.qqrobot.beans.messag
         private Integer status;
         private Integer team_id;
         private Integer ts_create;
+        private String originalData;
 
+        @Override
+        public String getOriginalData() {
+            return originalData;
+        }
+
+        public void setOriginalData(String originalData) {
+            this.originalData = originalData;
+        }
         public List<Content> getContent() {
             return content;
         }
@@ -347,6 +356,8 @@ public class Resp_getGroupHomeworkList implements com.forte.qqrobot.beans.messag
         public void setTs_create(Integer ts_create) {
             this.ts_create = ts_create;
         }
+
+
     }
 
     /**
@@ -356,6 +367,7 @@ public class Resp_getGroupHomeworkList implements com.forte.qqrobot.beans.messag
 
         private String text;
         private String type;
+        private String originalData;
 
         @Override
         public String getText() {
@@ -373,6 +385,18 @@ public class Resp_getGroupHomeworkList implements com.forte.qqrobot.beans.messag
 
         public void setType(String type) {
             this.type = type;
+        }
+
+        public void setOriginalData(String originalData) {
+            this.originalData = originalData;
+        }
+
+        /**
+         * 获取原本的数据 originalData
+         */
+        @Override
+        public String getOriginalData() {
+            return originalData;
         }
     }
 }
