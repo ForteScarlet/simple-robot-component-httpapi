@@ -55,7 +55,7 @@ public class Resp_getImageInfo implements com.forte.qqrobot.beans.messages.resul
      */
     @Override
     public String getMD5() {
-        return result.getMd5();
+        return result == null ? null : result.getMd5();
     }
 
     /**
@@ -63,7 +63,7 @@ public class Resp_getImageInfo implements com.forte.qqrobot.beans.messages.resul
      */
     @Override
     public Double getWidth() {
-        return result.getWidth();
+        return result == null ? null : result.getWidth();
     }
 
     /**
@@ -71,7 +71,7 @@ public class Resp_getImageInfo implements com.forte.qqrobot.beans.messages.resul
      */
     @Override
     public Double getHeight() {
-        return result.getHeight();
+        return result == null ? null : result.getHeight();
     }
 
     /**
@@ -79,7 +79,7 @@ public class Resp_getImageInfo implements com.forte.qqrobot.beans.messages.resul
      */
     @Override
     public Long getSize() {
-        return result.getSize();
+        return result == null ? null : result.getSize();
     }
 
     /**
@@ -87,7 +87,7 @@ public class Resp_getImageInfo implements com.forte.qqrobot.beans.messages.resul
      */
     @Override
     public String getUrl() {
-        return result.getUrl();
+        return result == null ? null : result.getUrl();
     }
 
     /**
@@ -103,7 +103,7 @@ public class Resp_getImageInfo implements com.forte.qqrobot.beans.messages.resul
      */
     @Override
     public String getFileBase64() {
-        return result.getFile();
+        return result == null ? null : result.getFile();
     }
 
 

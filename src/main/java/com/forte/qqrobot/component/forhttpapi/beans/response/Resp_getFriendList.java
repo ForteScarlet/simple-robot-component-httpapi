@@ -42,7 +42,7 @@ public class Resp_getFriendList implements FriendList,  RespBean<Resp_getFriendL
 
     @Override
     public FriendList[] getResult() {
-        return result;
+        return result == null ? new FriendList[0] : result;
     }
 
     @Override

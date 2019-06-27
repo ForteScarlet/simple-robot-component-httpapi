@@ -47,7 +47,7 @@ public class Resp_getAuthInfo implements com.forte.qqrobot.beans.messages.result
      */
     @Override
     public String getCode() {
-        return result.getAuthCode()+"";
+        return result == null ? null : result.getAuthCode()+"";
     }
 
     /**
@@ -55,7 +55,7 @@ public class Resp_getAuthInfo implements com.forte.qqrobot.beans.messages.result
      */
     @Override
     public String getCookies() {
-        return result.getCookies();
+        return result == null ? null : result.getCookies();
     }
 
     /**
@@ -63,7 +63,7 @@ public class Resp_getAuthInfo implements com.forte.qqrobot.beans.messages.result
      */
     @Override
     public String getCsrfToken() {
-        return result.getCsrfToken()+"";
+        return result == null ? null : result.getCsrfToken()+"";
     }
 
     /**

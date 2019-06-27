@@ -21,7 +21,7 @@ public class Resp_getStrangerInfo implements StrangerInfo, RespBean<Resp_getStra
 
     @Override
     public String getName(){
-        return result.getName();
+        return result == null ? null : result.getName();
     }
 
     public void setOriginalData(String originalData) {
@@ -60,7 +60,7 @@ public class Resp_getStrangerInfo implements StrangerInfo, RespBean<Resp_getStra
      */
     @Override
     public String getQQ() {
-        return result.getQq();
+        return result == null ? null : result.getQq();
     }
 
     /**
@@ -77,7 +77,7 @@ public class Resp_getStrangerInfo implements StrangerInfo, RespBean<Resp_getStra
      */
     @Override
     public Integer getAge() {
-        return result.getOld();
+        return result == null ? null : result.getOld();
     }
 
     /**
@@ -85,7 +85,7 @@ public class Resp_getStrangerInfo implements StrangerInfo, RespBean<Resp_getStra
      */
     @Override
     public String headUrl() {
-        return result.getHeadimg();
+        return result == null ? null : result.getHeadimg();
     }
 
     /**
@@ -93,7 +93,7 @@ public class Resp_getStrangerInfo implements StrangerInfo, RespBean<Resp_getStra
      */
     @Override
     public Integer getLevel() {
-        return result.getLevel();
+        return result == null ? null : result.getLevel();
     }
 
     /*

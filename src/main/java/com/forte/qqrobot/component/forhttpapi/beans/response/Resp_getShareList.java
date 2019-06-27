@@ -4,6 +4,7 @@ import com.forte.qqrobot.beans.messages.result.ShareList;
 import com.forte.qqrobot.beans.messages.result.inner.Share;
 
 /**
+ *
  * @author Ricardo
  * @create 2019-03-22 16:44
  **/
@@ -48,7 +49,7 @@ public class Resp_getShareList implements ShareList, RespBean<Resp_getShareList.
 
     @Override
     public ShareList[] getResult() {
-        return result;
+        return result == null ? new ShareList[0] : result;
     }
 
     /**
@@ -57,7 +58,7 @@ public class Resp_getShareList implements ShareList, RespBean<Resp_getShareList.
      */
     @Override
     public Share[] getList() {
-        return new Share[0];
+        return result == null ? new Share[0] : result;
     }
 
     /*

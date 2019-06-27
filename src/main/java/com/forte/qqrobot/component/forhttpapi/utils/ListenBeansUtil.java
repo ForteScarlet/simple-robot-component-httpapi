@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.forte.qqrobot.beans.messages.msgget.MsgGet;
 import com.forte.qqrobot.component.forhttpapi.beans.response.msgget.HttpMsgGetType;
+import com.forte.qqrobot.utils.JSONUtils;
 
 /**
  * 将字符串转化为对应的消息封装类的工具类

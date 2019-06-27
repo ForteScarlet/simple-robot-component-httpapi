@@ -21,6 +21,7 @@ public class Req_getGroupInfo implements GetGroupInfo, ReqGetBean<Resp_getGroupI
         return fun;
     }
 
+    @Override
     public String getGroup() {
         return group;
     }

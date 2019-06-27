@@ -37,7 +37,7 @@ public class Resp_getBanList implements com.forte.qqrobot.beans.messages.result.
 
     @Override
     public BanList[] getResult() {
-        return result;
+        return result == null ? new BanList[0] : result;
     }
 
     public void setResult(BanList[] result) {
@@ -50,7 +50,7 @@ public class Resp_getBanList implements com.forte.qqrobot.beans.messages.result.
      */
     @Override
     public BanInfo[] getList() {
-        return result;
+        return result == null ? new BanInfo[0] : result;
     }
 
     /**

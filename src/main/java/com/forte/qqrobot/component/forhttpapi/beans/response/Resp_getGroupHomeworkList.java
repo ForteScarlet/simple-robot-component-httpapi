@@ -42,7 +42,7 @@ public class Resp_getGroupHomeworkList implements com.forte.qqrobot.beans.messag
 
     @Override
     public GroupHomeworkList[] getResult() {
-        return result;
+        return result == null ? new GroupHomeworkList[0] : result;
     }
 
     /**
@@ -51,7 +51,7 @@ public class Resp_getGroupHomeworkList implements com.forte.qqrobot.beans.messag
      */
     @Override
     public GroupHomework[] getList() {
-        return result;
+        return result == null ? new GroupHomeworkList[0] : result;
     }
 
     /**

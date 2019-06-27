@@ -17,9 +17,6 @@ public class HttpSender implements RootSenderList {
     /** 真正的送信器 */
     private final QQHttpMsgSender msgSender;
 
-    /** 有些接口（获取列表的）需要传入获取数量，此处为默认数量 */
-    private static final Integer NUMBER = 99;
-
     /**
      * 构造
      * @param qqHttpMsgSender 真正的送信器
@@ -100,34 +97,38 @@ public class HttpSender implements RootSenderList {
 
     /**
      * 取群作业列表
-     * @param group 群号
+     *
+     * @param group  群号
+     * @param number 获取数量
      * @return 群作业列表
      */
     @Override
-    public GroupHomeworkList getGroupHomeworkList(String group) {
-        return msgSender.getGroupHomeworkList(group, NUMBER).orElse(null);
+    public GroupHomeworkList getGroupHomeworkList(String group, int number) {
+        return msgSender.getGroupHomeworkList(group, number).orElse(null);
     }
 
     /**
      * 取群信息
      *
      * @param group 群号
+     * @param cache 是否使用缓存
      * @return 群信息
      */
     @Override
-    public GroupInfo getGroupInfo(String group) {
+    public GroupInfo getGroupInfo(String group, boolean cache) {
         return msgSender.getGroupInfo(group).orElse(null);
     }
 
     /**
      * 取群链接列表
      *
-     * @param group 群号
+     * @param group  群号
+     * @param number 获取数量
      * @return 群链接
      */
     @Override
-    public GroupLinkList getGroupLinkList(String group) {
-        return msgSender.getGroupLinkList(group, NUMBER).orElse(null);
+    public GroupLinkList getGroupLinkList(String group, int number) {
+        return msgSender.getGroupLinkList(group, number).orElse(null);
     }
 
     /**
@@ -140,16 +141,18 @@ public class HttpSender implements RootSenderList {
         return msgSender.getGroupList().orElse(null);
     }
 
+
     /**
      * 取群成员信息
      *
      * @param group 群号
      * @param QQ    QQ号
+     * @param cache 是否使用缓存
      * @return 群成员信息
      */
     @Override
-    public GroupMemberInfo getGroupMemberInfo(String group, String QQ) {
-        return msgSender.getGroupMemberInfo(QQ, group, 1).orElse(null);
+    public GroupMemberInfo getGroupMemberInfo(String group, String QQ, boolean cache) {
+        return msgSender.getGroupMemberInfo(QQ, group, cache ? 1 : 0).orElse(null);
     }
 
     /**
@@ -166,12 +169,13 @@ public class HttpSender implements RootSenderList {
     /**
      * 取群公告列表
      *
-     * @param group 群号
+     * @param group  群号
+     * @param number 数量
      * @return 群公告列表
      */
     @Override
-    public GroupNoteList getGroupNoteList(String group) {
-        return msgSender.getGroupNoteList(group, NUMBER).orElse(null);
+    public GroupNoteList getGroupNoteList(String group, int number) {
+        return msgSender.getGroupNoteList(group, number).orElse(null);
     }
 
     /**
@@ -220,12 +224,13 @@ public class HttpSender implements RootSenderList {
     /**
      * 取陌生人信息
      *
-     * @param QQ 陌生人的QQ号
+     * @param QQ    陌生人的QQ号
+     * @param cache 是否使用缓存
      * @return
      */
     @Override
-    public StrangerInfo getStrangerInfo(String QQ) {
-        return msgSender.getStrangerInfo(QQ, false).orElse(null);
+    public StrangerInfo getStrangerInfo(String QQ, boolean cache) {
+        return msgSender.getStrangerInfo(QQ, cache).orElse(null);
     }
 
     //**************************************

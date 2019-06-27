@@ -53,7 +53,7 @@ public class Resp_getGroupNoteList implements GroupNoteList,  RespBean<Resp_getG
 
     @Override
     public GroupNoteList[] getResult() {
-        return result;
+        return result == null ? new GroupNoteList[0] : result;
     }
 
     /**
@@ -62,7 +62,7 @@ public class Resp_getGroupNoteList implements GroupNoteList,  RespBean<Resp_getG
      */
     @Override
     public GroupNote[] getList() {
-        return result;
+        return result == null ? new GroupNote[0] : result;
     }
 
     /*

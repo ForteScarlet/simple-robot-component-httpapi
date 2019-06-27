@@ -49,7 +49,7 @@ public class Resp_getGroupLinkList implements GroupLinkList, RespBean<Resp_getGr
 
     @Override
     public GroupLinkList[] getResult() {
-        return result;
+        return result == null ? new GroupLinkList[0] : result;
     }
 
     /**
@@ -58,7 +58,7 @@ public class Resp_getGroupLinkList implements GroupLinkList, RespBean<Resp_getGr
      */
     @Override
     public GroupLink[] getList() {
-        return result;
+        return result == null ? new GroupLink[0] : result;
     }
 
     /*

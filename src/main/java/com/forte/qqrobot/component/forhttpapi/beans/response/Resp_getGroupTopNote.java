@@ -58,7 +58,7 @@ public class Resp_getGroupTopNote implements com.forte.qqrobot.beans.messages.re
      */
     @Override
     public String getId() {
-        return result.getFid();
+        return result == null ? null : result.getFid();
     }
 
     /**
@@ -66,7 +66,7 @@ public class Resp_getGroupTopNote implements com.forte.qqrobot.beans.messages.re
      */
     @Override
     public String getMsg() {
-        return result.getMsg().toString();
+        return result == null ? null : result.getMsg().toString();
     }
 
     /**
@@ -74,7 +74,7 @@ public class Resp_getGroupTopNote implements com.forte.qqrobot.beans.messages.re
      */
     @Override
     public String getFaceMsg() {
-        return result.getMsg().toString();
+        return result == null ? null : result.getMsg().toString();
     }
 
     /**
@@ -82,7 +82,7 @@ public class Resp_getGroupTopNote implements com.forte.qqrobot.beans.messages.re
      */
     @Override
     public String getTitle() {
-        return result.getMsg().toString();
+        return result == null ? null : result.getMsg().toString();
     }
 
     /**
@@ -98,13 +98,15 @@ public class Resp_getGroupTopNote implements com.forte.qqrobot.beans.messages.re
      */
     @Override
     public Integer getReadNum() {
-        return result.getRead_num();
+        return result == null ? null : result.getRead_num();
     }
 
     /**
      * 是否提醒群员修改群名片
+     * 似乎是不支持的API
      */
     @Override
+    @Deprecated
     public Boolean isShowEditCard() {
         return false;
     }
@@ -114,7 +116,7 @@ public class Resp_getGroupTopNote implements com.forte.qqrobot.beans.messages.re
      */
     @Override
     public String getQQ() {
-        return result.getU();
+        return result == null ? null : result.getU();
     }
 
     /**

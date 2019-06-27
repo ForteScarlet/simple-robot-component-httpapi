@@ -51,7 +51,7 @@ public class Resp_getGroupMemberList implements com.forte.qqrobot.beans.messages
 
     @Override
     public GroupMemberList[] getResult() {
-        return result;
+        return result == null ? new GroupMemberList[0] : result;
     }
 
     /**
@@ -60,7 +60,7 @@ public class Resp_getGroupMemberList implements com.forte.qqrobot.beans.messages
      */
     @Override
     public GroupMember[] getList() {
-        return result;
+        return result == null ? new GroupMember[0] : result;
     }
 
     /*

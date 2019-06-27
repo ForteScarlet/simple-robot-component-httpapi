@@ -48,7 +48,7 @@ public class Resp_getGroupList implements GroupList, RespBean<Resp_getGroupList.
 
     @Override
     public getGroupList[] getResult() {
-        return result;
+        return result == null ? new getGroupList[0] : result;
     }
 
     /**
@@ -57,7 +57,7 @@ public class Resp_getGroupList implements GroupList, RespBean<Resp_getGroupList.
      */
     @Override
     public Group[] getList() {
-        return result;
+        return result == null ? new Group[0] : result;
     }
 
 

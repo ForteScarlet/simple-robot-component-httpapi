@@ -48,7 +48,7 @@ public class Resp_getFileInfo implements FileInfo, RespBean<Resp_getFileInfo.Fil
      */
     @Override
     public String getFileName() {
-        return result.getName();
+        return result == null ? null : result.getName();
     }
 
     /**
@@ -56,7 +56,7 @@ public class Resp_getFileInfo implements FileInfo, RespBean<Resp_getFileInfo.Fil
      */
     @Override
     public String getId() {
-        return result.getId();
+        return result == null ? null : result.getId();
     }
 
     /**
@@ -72,7 +72,7 @@ public class Resp_getFileInfo implements FileInfo, RespBean<Resp_getFileInfo.Fil
      */
     @Override
     public Long getFileSize() {
-        return result.getSize();
+        return result == null ? null : result.getSize();
     }
 
     /**

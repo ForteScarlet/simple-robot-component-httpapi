@@ -63,7 +63,7 @@ public class Resp_getGroupInfo implements GroupInfo, RespBean<Resp_getGroupInfo.
      */
     @Override
     public Integer getLevel() {
-        return result.getgLevel();
+        return result == null ? null : result.getgLevel();
     }
 
     /**
@@ -71,7 +71,7 @@ public class Resp_getGroupInfo implements GroupInfo, RespBean<Resp_getGroupInfo.
      */
     @Override
     public Integer getOpenType() {
-        return result.getAc_open();
+        return result == null ? null : result.getAc_open();
     }
 
     /**
@@ -79,7 +79,7 @@ public class Resp_getGroupInfo implements GroupInfo, RespBean<Resp_getGroupInfo.
      */
     @Override
     public String getType() {
-        return result.getClassName();
+        return result == null ? null : result.getClassName();
     }
 
     /**
@@ -87,7 +87,7 @@ public class Resp_getGroupInfo implements GroupInfo, RespBean<Resp_getGroupInfo.
      */
     @Override
     public Integer getTypeId() {
-        return result.getGtype();
+        return result == null ? null : result.getGtype();
     }
 
     /**
@@ -95,7 +95,7 @@ public class Resp_getGroupInfo implements GroupInfo, RespBean<Resp_getGroupInfo.
      */
     @Override
     public String[] getAdminList() {
-        return result.getgAdmins();
+        return result == null ? null : result.getgAdmins();
     }
 
     /**
@@ -103,7 +103,7 @@ public class Resp_getGroupInfo implements GroupInfo, RespBean<Resp_getGroupInfo.
      */
     @Override
     public String getBoard() {
-        return result.getgBoard();
+        return result == null ? null : result.getgBoard();
     }
 
     /**
@@ -115,7 +115,7 @@ public class Resp_getGroupInfo implements GroupInfo, RespBean<Resp_getGroupInfo.
             return Long.parseLong(result.getgCrtTime());
         }catch (Exception e){
             e.printStackTrace();
-            return -1L;
+            return null;
         }
     }
 
@@ -124,7 +124,7 @@ public class Resp_getGroupInfo implements GroupInfo, RespBean<Resp_getGroupInfo.
      */
     @Override
     public String getSimpleIntro() {
-        return result.getgIntro();
+        return result == null ? null : result.getgIntro();
     }
 
     /**
@@ -132,7 +132,7 @@ public class Resp_getGroupInfo implements GroupInfo, RespBean<Resp_getGroupInfo.
      */
     @Override
     public String getCompleteIntro() {
-        return result.getgRIntro();
+        return result == null ? null : result.getgRIntro();
     }
 
     /**
@@ -140,7 +140,7 @@ public class Resp_getGroupInfo implements GroupInfo, RespBean<Resp_getGroupInfo.
      */
     @Override
     public Integer getMaxMember() {
-        return result.getgMaxMem();
+        return result == null ? null : result.getgMaxMem();
     }
 
     /**
@@ -148,7 +148,7 @@ public class Resp_getGroupInfo implements GroupInfo, RespBean<Resp_getGroupInfo.
      */
     @Override
     public Integer getMemberNum() {
-        return result.getgMemNum();
+        return result == null ? null : result.getgMemNum();
     }
 
     /**
@@ -156,7 +156,7 @@ public class Resp_getGroupInfo implements GroupInfo, RespBean<Resp_getGroupInfo.
      */
     @Override
     public String getName() {
-        return result.getgName();
+        return result == null ? null : result.getgName();
     }
 
     /**
@@ -164,7 +164,7 @@ public class Resp_getGroupInfo implements GroupInfo, RespBean<Resp_getGroupInfo.
      */
     @Override
     public String getOwnerQQ() {
-        return result.getgOwner();
+        return result == null ? null : result.getgOwner();
     }
 
     /**
@@ -172,7 +172,7 @@ public class Resp_getGroupInfo implements GroupInfo, RespBean<Resp_getGroupInfo.
      */
     @Override
     public String getCode() {
-        return result.getAc_num();
+        return result == null ? null : result.getAc_num();
     }
 
     /**
@@ -180,7 +180,7 @@ public class Resp_getGroupInfo implements GroupInfo, RespBean<Resp_getGroupInfo.
      */
     @Override
     public Map<String, String> getLevelNames() {
-        return result.getLevelname();
+        return result == null ? null : result.getLevelname();
     }
 
     /**
@@ -188,7 +188,7 @@ public class Resp_getGroupInfo implements GroupInfo, RespBean<Resp_getGroupInfo.
      */
     @Override
     public Map<String, String> getAdminNickList() {
-        return result.getNs();
+        return result == null ? null : result.getNs();
     }
 
     /**
@@ -196,7 +196,7 @@ public class Resp_getGroupInfo implements GroupInfo, RespBean<Resp_getGroupInfo.
      */
     @Override
     public String getPos() {
-        return result.getPos();
+        return result == null ? null : result.getPos();
     }
 
     /**
@@ -204,7 +204,7 @@ public class Resp_getGroupInfo implements GroupInfo, RespBean<Resp_getGroupInfo.
      */
     @Override
     public Integer getSearchType() {
-        return result.getSearch();
+        return result == null ? null : result.getSearch();
     }
 
     /**
@@ -212,7 +212,7 @@ public class Resp_getGroupInfo implements GroupInfo, RespBean<Resp_getGroupInfo.
      */
     @Override
     public String[] getTags() {
-        return result.getTags().stream().map(m -> m.getOrDefault("tag", null)).toArray(String[]::new);
+        return result == null ? null : result.getTags().stream().map(m -> m.getOrDefault("tag", null)).toArray(String[]::new);
     }
 
     /*

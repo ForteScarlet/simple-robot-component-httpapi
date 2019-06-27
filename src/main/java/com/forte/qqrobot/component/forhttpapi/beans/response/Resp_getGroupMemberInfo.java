@@ -56,7 +56,7 @@ public class Resp_getGroupMemberInfo implements com.forte.qqrobot.beans.messages
      */
     @Override
     public String getCode() {
-        return result.getGroup();
+        return result == null ? null : result.getGroup();
     }
 
     /**
@@ -64,7 +64,7 @@ public class Resp_getGroupMemberInfo implements com.forte.qqrobot.beans.messages
      */
     @Override
     public String getQQ() {
-        return result.getQq();
+        return result == null ? null : result.getQq();
     }
 
     /**
@@ -72,7 +72,7 @@ public class Resp_getGroupMemberInfo implements com.forte.qqrobot.beans.messages
      */
     @Override
     public String getName() {
-        return result.getName();
+        return result == null ? null : result.getName();
     }
 
     /**
@@ -80,7 +80,7 @@ public class Resp_getGroupMemberInfo implements com.forte.qqrobot.beans.messages
      */
     @Override
     public String getNickName() {
-        return result.getName();
+        return result == null ? null : result.getName();
     }
 
     /**
@@ -88,7 +88,7 @@ public class Resp_getGroupMemberInfo implements com.forte.qqrobot.beans.messages
      */
     @Override
     public String getCard() {
-        return result.getCard();
+        return result == null ? null : result.getCard();
     }
 
     /**
@@ -96,6 +96,9 @@ public class Resp_getGroupMemberInfo implements com.forte.qqrobot.beans.messages
      */
     @Override
     public SexType getSex() {
+        if(result == null){
+            return null;
+        }
         Integer gender = result.getGender();
         return gender == 0 ? SexType.MALE : gender == 1 ? SexType.FEMALE : SexType.UNKNOWN;
     }
@@ -105,7 +108,7 @@ public class Resp_getGroupMemberInfo implements com.forte.qqrobot.beans.messages
      */
     @Override
     public String getCity() {
-        return result.getCity();
+        return result == null ? null : result.getCity();
     }
 
     /**
@@ -113,6 +116,9 @@ public class Resp_getGroupMemberInfo implements com.forte.qqrobot.beans.messages
      */
     @Override
     public Long getJoinTime() {
+        if(result == null){
+            return null;
+        }
         return Long.parseLong(result.getJoinTime());
     }
 
@@ -121,6 +127,9 @@ public class Resp_getGroupMemberInfo implements com.forte.qqrobot.beans.messages
      */
     @Override
     public Long getLastTime() {
+        if(result == null){
+            return null;
+        }
         return Long.parseLong(result.getLastTime());
     }
 
@@ -129,6 +138,9 @@ public class Resp_getGroupMemberInfo implements com.forte.qqrobot.beans.messages
      */
     @Override
     public PowerType getPowerType() {
+        if(result == null){
+            return null;
+        }
         Integer power = result.getPower();
         return power == 1 ? PowerType.MEMBER : power == 2 ? PowerType.MEMBER : PowerType.OWNER;
     }
@@ -138,7 +150,7 @@ public class Resp_getGroupMemberInfo implements com.forte.qqrobot.beans.messages
      */
     @Override
     public String getExTitle() {
-        return result.getTip();
+        return result == null ? null : result.getTip();
     }
 
     /**
@@ -146,7 +158,7 @@ public class Resp_getGroupMemberInfo implements com.forte.qqrobot.beans.messages
      */
     @Override
     public String getLevelName() {
-        return result.getLevel();
+        return result == null ? null : result.getLevel();
     }
 
     /**
@@ -155,7 +167,7 @@ public class Resp_getGroupMemberInfo implements com.forte.qqrobot.beans.messages
      */
     @Override
     public Boolean isBlack() {
-        return result.getInBlackList() == 1;
+        return result == null ? null : result.getInBlackList() == 1;
     }
 
     /**
@@ -164,7 +176,7 @@ public class Resp_getGroupMemberInfo implements com.forte.qqrobot.beans.messages
      */
     @Override
     public Boolean isAllowChangeNick() {
-        return result.getAllowChangeCard() == 1;
+        return result == null ? null : result.getAllowChangeCard() == 1;
     }
 
     /**
@@ -172,7 +184,7 @@ public class Resp_getGroupMemberInfo implements com.forte.qqrobot.beans.messages
      */
     @Override
     public Long getExTitleTime() {
-        return result.getTipExpireTime().longValue();
+        return result == null ? null : result.getTipExpireTime().longValue();
     }
 
     /**
@@ -180,13 +192,15 @@ public class Resp_getGroupMemberInfo implements com.forte.qqrobot.beans.messages
      */
     @Override
     public String getHeadImgUrl() {
-        return result.getHeadimg();
+        return result == null ? null : result.getHeadimg();
     }
 
     /**
      * 禁言剩余时间
+     * 不支持的属性
      */
     @Override
+    @Deprecated
     public Long getBanTime() {
         return -1L;
     }

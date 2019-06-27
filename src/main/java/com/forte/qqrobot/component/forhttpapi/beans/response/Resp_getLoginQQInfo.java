@@ -54,7 +54,7 @@ public class Resp_getLoginQQInfo implements com.forte.qqrobot.beans.messages.res
      */
     @Override
     public String getName() {
-        return result.getNick();
+        return result == null ? null : result.getNick();
     }
 
     /**
@@ -62,7 +62,7 @@ public class Resp_getLoginQQInfo implements com.forte.qqrobot.beans.messages.res
      */
     @Override
     public String getQQ() {
-        return result.getQq();
+        return result == null ? null : result.getQq();
     }
 
     /**
@@ -70,7 +70,7 @@ public class Resp_getLoginQQInfo implements com.forte.qqrobot.beans.messages.res
      */
     @Override
     public String getHeadUrl() {
-        return result.getHeadimg();
+        return result == null ? null : result.getHeadimg();
     }
 
     /**
@@ -78,7 +78,7 @@ public class Resp_getLoginQQInfo implements com.forte.qqrobot.beans.messages.res
      */
     @Override
     public Integer getLevel() {
-        return result.getLevel();
+        return result == null ? null : result.getLevel();
     }
 
     /*

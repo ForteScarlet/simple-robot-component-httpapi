@@ -58,7 +58,7 @@ public class Resp_getAnonymousInfo implements AnonInfo, RespBean<Resp_getAnonymo
      */
     @Override
     public String getId() {
-        return result.getAid()+"";
+        return result == null ? null : result.getAid()+"";
     }
 
     /**
@@ -66,7 +66,7 @@ public class Resp_getAnonymousInfo implements AnonInfo, RespBean<Resp_getAnonymo
      */
     @Override
     public String getAnonName() {
-        return result.getCode();
+        return result == null ? null : result.getCode();
     }
 
     /**
@@ -74,7 +74,7 @@ public class Resp_getAnonymousInfo implements AnonInfo, RespBean<Resp_getAnonymo
      */
     @Override
     public String token() {
-        return result.getToken();
+        return result == null ? null : result.getToken();
     }
 
     /**
