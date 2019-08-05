@@ -1,5 +1,7 @@
 package com.forte.qqrobot.component.forhttpapi.beans.response;
 
+import com.forte.qqrobot.beans.messages.result.AbstractGroupMemberList;
+import com.forte.qqrobot.beans.messages.result.inner.AbstractGroupMember;
 import com.forte.qqrobot.beans.messages.result.inner.GroupMember;
 import com.forte.qqrobot.beans.messages.types.PowerType;
 import com.forte.qqrobot.beans.messages.types.SexType;
@@ -9,7 +11,7 @@ import com.forte.qqrobot.beans.messages.types.SexType;
  * @create 2019-03-22 16:44
  **/
 
-public class Resp_getGroupMemberList implements com.forte.qqrobot.beans.messages.result.GroupMemberList, RespBean<Resp_getGroupMemberList.GroupMemberList[]> {
+public class Resp_getGroupMemberList extends AbstractGroupMemberList implements RespBean<Resp_getGroupMemberList.GroupMemberList[]> {
     private Integer status;
     private GroupMemberList[] result;
     private String errMsg;
@@ -21,6 +23,7 @@ public class Resp_getGroupMemberList implements com.forte.qqrobot.beans.messages
         return originalData;
     }
 
+    @Override
     public void setOriginalData(String originalData) {
         this.originalData = originalData;
     }
@@ -105,7 +108,7 @@ result[i].allowChangeCard	int	允许修改名片，0/不允许，1/允许
 result[i].tipExpireTime	int	头衔有效期，时间戳形式，-1为永不到期
 result[i].headimg	string	QQ头像
      */
-    public static class GroupMemberList implements GroupMember {
+    public static class GroupMemberList extends AbstractGroupMember {
         private String group;
         private String qq;
         private String name;
@@ -128,17 +131,22 @@ result[i].headimg	string	QQ头像
             return originalData;
         }
 
+        @Override
         public void setOriginalData(String originalData) {
             this.originalData = originalData;
         }
+
+        @Override
         public void setGroup(String group) {
             this.group = group;
         }
 
+        @Override
         public String getQq() {
             return qq;
         }
 
+        @Override
         public void setQq(String qq) {
             this.qq = qq;
         }
@@ -180,6 +188,7 @@ result[i].headimg	string	QQ头像
             return gender == 0 ? SexType.MALE : gender == 1 ? SexType.FEMALE : SexType.UNKNOWN;
         }
 
+        @Override
         public void setName(String name) {
             this.name = name;
         }
@@ -205,6 +214,7 @@ result[i].headimg	string	QQ头像
             return city;
         }
 
+        @Override
         public void setCity(String city) {
             this.city = city;
         }

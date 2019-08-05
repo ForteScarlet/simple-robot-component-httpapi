@@ -1,6 +1,8 @@
 package com.forte.qqrobot.component.forhttpapi.beans.response;
 
+import com.forte.qqrobot.beans.messages.result.AbstractGroupLinkList;
 import com.forte.qqrobot.beans.messages.result.GroupLinkList;
+import com.forte.qqrobot.beans.messages.result.inner.AbstractGroupLink;
 import com.forte.qqrobot.beans.messages.result.inner.GroupLink;
 
 /**
@@ -8,7 +10,7 @@ import com.forte.qqrobot.beans.messages.result.inner.GroupLink;
  * @create 2019-03-22 16:44
  **/
 
-public class Resp_getGroupLinkList implements GroupLinkList, RespBean<Resp_getGroupLinkList.GroupLinkList[]> {
+public class Resp_getGroupLinkList extends AbstractGroupLinkList implements RespBean<Resp_getGroupLinkList.GroupLinkList[]> {
     private Integer status;
     private GroupLinkList[] result;
     private String errMsg;
@@ -19,6 +21,7 @@ public class Resp_getGroupLinkList implements GroupLinkList, RespBean<Resp_getGr
         return originalData;
     }
 
+    @Override
     public void setOriginalData(String originalData) {
         this.originalData = originalData;
     }
@@ -84,7 +87,7 @@ public class Resp_getGroupLinkList implements GroupLinkList, RespBean<Resp_getGr
             result[i].uin	number	发布该链接的QQ
 
      */
-    public static class GroupLinkList implements GroupLink {
+    public static class GroupLinkList extends AbstractGroupLink {
         private String raw_url;
         private String seq;
         private String thumbnail;
@@ -98,6 +101,7 @@ public class Resp_getGroupLinkList implements GroupLinkList, RespBean<Resp_getGr
             return originalData;
         }
 
+        @Override
         public void setOriginalData(String originalData) {
             this.originalData = originalData;
         }
@@ -163,6 +167,7 @@ public class Resp_getGroupLinkList implements GroupLinkList, RespBean<Resp_getGr
             return null;
         }
 
+        @Override
         public void setTitle(String title) {
             this.title = title;
         }

@@ -1,6 +1,8 @@
 package com.forte.qqrobot.component.forhttpapi.beans.response;
 
+import com.forte.qqrobot.beans.messages.result.AbstractFriendList;
 import com.forte.qqrobot.beans.messages.result.FriendList;
+import com.forte.qqrobot.beans.messages.result.inner.AbstractFriend;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -11,7 +13,7 @@ import java.util.stream.Collectors;
  * @create 2019-03-22 16:44
  **/
 
-public class Resp_getFriendList implements FriendList,  RespBean<Resp_getFriendList.FriendList[]> {
+public class Resp_getFriendList extends AbstractFriendList implements RespBean<Resp_getFriendList.FriendList[]> {
     private Integer status;
     private FriendList[] result;
     private String errMsg;
@@ -50,6 +52,7 @@ public class Resp_getFriendList implements FriendList,  RespBean<Resp_getFriendL
         return originalData;
     }
 
+    @Override
     public void setOriginalData(String originalData) {
         this.originalData = originalData;
     }
@@ -135,7 +138,7 @@ public class Resp_getFriendList implements FriendList,  RespBean<Resp_getFriendL
     /**
      * 好友对象
      */
-    public static class Friend implements com.forte.qqrobot.beans.messages.result.inner.Friend {
+    public static class Friend extends AbstractFriend {
 
         private String name;
 
@@ -148,6 +151,7 @@ public class Resp_getFriendList implements FriendList,  RespBean<Resp_getFriendL
             return originalData;
         }
 
+        @Override
         public void setOriginalData(String originalData) {
             this.originalData = originalData;
         }
@@ -167,6 +171,7 @@ public class Resp_getFriendList implements FriendList,  RespBean<Resp_getFriendL
             return uin;
         }
 
+        @Override
         public void setName(String name) {
             this.name = name;
         }

@@ -9,7 +9,7 @@ import com.forte.qqrobot.sender.MsgSender;
  * @date Created in 2019/4/4 18:17
  * @since JDK1.8
  **/
-public class HttpConfiguration extends BaseConfiguration {
+public class HttpConfiguration extends BaseConfiguration<HttpConfiguration> {
 
 
     /** 服务器端口 */
@@ -47,8 +47,9 @@ public class HttpConfiguration extends BaseConfiguration {
     }
 
     /** 配置java服务器的请求路径，默认为/coolq */
-    public void setServerPath(String serverPath) {
+    public HttpConfiguration setServerPath(String serverPath) {
         this.serverPath = serverPath;
+        return this;
     }
 
     public int getJavaPort() {
@@ -56,16 +57,18 @@ public class HttpConfiguration extends BaseConfiguration {
     }
 
     /** 配置java服务器的监听端口，默认为15514 */
-    public void setJavaPort(int javaPort) {
+    public HttpConfiguration setJavaPort(int javaPort) {
         this.javaPort = javaPort;
+        return this;
     }
 
     public String[] getMethod() {
         return method;
     }
     /** 配置java服务器可接收的请求类型，默认为post类型 */
-    public void setMethod(String[] method) {
+    public HttpConfiguration setMethod(String[] method) {
         this.method = method;
+        return this;
     }
 
 
@@ -74,8 +77,9 @@ public class HttpConfiguration extends BaseConfiguration {
     }
 
     /** TCP连接最大并发数, 传 0 或负数表示使用默认值，默认为0 */
-    public void setBacklog(int backlog) {
+    public HttpConfiguration setBacklog(int backlog) {
         this.backlog = backlog;
+        return this;
     }
 
     public int getServerPort() {
@@ -83,10 +87,9 @@ public class HttpConfiguration extends BaseConfiguration {
     }
 
     /** 配置酷Q端的端口地址，默认为8877 */
-    public void setServerPort(int serverPort) {
+    public HttpConfiguration setServerPort(int serverPort) {
         this.serverPort = serverPort;
+        return this;
     }
-
-
 
 }

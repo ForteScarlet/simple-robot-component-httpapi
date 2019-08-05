@@ -1,6 +1,8 @@
 package com.forte.qqrobot.component.forhttpapi.beans.response;
 
+import com.forte.qqrobot.beans.messages.result.AbstractGroupList;
 import com.forte.qqrobot.beans.messages.result.GroupList;
+import com.forte.qqrobot.beans.messages.result.inner.AbstractGroup;
 import com.forte.qqrobot.beans.messages.result.inner.Group;
 
 /**
@@ -8,7 +10,7 @@ import com.forte.qqrobot.beans.messages.result.inner.Group;
  * @create 2019-03-22 16:44
  **/
 
-public class Resp_getGroupList implements GroupList, RespBean<Resp_getGroupList.getGroupList[]> {
+public class Resp_getGroupList extends AbstractGroupList implements RespBean<Resp_getGroupList.getGroupList[]> {
     private Integer status;
     private getGroupList[] result;
     private String errMsg;
@@ -20,6 +22,7 @@ public class Resp_getGroupList implements GroupList, RespBean<Resp_getGroupList.
         return originalData;
     }
 
+    @Override
     public void setOriginalData(String originalData) {
         this.originalData = originalData;
     }
@@ -78,7 +81,7 @@ result[i].name	string	群名，url编码
 result[i].group	number	群号
 result[i].headimg	string	群头像链接
      */
-    public static class getGroupList implements Group {
+    public static class getGroupList extends AbstractGroup {
         private String name;
         private String group;
         private String headimg;
@@ -89,6 +92,7 @@ result[i].headimg	string	群头像链接
             return originalData;
         }
 
+        @Override
         public void setOriginalData(String originalData) {
             this.originalData = originalData;
         }
@@ -113,6 +117,7 @@ result[i].headimg	string	群头像链接
             return headimg;
         }
 
+        @Override
         public void setName(String name) {
             this.name = name;
         }

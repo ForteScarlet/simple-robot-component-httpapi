@@ -6,6 +6,7 @@ import com.forte.qqrobot.beans.messages.result.LoginQQInfo;
 import com.forte.qqrobot.component.forhttpapi.http.*;
 import com.forte.qqrobot.listener.invoker.ListenerManager;
 import com.forte.qqrobot.log.QQLog;
+import com.forte.qqrobot.log.QQLogBack;
 import com.forte.qqrobot.sender.senderlist.SenderGetList;
 import com.forte.qqrobot.sender.senderlist.SenderSendList;
 import com.forte.qqrobot.sender.senderlist.SenderSetList;
@@ -20,11 +21,12 @@ import java.io.IOException;
  **/
 public class HttpApplication extends BaseApplication<HttpConfiguration> {
 
-    /** 送信器 */
-    protected HttpSender httpSender;
 
     /** http 服务器 */
     private QQHttpServer httpServer;
+
+    /** 送信器 */
+    private HttpSender httpSender;
 
     /**
      * 开发者实现的资源初始化
@@ -86,8 +88,6 @@ public class HttpApplication extends BaseApplication<HttpConfiguration> {
         String encode = HttpConfiguration.getEncode();
         String[] method = configuration.getMethod();
 
-        long s = System.currentTimeMillis();
-
         try {
             this.httpServer = QQHttpServer.start(port, listenerPath, backlog, encode, method, manager, httpSender);
         } catch (IOException e) {
@@ -138,5 +138,22 @@ public class HttpApplication extends BaseApplication<HttpConfiguration> {
     @Override
     public void close() throws IOException {
         httpServer.close();
+    }
+
+    //**************** 构造 ****************//
+
+
+    /**
+     * 无参构造
+     */
+    public HttpApplication() {
+    }
+
+    /**
+     * 日志拦截构造
+     * @param qqLogBack
+     */
+    public HttpApplication(QQLogBack qqLogBack) {
+        super(qqLogBack);
     }
 }

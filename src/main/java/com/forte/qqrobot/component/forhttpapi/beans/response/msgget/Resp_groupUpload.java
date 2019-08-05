@@ -1,7 +1,7 @@
 package com.forte.qqrobot.component.forhttpapi.beans.response.msgget;
 
-import com.forte.qqrobot.beans.messages.msgget.GroupFileUpload;
-import com.forte.qqrobot.beans.messages.result.FileInfo;
+import com.forte.qqrobot.beans.messages.msgget.AbstractGroupFileUpload;
+import com.forte.qqrobot.beans.messages.result.AbstractFileInfo;
 
 import java.time.Instant;
 
@@ -10,7 +10,7 @@ import java.time.Instant;
  * @author ForteScarlet <[email]ForteScarlet@163.com>
  * @since JDK1.8
  **/
-public class Resp_groupUpload implements GroupFileUpload {
+public class Resp_groupUpload extends AbstractGroupFileUpload {
 
 
     private Integer type;
@@ -47,10 +47,12 @@ public class Resp_groupUpload implements GroupFileUpload {
         this.subType = subType;
     }
 
+    @Override
     public String getQq() {
         return qq;
     }
 
+    @Override
     public void setQq(String qq) {
         this.qq = qq;
     }
@@ -92,6 +94,7 @@ public class Resp_groupUpload implements GroupFileUpload {
         return fileInfo.getBusid();
     }
 
+    @Override
     public void setGroup(String group) {
         this.group = group;
     }
@@ -117,6 +120,7 @@ public class Resp_groupUpload implements GroupFileUpload {
         return originalData;
     }
 
+    @Override
     public void setOriginalData(String originalData) {
         this.originalData = originalData;
     }
@@ -137,6 +141,7 @@ public class Resp_groupUpload implements GroupFileUpload {
         return time;
     }
 
+    @Override
     public void setTime(Long time) {
         this.time = time;
     }
@@ -144,7 +149,7 @@ public class Resp_groupUpload implements GroupFileUpload {
     /** 群文件上传的文件信息
      *  内部类
      * */
-    public static class FileInfo implements com.forte.qqrobot.beans.messages.result.FileInfo {
+    public static class FileInfo extends AbstractFileInfo {
 
         /** size */
         private Long size;
@@ -178,6 +183,7 @@ public class Resp_groupUpload implements GroupFileUpload {
             return size;
         }
 
+        @Override
         public void setBusid(String busid) {
             this.busid = busid;
         }
@@ -203,10 +209,12 @@ public class Resp_groupUpload implements GroupFileUpload {
             return id;
         }
 
+        @Override
         public void setId(String id) {
             this.id = id;
         }
 
+        @Override
         public void setOriginalData(String originalData) {
             this.originalData = originalData;
         }

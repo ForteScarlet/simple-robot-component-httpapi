@@ -1,6 +1,8 @@
 package com.forte.qqrobot.component.forhttpapi.beans.response;
 
+import com.forte.qqrobot.beans.messages.result.AbstractShareList;
 import com.forte.qqrobot.beans.messages.result.ShareList;
+import com.forte.qqrobot.beans.messages.result.inner.AbstractShare;
 import com.forte.qqrobot.beans.messages.result.inner.Share;
 
 /**
@@ -9,7 +11,7 @@ import com.forte.qqrobot.beans.messages.result.inner.Share;
  * @create 2019-03-22 16:44
  **/
 
-public class Resp_getShareList implements ShareList, RespBean<Resp_getShareList.ShareList[]> {
+public class Resp_getShareList extends AbstractShareList implements RespBean<Resp_getShareList.ShareList[]> {
     private Integer status;
     private ShareList[] result;
     private String errMsg;
@@ -20,6 +22,7 @@ public class Resp_getShareList implements ShareList, RespBean<Resp_getShareList.
         return originalData;
     }
 
+    @Override
     public void setOriginalData(String originalData) {
         this.originalData = originalData;
     }
@@ -105,7 +108,7 @@ result[i].uploadnick	string	上传者的群名片
 result[i].uploadsize	number	上传的文件大小
 result[i].uploaduin	number	上传者的QQ
      */
-    public static class ShareList implements Share {
+    public static class ShareList extends AbstractShare {
         private String auditflag;
         private Integer busid;
         private String createtime;
@@ -132,9 +135,11 @@ result[i].uploaduin	number	上传者的QQ
             return originalData;
         }
 
+        @Override
         public void setOriginalData(String originalData) {
             this.originalData = originalData;
         }
+
         public String getAuditflag() {
             return auditflag;
         }

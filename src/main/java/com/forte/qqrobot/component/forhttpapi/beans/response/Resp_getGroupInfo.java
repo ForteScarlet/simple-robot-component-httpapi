@@ -1,6 +1,7 @@
 package com.forte.qqrobot.component.forhttpapi.beans.response;
 
 import com.alibaba.fastjson.annotation.JSONField;
+import com.forte.qqrobot.beans.messages.result.AbstractGroupInfo;
 import com.forte.qqrobot.beans.messages.result.GroupInfo;
 
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ import java.util.Map;
  * @create 2019-03-22 16:44
  **/
 
-public class Resp_getGroupInfo implements GroupInfo, RespBean<Resp_getGroupInfo.GroupInfo> {
+public class Resp_getGroupInfo extends AbstractGroupInfo implements RespBean<Resp_getGroupInfo.GroupInfo> {
     private Integer status;
     private GroupInfo result;
     private String errMsg;
@@ -51,6 +52,7 @@ public class Resp_getGroupInfo implements GroupInfo, RespBean<Resp_getGroupInfo.
         return originalData;
     }
 
+    @Override
     public void setOriginalData(String originalData) {
         this.originalData = originalData;
     }
@@ -212,7 +214,7 @@ public class Resp_getGroupInfo implements GroupInfo, RespBean<Resp_getGroupInfo.
      */
     @Override
     public String[] getTags() {
-        return result == null ? null : result.getTags().stream().map(m -> m.getOrDefault("tag", null)).toArray(String[]::new);
+        return result == null || result.getTags() == null ? null : result.getTags().stream().map(m -> m.getOrDefault("tag", null)).toArray(String[]::new);
     }
 
     /*

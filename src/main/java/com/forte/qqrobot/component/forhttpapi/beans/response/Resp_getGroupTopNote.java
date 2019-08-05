@@ -1,5 +1,7 @@
 package com.forte.qqrobot.component.forhttpapi.beans.response;
 
+import com.forte.qqrobot.beans.messages.result.AbstractGroupTopNote;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -9,7 +11,7 @@ import java.util.Map;
  * @create 2019-03-22 16:44
  **/
 
-public class Resp_getGroupTopNote implements com.forte.qqrobot.beans.messages.result.GroupTopNote, RespBean<Resp_getGroupTopNote.GroupTopNote> {
+public class Resp_getGroupTopNote extends AbstractGroupTopNote implements RespBean<Resp_getGroupTopNote.GroupTopNote> {
     private Integer status;
     private GroupTopNote result;
     private String errMsg;
@@ -21,6 +23,7 @@ public class Resp_getGroupTopNote implements com.forte.qqrobot.beans.messages.re
         return originalData;
     }
 
+    @Override
     public void setOriginalData(String originalData) {
         this.originalData = originalData;
     }
@@ -66,7 +69,7 @@ public class Resp_getGroupTopNote implements com.forte.qqrobot.beans.messages.re
      */
     @Override
     public String getMsg() {
-        return result == null ? null : result.getMsg().toString();
+        return result == null || result.getMsg() == null ? null : result.getMsg().toString();
     }
 
     /**

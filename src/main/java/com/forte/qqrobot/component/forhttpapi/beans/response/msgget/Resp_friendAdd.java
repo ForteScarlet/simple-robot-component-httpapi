@@ -1,6 +1,6 @@
 package com.forte.qqrobot.component.forhttpapi.beans.response.msgget;
 
-import com.forte.qqrobot.beans.messages.msgget.FriendAdd;
+import com.forte.qqrobot.beans.messages.msgget.AbstractFriendAdd;
 
 import java.time.Instant;
 
@@ -9,7 +9,7 @@ import java.time.Instant;
  * @author ForteScarlet <[email]ForteScarlet@163.com>
  * @since JDK1.8
  **/
-public class Resp_friendAdd implements FriendAdd {
+public class Resp_friendAdd extends AbstractFriendAdd {
 
     /*
     {
@@ -51,6 +51,7 @@ public class Resp_friendAdd implements FriendAdd {
         return originalData;
     }
 
+    @Override
     public void setOriginalData(String originalData) {
         this.originalData = originalData;
     }
@@ -68,14 +69,17 @@ public class Resp_friendAdd implements FriendAdd {
         return time;
     }
 
+    @Override
     public void setTime(Long time) {
         this.time = time;
     }
 
+    @Override
     public String getQq() {
         return qq;
     }
 
+    @Override
     public void setQq(String qq) {
         this.qq = qq;
     }

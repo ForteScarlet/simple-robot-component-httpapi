@@ -1,6 +1,6 @@
 package com.forte.qqrobot.component.forhttpapi.beans.response;
 
-import com.forte.qqrobot.beans.messages.result.AnonInfo;
+import com.forte.qqrobot.beans.messages.result.AbstractAnonInfo;
 
 /**
  * 「取匿名成员信息」
@@ -8,7 +8,7 @@ import com.forte.qqrobot.beans.messages.result.AnonInfo;
  * @date Created in 2019/3/22 15:37
  * @since JDK1.8
  **/
-public class Resp_getAnonymousInfo implements AnonInfo, RespBean<Resp_getAnonymousInfo.AnonymousInfo> {
+public class Resp_getAnonymousInfo extends AbstractAnonInfo implements RespBean<Resp_getAnonymousInfo.AnonymousInfo> {
     /*
     {
     "status":0,
@@ -85,6 +85,7 @@ public class Resp_getAnonymousInfo implements AnonInfo, RespBean<Resp_getAnonymo
         return originalData;
     }
 
+    @Override
     public void setOriginalData(String originalData) {
         this.originalData = originalData;
     }

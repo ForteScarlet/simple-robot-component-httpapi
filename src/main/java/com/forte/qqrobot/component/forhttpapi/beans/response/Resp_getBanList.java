@@ -1,5 +1,6 @@
 package com.forte.qqrobot.component.forhttpapi.beans.response;
 
+import com.forte.qqrobot.beans.messages.result.AbstractBanList;
 import com.forte.qqrobot.beans.messages.result.inner.BanInfo;
 
 /**
@@ -8,7 +9,7 @@ import com.forte.qqrobot.beans.messages.result.inner.BanInfo;
  * @date Created in 2019/3/22 15:46
  * @since JDK1.8
  **/
-public class Resp_getBanList implements com.forte.qqrobot.beans.messages.result.BanList, RespBean<Resp_getBanList.BanList[]> {
+public class Resp_getBanList extends AbstractBanList implements RespBean<Resp_getBanList.BanList[]> {
 
     private Integer status;
     private BanList[] result;
@@ -61,6 +62,7 @@ public class Resp_getBanList implements com.forte.qqrobot.beans.messages.result.
         return this.originalData;
     }
 
+    @Override
     public void setOriginalData(String originalData) {
         this.originalData = originalData;
     }

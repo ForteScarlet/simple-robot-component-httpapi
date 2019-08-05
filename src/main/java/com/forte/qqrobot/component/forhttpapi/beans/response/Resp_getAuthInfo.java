@@ -1,12 +1,14 @@
 package com.forte.qqrobot.component.forhttpapi.beans.response;
 
+import com.forte.qqrobot.beans.messages.result.AbstractAuthInfo;
+
 /**
  * 「取权限信息」
  * @author ForteScarlet <[163邮箱地址]ForteScarlet@163.com>
  * @date Created in 2019/3/22 15:41
  * @since JDK1.8
  **/
-public class Resp_getAuthInfo implements com.forte.qqrobot.beans.messages.result.AuthInfo, RespBean<Resp_getAuthInfo.AuthInfo> {
+public class Resp_getAuthInfo extends AbstractAuthInfo implements RespBean<Resp_getAuthInfo.AuthInfo> {
 
     private Integer status;
     private AuthInfo result;
@@ -74,6 +76,7 @@ public class Resp_getAuthInfo implements com.forte.qqrobot.beans.messages.result
         return this.originalData;
     }
 
+    @Override
     public void setOriginalData(String originalData) {
         this.originalData = originalData;
     }

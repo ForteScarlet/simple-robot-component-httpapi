@@ -1,6 +1,6 @@
 package com.forte.qqrobot.component.forhttpapi.beans.response.msgget;
 
-import com.forte.qqrobot.beans.messages.msgget.GroupMemberReduce;
+import com.forte.qqrobot.beans.messages.msgget.AbstractGroupMemberReduce;
 import com.forte.qqrobot.beans.messages.types.ReduceType;
 
 import java.time.Instant;
@@ -10,7 +10,7 @@ import java.time.Instant;
  * @author ForteScarlet <[email]ForteScarlet@163.com>
  * @since JDK1.8
  **/
-public class Resp_groupMemberDecrease implements GroupMemberReduce {
+public class Resp_groupMemberDecrease extends AbstractGroupMemberReduce {
 
     private Integer type;
     private Integer subType;
@@ -63,6 +63,7 @@ public class Resp_groupMemberDecrease implements GroupMemberReduce {
         return originalData;
     }
 
+    @Override
     public void setOriginalData(String originalData) {
         this.originalData = originalData;
     }
@@ -80,6 +81,7 @@ public class Resp_groupMemberDecrease implements GroupMemberReduce {
         return time;
     }
 
+    @Override
     public void setTime(Long time) {
         this.time = time;
     }
@@ -113,6 +115,7 @@ public class Resp_groupMemberDecrease implements GroupMemberReduce {
         return beingOperateQQ;
     }
 
+    @Override
     public void setGroup(String group) {
         this.group = group;
     }

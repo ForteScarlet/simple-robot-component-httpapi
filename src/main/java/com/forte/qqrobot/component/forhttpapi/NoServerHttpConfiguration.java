@@ -1,7 +1,5 @@
 package com.forte.qqrobot.component.forhttpapi;
 
-import com.forte.qqrobot.BaseConfiguration;
-
 /**
  * 没有服务器的配置，移除了对内置服务器的配置
  * @author ForteScarlet <[email]ForteScarlet@163.com>
@@ -9,18 +7,18 @@ import com.forte.qqrobot.BaseConfiguration;
  **/
 public class NoServerHttpConfiguration extends HttpConfiguration {
 
-    /** 服务器端口 */
-    private int serverPort = 8877;
-
-    @Override
-    public int getServerPort() {
-        return serverPort;
-    }
-
-    @Override
-    public void setServerPort(int serverPort) {
-        this.serverPort = serverPort;
-    }
+//    /** 服务器端口 */
+//    private int serverPort = 8877;
+//
+//    @Override
+//    public int getServerPort() {
+//        return serverPort;
+//    }
+//
+//    @Override
+//    public void setServerPort(int serverPort) {
+//        this.serverPort = serverPort;
+//    }
 
     @Override
     @Deprecated
@@ -40,8 +38,9 @@ public class NoServerHttpConfiguration extends HttpConfiguration {
      */
     @Override
     @Deprecated
-    public void setServerPath(String serverPath) {
+    public NoServerHttpConfiguration setServerPath(String serverPath) {
         super.setServerPath(serverPath);
+        return this;
     }
 
     @Override
@@ -56,8 +55,9 @@ public class NoServerHttpConfiguration extends HttpConfiguration {
      */
     @Override
     @Deprecated
-    public void setJavaPort(int javaPort) {
+    public NoServerHttpConfiguration setJavaPort(int javaPort) {
         super.setJavaPort(javaPort);
+        return this;
     }
 
     @Override
@@ -73,8 +73,9 @@ public class NoServerHttpConfiguration extends HttpConfiguration {
      */
     @Override
     @Deprecated
-    public void setMethod(String[] method) {
+    public NoServerHttpConfiguration setMethod(String[] method) {
         super.setMethod(method);
+        return this;
     }
 
     @Override
@@ -90,7 +91,8 @@ public class NoServerHttpConfiguration extends HttpConfiguration {
      */
     @Override
     @Deprecated
-    public void setBacklog(int backlog) {
+    public NoServerHttpConfiguration setBacklog(int backlog) {
         super.setBacklog(backlog);
+        return this;
     }
 }

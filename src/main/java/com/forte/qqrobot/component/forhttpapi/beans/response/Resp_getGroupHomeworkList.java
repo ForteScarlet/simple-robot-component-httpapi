@@ -1,6 +1,8 @@
 package com.forte.qqrobot.component.forhttpapi.beans.response;
 
-import com.forte.qqrobot.beans.messages.result.inner.Content;
+import com.forte.qqrobot.beans.messages.result.AbstractGroupHomeworkList;
+import com.forte.qqrobot.beans.messages.result.inner.AbstractContent;
+import com.forte.qqrobot.beans.messages.result.inner.AbstractGroupHomework;
 import com.forte.qqrobot.beans.messages.result.inner.GroupHomework;
 
 import java.util.ArrayList;
@@ -12,7 +14,7 @@ import java.util.List;
  * @create 2019-03-22 16:44
  **/
 
-public class Resp_getGroupHomeworkList implements com.forte.qqrobot.beans.messages.result.GroupHomeworkList, RespBean<Resp_getGroupHomeworkList.GroupHomeworkList[]> {
+public class Resp_getGroupHomeworkList extends AbstractGroupHomeworkList implements RespBean<Resp_getGroupHomeworkList.GroupHomeworkList[]> {
     private Integer status;
     private GroupHomeworkList[] result;
     private String errMsg;
@@ -62,6 +64,7 @@ public class Resp_getGroupHomeworkList implements com.forte.qqrobot.beans.messag
         return originalData;
     }
 
+    @Override
     public void setOriginalData(String originalData) {
         this.originalData = originalData;
     }
@@ -115,7 +118,7 @@ public class Resp_getGroupHomeworkList implements com.forte.qqrobot.beans.messag
             result[i].team_id	int	该作业属于哪个团队的(根据官方政策，无用)
             result[i].ts_create	int	该作业的创建时间，时间戳形式
                       */
-    public static class GroupHomeworkList implements GroupHomework {
+    public static class GroupHomeworkList extends AbstractGroupHomework {
         //该作业的内容信息数组 该作业的内容/该作业的内容类型
         private List<Content> content = new ArrayList<>();
 
@@ -140,6 +143,7 @@ public class Resp_getGroupHomeworkList implements com.forte.qqrobot.beans.messag
             return originalData;
         }
 
+        @Override
         public void setOriginalData(String originalData) {
             this.originalData = originalData;
         }
@@ -296,6 +300,7 @@ public class Resp_getGroupHomeworkList implements com.forte.qqrobot.beans.messag
             return puin;
         }
 
+        @Override
         public void setIcon(String icon) {
             this.icon = icon;
         }
@@ -363,7 +368,7 @@ public class Resp_getGroupHomeworkList implements com.forte.qqrobot.beans.messag
     /**
      * 作业内容
      */
-    public static class Content implements com.forte.qqrobot.beans.messages.result.inner.Content {
+    public static class Content extends AbstractContent {
 
         private String text;
         private String type;
@@ -374,6 +379,7 @@ public class Resp_getGroupHomeworkList implements com.forte.qqrobot.beans.messag
             return text;
         }
 
+        @Override
         public void setText(String text) {
             this.text = text;
         }
@@ -383,10 +389,12 @@ public class Resp_getGroupHomeworkList implements com.forte.qqrobot.beans.messag
             return type;
         }
 
+        @Override
         public void setType(String type) {
             this.type = type;
         }
 
+        @Override
         public void setOriginalData(String originalData) {
             this.originalData = originalData;
         }

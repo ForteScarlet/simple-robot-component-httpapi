@@ -1,5 +1,6 @@
 package com.forte.qqrobot.component.forhttpapi.beans.response;
 
+import com.forte.qqrobot.beans.messages.result.AbstractStrangerInfo;
 import com.forte.qqrobot.beans.messages.result.StrangerInfo;
 import com.forte.qqrobot.beans.messages.types.SexType;
 
@@ -8,7 +9,7 @@ import com.forte.qqrobot.beans.messages.types.SexType;
  * @create 2019-03-22 16:44
  **/
 
-public class Resp_getStrangerInfo implements StrangerInfo, RespBean<Resp_getStrangerInfo.StrangerInfo> {
+public class Resp_getStrangerInfo extends AbstractStrangerInfo implements RespBean<Resp_getStrangerInfo.StrangerInfo> {
     private Integer status;
     private StrangerInfo result;
     private String errMsg;
@@ -24,6 +25,7 @@ public class Resp_getStrangerInfo implements StrangerInfo, RespBean<Resp_getStra
         return result == null ? null : result.getName();
     }
 
+    @Override
     public void setOriginalData(String originalData) {
         this.originalData = originalData;
     }

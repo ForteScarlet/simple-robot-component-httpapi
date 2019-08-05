@@ -85,15 +85,6 @@ public class QQHttpHandler implements HttpHandler {
                 if(msgGet != null){
                     listenerManager.onMsg(msgGet, httpSender);
                 }
-//                JSONObject jsonData = JSON.parseObject(params);
-//                jsonData.put("originalData", params);
-//
-//                int type = jsonData.getInteger("type");
-//                HttpMsgGetType byType = HttpMsgGetType.getByType(type);
-//                if(byType != null){
-//                    MsgGet msgGet = jsonData.toJavaObject(byType.getType());
-//                    listenerManager.onMsg(msgGet, httpSender);
-//                }
 
                 //将获取到的请求参数放入, 获得响应消息
                 Resp apply = Resp.getDefaultInstance();

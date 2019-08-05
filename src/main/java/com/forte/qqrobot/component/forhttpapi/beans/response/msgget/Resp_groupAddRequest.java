@@ -1,6 +1,7 @@
 package com.forte.qqrobot.component.forhttpapi.beans.response.msgget;
 
 import com.forte.qqrobot.beans.messages.msgget.GroupAddRequest;
+import com.forte.qqrobot.beans.messages.types.GroupAddRequestType;
 
 import java.time.Instant;
 
@@ -12,6 +13,7 @@ import java.time.Instant;
 public class Resp_groupAddRequest implements GroupAddRequest {
 
     private Integer type;
+    /** 事件子类型，1/他人申请入群，2/自己(即登录号)受邀入群 */
     private Integer subType;
     /**
      * 原始数据
@@ -114,6 +116,16 @@ public class Resp_groupAddRequest implements GroupAddRequest {
     public String getMsg() {
         return msg;
     }
+
+    /**
+     * 加群类型
+     */
+    @Override
+    public GroupAddRequestType getRequestType() {
+        //事件子类型，1/他人申请入群，2/自己(即登录号)受邀入群
+        return subType == 1 ? GroupAddRequestType.ADD : subType == 2 ? GroupAddRequestType.INVITE : null;
+    }
+
 
     /**
      * 请求类消息的标识

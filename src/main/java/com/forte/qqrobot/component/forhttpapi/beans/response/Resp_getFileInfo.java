@@ -1,5 +1,6 @@
 package com.forte.qqrobot.component.forhttpapi.beans.response;
 
+import com.forte.qqrobot.beans.messages.result.AbstractFileInfo;
 import com.forte.qqrobot.beans.messages.result.FileInfo;
 
 /**
@@ -8,7 +9,7 @@ import com.forte.qqrobot.beans.messages.result.FileInfo;
  * @create 2019-03-22 16:44
  **/
 
-public class Resp_getFileInfo implements FileInfo, RespBean<Resp_getFileInfo.FileInfo> {
+public class Resp_getFileInfo extends AbstractFileInfo implements RespBean<Resp_getFileInfo.FileInfo> {
 
     private Integer status;
     private FileInfo result;
@@ -83,6 +84,7 @@ public class Resp_getFileInfo implements FileInfo, RespBean<Resp_getFileInfo.Fil
         return originalData;
     }
 
+    @Override
     public void setOriginalData(String originalData) {
         this.originalData = originalData;
     }

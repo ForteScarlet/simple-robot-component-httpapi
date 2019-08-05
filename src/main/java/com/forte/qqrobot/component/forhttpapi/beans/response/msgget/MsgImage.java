@@ -1,7 +1,5 @@
 package com.forte.qqrobot.component.forhttpapi.beans.response.msgget;
 
-import com.forte.qqrobot.beans.messages.types.MsgGetTypes;
-
 /**
  * 根据插件API，如果消息种存在图片信息，则会增加两种参数。
  * 这两个参数其中的‘imageInfo’通过此类进行封装

@@ -1,11 +1,13 @@
 package com.forte.qqrobot.component.forhttpapi.beans.response;
 
+import com.forte.qqrobot.beans.messages.result.AbstractImageInfo;
+
 /**
  * @author Ricardo
  * @create 2019-03-22 16:44
  **/
 
-public class Resp_getImageInfo implements com.forte.qqrobot.beans.messages.result.ImageInfo,  RespBean<Resp_getImageInfo.ImageInfo> {
+public class Resp_getImageInfo extends AbstractImageInfo implements RespBean<Resp_getImageInfo.ImageInfo> {
     private Integer status;
     private ImageInfo result;
     private String errMsg;
@@ -16,6 +18,7 @@ public class Resp_getImageInfo implements com.forte.qqrobot.beans.messages.resul
         return originalData;
     }
 
+    @Override
     public void setOriginalData(String originalData) {
         this.originalData = originalData;
     }
@@ -129,7 +132,7 @@ result.url	string	图片的url地址，请注意QQ有防盗链机制，不能直
 result.addTime	int	图片上传到腾讯服务器的时间，时间戳形式
 result.file	string	图片文件内容，已Base64编码
      */
-    public static class ImageInfo {
+    public static class ImageInfo{
         private String md5;
         private Double width;
         private Double height;

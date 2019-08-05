@@ -1,5 +1,6 @@
 package com.forte.qqrobot.component.forhttpapi.beans.response.msgget;
 
+import com.forte.qqrobot.beans.messages.msgget.AbstractPrivateMsg;
 import com.forte.qqrobot.beans.messages.msgget.PrivateMsg;
 import com.forte.qqrobot.beans.messages.types.PrivateMsgType;
 import com.forte.qqrobot.component.forhttpapi.beans.response.Resp_getStrangerInfo;
@@ -12,7 +13,7 @@ import java.time.Instant;
  * @author ForteScarlet <[email]ForteScarlet@163.com>
  * @since JDK1.8
  **/
-public class Resp_privateMsg implements PrivateMsg, MsgBean, Imageable, Anonable {
+public class Resp_privateMsg extends AbstractPrivateMsg implements MsgBean, Imageable, Anonable {
     /*
         "type":2,
         "subType":1,
@@ -97,14 +98,14 @@ public class Resp_privateMsg implements PrivateMsg, MsgBean, Imageable, Anonable
 
     @Override
     public PrivateMsgType getType() {
-        /* 事件子类型，1/普通消息，2/匿名消息，3/系统消息 */
+        /* 事件子类型，11/来自好友，1/普通消息，2/匿名消息，3/系统消息 */
         //如果存在群号，则是群消息
         if (group != null && group.trim().length() > 0) {
             return PrivateMsgType.FROM_GROUP;
         }
 
         //不区分讨论组、好友、在线之类的，则普通消息、匿名消息认为是好友消息
-        if (subType == 1 || subType == 2) {
+        if (subType == 11 || subType == 1 || subType == 2) {
             return PrivateMsgType.FROM_FRIEND;
         }
 
@@ -144,10 +145,12 @@ public class Resp_privateMsg implements PrivateMsg, MsgBean, Imageable, Anonable
         this.subType = subType;
     }
 
+    @Override
     public String getQq() {
         return qq;
     }
 
+    @Override
     public void setQq(String qq) {
         this.qq = qq;
     }
@@ -173,6 +176,7 @@ public class Resp_privateMsg implements PrivateMsg, MsgBean, Imageable, Anonable
         return msg;
     }
 
+    @Override
     public void setMsg(String msg) {
         this.msg = msg;
     }
@@ -183,14 +187,6 @@ public class Resp_privateMsg implements PrivateMsg, MsgBean, Imageable, Anonable
     }
 
     /**
-     * 获取此人的昵称
-     */
-    @Override
-    public String getName() {
-        return null;
-    }
-
-    /**
      * 获取到的时间, 代表某一时间的秒值。注意是秒值！如果类型不对请自行转化
      */
     @Override
@@ -198,6 +194,7 @@ public class Resp_privateMsg implements PrivateMsg, MsgBean, Imageable, Anonable
         return time;
     }
 
+    @Override
     public void setFont(String font) {
         this.font = font;
     }
@@ -236,11 +233,12 @@ public class Resp_privateMsg implements PrivateMsg, MsgBean, Imageable, Anonable
         return originalMsg;
     }
 
-
+    @Override
     public void setOriginalData(String originalData) {
         this.originalData = originalData;
     }
 
+    @Override
     public void setTime(Long time) {
         this.time = time;
     }

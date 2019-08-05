@@ -1,11 +1,13 @@
 package com.forte.qqrobot.component.forhttpapi.beans.response;
 
+import com.forte.qqrobot.beans.messages.result.AbstractLoginQQInfo;
+
 /**
  * @author Ricardo
  * @create 2019-03-22 16:44
  **/
 
-public class Resp_getLoginQQInfo implements com.forte.qqrobot.beans.messages.result.LoginQQInfo, RespBean<Resp_getLoginQQInfo.LoginQQInfo> {
+public class Resp_getLoginQQInfo extends AbstractLoginQQInfo implements RespBean<Resp_getLoginQQInfo.LoginQQInfo> {
     private Integer status;
     private LoginQQInfo result;
     private String errMsg;
@@ -16,6 +18,7 @@ public class Resp_getLoginQQInfo implements com.forte.qqrobot.beans.messages.res
         return originalData;
     }
 
+    @Override
     public void setOriginalData(String originalData) {
         this.originalData = originalData;
     }

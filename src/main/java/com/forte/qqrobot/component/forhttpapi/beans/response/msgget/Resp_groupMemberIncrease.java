@@ -1,6 +1,6 @@
 package com.forte.qqrobot.component.forhttpapi.beans.response.msgget;
 
-import com.forte.qqrobot.beans.messages.msgget.GroupMemberIncrease;
+import com.forte.qqrobot.beans.messages.msgget.AbstractGroupMemberIncrease;
 import com.forte.qqrobot.beans.messages.types.IncreaseType;
 
 import java.time.Instant;
@@ -10,7 +10,7 @@ import java.time.Instant;
  * @author ForteScarlet <[email]ForteScarlet@163.com>
  * @since JDK1.8
  **/
-public class Resp_groupMemberIncrease implements GroupMemberIncrease {
+public class Resp_groupMemberIncrease extends AbstractGroupMemberIncrease {
 
     private Integer type;
     private Integer subType;
@@ -68,6 +68,7 @@ public class Resp_groupMemberIncrease implements GroupMemberIncrease {
         return originalData;
     }
 
+    @Override
     public void setOriginalData(String originalData) {
         this.originalData = originalData;
     }
@@ -85,6 +86,7 @@ public class Resp_groupMemberIncrease implements GroupMemberIncrease {
         return time;
     }
 
+    @Override
     public void setTime(Long time) {
         this.time = time;
     }
@@ -118,6 +120,7 @@ public class Resp_groupMemberIncrease implements GroupMemberIncrease {
         return beingOperateQQ;
     }
 
+    @Override
     public void setGroup(String group) {
         this.group = group;
     }

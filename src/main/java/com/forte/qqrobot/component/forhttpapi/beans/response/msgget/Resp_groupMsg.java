@@ -1,6 +1,6 @@
 package com.forte.qqrobot.component.forhttpapi.beans.response.msgget;
 
-import com.forte.qqrobot.beans.messages.msgget.GroupMsg;
+import com.forte.qqrobot.beans.messages.msgget.AbstractGroupMsg;
 import com.forte.qqrobot.beans.messages.types.GroupMsgType;
 
 import java.time.Instant;
@@ -10,7 +10,7 @@ import java.time.Instant;
  * @author ForteScarlet <[email]ForteScarlet@163.com>
  * @since JDK1.8
  **/
-public class Resp_groupMsg implements GroupMsg, Imageable, Anonable{
+public class Resp_groupMsg extends AbstractGroupMsg implements Imageable, Anonable{
 
     /** 事件类型，此事件固定为2 */
     private Integer type;
@@ -54,14 +54,6 @@ public class Resp_groupMsg implements GroupMsg, Imageable, Anonable{
         return GroupMsgType.of(typeInt);
     }
 
-    /**
-     * 获取群名称
-     */
-    @Override
-    public String getName() {
-        return null;
-    }
-
     public void setType(Integer type) {
         this.type = type;
     }
@@ -87,14 +79,17 @@ public class Resp_groupMsg implements GroupMsg, Imageable, Anonable{
         return group;
     }
 
+    @Override
     public void setGroup(String group) {
         this.group = group;
     }
 
+    @Override
     public String getQq() {
         return qq;
     }
 
+    @Override
     public void setQq(String qq) {
         this.qq = qq;
     }
@@ -112,6 +107,7 @@ public class Resp_groupMsg implements GroupMsg, Imageable, Anonable{
         return msg;
     }
 
+    @Override
     public void setMsg(String msg) {
         this.msg = msg;
     }
@@ -129,6 +125,7 @@ public class Resp_groupMsg implements GroupMsg, Imageable, Anonable{
         return time;
     }
 
+    @Override
     public void setFont(String font) {
         this.font = font;
     }
@@ -183,10 +180,12 @@ public class Resp_groupMsg implements GroupMsg, Imageable, Anonable{
         return anonymousInfo;
     }
 
+    @Override
     public void setTime(Long time) {
         this.time = time;
     }
 
+    @Override
     public void setOriginalData(String originalData) {
         this.originalData = originalData;
     }

@@ -1,14 +1,15 @@
 package com.forte.qqrobot.component.forhttpapi.beans.response;
 
+import com.forte.qqrobot.beans.messages.result.AbstractGroupMemberInfo;
 import com.forte.qqrobot.beans.messages.types.PowerType;
 import com.forte.qqrobot.beans.messages.types.SexType;
 
 /**
- * @author Ricardo
- * @create 2019-03-22 16:44
+ * 群成员信息
+ * @author ForteScarlet
  **/
 
-public class Resp_getGroupMemberInfo implements com.forte.qqrobot.beans.messages.result.GroupMemberInfo,  RespBean<Resp_getGroupMemberInfo.GroupMemberInfo> {
+public class Resp_getGroupMemberInfo extends AbstractGroupMemberInfo implements RespBean<Resp_getGroupMemberInfo.GroupMemberInfo> {
     private Integer status;
     private GroupMemberInfo result;
     private String errMsg;
@@ -19,6 +20,7 @@ public class Resp_getGroupMemberInfo implements com.forte.qqrobot.beans.messages
         return originalData;
     }
 
+    @Override
     public void setOriginalData(String originalData) {
         this.originalData = originalData;
     }
@@ -142,7 +144,7 @@ public class Resp_getGroupMemberInfo implements com.forte.qqrobot.beans.messages
             return null;
         }
         Integer power = result.getPower();
-        return power == 1 ? PowerType.MEMBER : power == 2 ? PowerType.MEMBER : PowerType.OWNER;
+        return power == 1 ? PowerType.MEMBER : power == 2 ? PowerType.ADMIN : PowerType.OWNER;
     }
 
     /**

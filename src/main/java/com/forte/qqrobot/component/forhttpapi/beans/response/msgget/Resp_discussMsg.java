@@ -1,6 +1,6 @@
 package com.forte.qqrobot.component.forhttpapi.beans.response.msgget;
 
-import com.forte.qqrobot.beans.messages.msgget.DiscussMsg;
+import com.forte.qqrobot.beans.messages.msgget.AbstractDiscussMsg;
 
 import java.time.Instant;
 
@@ -9,7 +9,7 @@ import java.time.Instant;
  * @author ForteScarlet <[email]ForteScarlet@163.com>
  * @since JDK1.8
  **/
-public class Resp_discussMsg implements DiscussMsg, Imageable, Anonable{
+public class Resp_discussMsg extends AbstractDiscussMsg implements Imageable, Anonable{
 
     /*
         {
@@ -66,10 +66,12 @@ public class Resp_discussMsg implements DiscussMsg, Imageable, Anonable{
         this.subType = subType;
     }
 
+    @Override
     public String getQq() {
         return qq;
     }
 
+    @Override
     public void setQq(String qq) {
         this.qq = qq;
     }
@@ -87,6 +89,7 @@ public class Resp_discussMsg implements DiscussMsg, Imageable, Anonable{
         return qq;
     }
 
+    @Override
     public void setGroup(String group) {
         this.group = group;
     }
@@ -104,6 +107,7 @@ public class Resp_discussMsg implements DiscussMsg, Imageable, Anonable{
         return msg;
     }
 
+    @Override
     public void setMsg(String msg) {
         this.msg = msg;
     }
@@ -113,6 +117,7 @@ public class Resp_discussMsg implements DiscussMsg, Imageable, Anonable{
         return font;
     }
 
+    @Override
     public void setFont(String font) {
         this.font = font;
     }
@@ -130,6 +135,7 @@ public class Resp_discussMsg implements DiscussMsg, Imageable, Anonable{
         return time;
     }
 
+    @Override
     public void setTime(Long time) {
         this.time = time;
     }
@@ -175,6 +181,7 @@ public class Resp_discussMsg implements DiscussMsg, Imageable, Anonable{
         return originalData;
     }
 
+    @Override
     public void setOriginalData(String originalData) {
         this.originalData = originalData;
     }

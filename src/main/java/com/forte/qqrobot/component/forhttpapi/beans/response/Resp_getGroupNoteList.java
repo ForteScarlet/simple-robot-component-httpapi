@@ -1,6 +1,8 @@
 package com.forte.qqrobot.component.forhttpapi.beans.response;
 
+import com.forte.qqrobot.beans.messages.result.AbstractGroupNoteList;
 import com.forte.qqrobot.beans.messages.result.GroupNoteList;
+import com.forte.qqrobot.beans.messages.result.inner.AbstractGroupNote;
 import com.forte.qqrobot.beans.messages.result.inner.GroupNote;
 
 import java.util.HashMap;
@@ -12,7 +14,7 @@ import java.util.Map;
  * @create 2019-03-22 16:44
  **/
 
-public class Resp_getGroupNoteList implements GroupNoteList,  RespBean<Resp_getGroupNoteList.GroupNoteList[]> {
+public class Resp_getGroupNoteList extends AbstractGroupNoteList implements RespBean<Resp_getGroupNoteList.GroupNoteList[]> {
     private Integer status;
     private GroupNoteList[] result;
     private String errMsg;
@@ -24,6 +26,7 @@ public class Resp_getGroupNoteList implements GroupNoteList,  RespBean<Resp_getG
         return originalData;
     }
 
+    @Override
     public void setOriginalData(String originalData) {
         this.originalData = originalData;
     }
@@ -108,7 +111,7 @@ result[i].settings.is_show_edit_card	int	提醒群成员修改名片，1/提醒�
 result[i].type	int	公告类型ID
 result[i].u	number	发布人QQ
      */
-    public static class GroupNoteList implements GroupNote {
+    public static class GroupNoteList extends AbstractGroupNote {
         private String cn;
         private String fid;
         private String fn;
@@ -128,6 +131,7 @@ result[i].u	number	发布人QQ
             return originalData;
         }
 
+        @Override
         public void setOriginalData(String originalData) {
             this.originalData = originalData;
         }

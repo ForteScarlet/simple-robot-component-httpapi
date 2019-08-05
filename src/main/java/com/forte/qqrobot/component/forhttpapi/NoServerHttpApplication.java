@@ -15,6 +15,7 @@ import com.forte.qqrobot.component.forhttpapi.utils.ListenBeansUtil;
 import com.forte.qqrobot.exception.RobotRuntionException;
 import com.forte.qqrobot.listener.invoker.ListenerManager;
 import com.forte.qqrobot.log.QQLog;
+import com.forte.qqrobot.log.QQLogBack;
 import com.forte.qqrobot.sender.senderlist.SenderGetList;
 import com.forte.qqrobot.sender.senderlist.SenderList;
 import com.forte.qqrobot.sender.senderlist.SenderSendList;
@@ -37,7 +38,7 @@ public class NoServerHttpApplication extends BaseApplication<NoServerHttpConfigu
     private Consumer<String> jsonGet;
 
     /** 送信器 */
-    protected HttpSender httpSender;
+    private HttpSender httpSender;
 
     /**
      * 开发者实现的资源初始化
@@ -155,5 +156,21 @@ public class NoServerHttpApplication extends BaseApplication<NoServerHttpConfigu
      */
     @Override
     public void close() {
+    }
+
+    //**************** 构造 ****************//
+
+
+    /**
+     * 无参构造
+     */
+    public NoServerHttpApplication() {
+    }
+
+    /**
+     * 日志拦截构造
+     */
+    public NoServerHttpApplication(QQLogBack qqLogBack) {
+        super(qqLogBack);
     }
 }
