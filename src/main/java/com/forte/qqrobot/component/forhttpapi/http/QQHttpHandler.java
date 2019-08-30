@@ -1,13 +1,9 @@
 package com.forte.qqrobot.component.forhttpapi.http;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.forte.qqrobot.ResourceDispatchCenter;
 import com.forte.qqrobot.beans.messages.msgget.MsgGet;
-import com.forte.qqrobot.component.forhttpapi.beans.response.msgget.HttpMsgGetType;
 import com.forte.qqrobot.component.forhttpapi.utils.ListenBeansUtil;
 import com.forte.qqrobot.listener.invoker.ListenerManager;
-import com.forte.qqrobot.sender.MsgSender;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import org.apache.commons.io.IOUtils;
@@ -17,7 +13,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URLDecoder;
 import java.util.Arrays;
-import java.util.function.Function;
 
 /**
  * qq请求处理器
