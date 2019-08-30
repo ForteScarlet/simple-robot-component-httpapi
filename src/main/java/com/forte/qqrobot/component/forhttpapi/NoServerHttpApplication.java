@@ -30,7 +30,7 @@ import java.util.function.Consumer;
  * @author ForteScarlet <[email]ForteScarlet@163.com>
  * @since JDK1.8
  **/
-public class NoServerHttpApplication extends BaseApplication<NoServerHttpConfiguration> {
+public class NoServerHttpApplication extends BaseApplication<NoServerHttpConfiguration, HttpSender> {
 
     /**
      * json参数接收函数
@@ -39,6 +39,14 @@ public class NoServerHttpApplication extends BaseApplication<NoServerHttpConfigu
 
     /** 送信器 */
     private HttpSender httpSender;
+
+    /**
+     * 开发者实现的资源初始化
+     */
+    @Override
+    protected void resourceInit(NoServerHttpConfiguration configuration) {
+
+    }
 
     /**
      * 开发者实现的资源初始化
@@ -74,6 +82,11 @@ public class NoServerHttpApplication extends BaseApplication<NoServerHttpConfigu
      */
     @Override
     protected SenderGetList getGetter() {
+        return httpSender;
+    }
+
+    @Override
+    public HttpSender getSpecialApi() {
         return httpSender;
     }
 

@@ -19,7 +19,7 @@ import java.io.IOException;
  * @date Created in 2019/4/4 18:14
  * @since JDK1.8
  **/
-public class HttpApplication extends BaseApplication<HttpConfiguration> {
+public class HttpApplication extends BaseApplication<HttpConfiguration, HttpSender> {
 
 
     /** http 服务器 */
@@ -40,6 +40,9 @@ public class HttpApplication extends BaseApplication<HttpConfiguration> {
         HttpApiResourceDispatchCenter.saveHttpSender(httpSender);
         this.httpSender = httpSender;
     }
+
+    @Override
+    protected void resourceInit(HttpConfiguration configuration){}
 
     /**
      * 获取消息发送接口, 将会在连接成功后使用
@@ -62,6 +65,14 @@ public class HttpApplication extends BaseApplication<HttpConfiguration> {
      */
     @Override
     protected SenderGetList getGetter() {
+        return httpSender;
+    }
+
+    /**
+     * 获取真实的完整Sender对象
+     */
+    @Override
+    public HttpSender getSpecialApi() {
         return httpSender;
     }
 
