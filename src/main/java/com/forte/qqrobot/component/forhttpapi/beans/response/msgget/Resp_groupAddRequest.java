@@ -71,7 +71,7 @@ public class Resp_groupAddRequest implements GroupAddRequest {
     }
 
     @Override
-    public long getTime() {
+    public Long getTime() {
         return time;
     }
 

@@ -131,7 +131,7 @@ public class Resp_discussMsg extends AbstractDiscussMsg implements Imageable, An
     }
 
     @Override
-    public long getTime() {
+    public Long getTime() {
         return time;
     }
 

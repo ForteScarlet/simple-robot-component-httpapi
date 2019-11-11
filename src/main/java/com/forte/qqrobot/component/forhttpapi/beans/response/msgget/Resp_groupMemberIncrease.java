@@ -82,7 +82,7 @@ public class Resp_groupMemberIncrease extends AbstractGroupMemberIncrease {
     }
 
     @Override
-    public long getTime() {
+    public Long getTime() {
         return time;
     }
 

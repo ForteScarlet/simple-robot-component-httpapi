@@ -18,6 +18,7 @@ public class Resp_friendAdd extends AbstractFriendAdd {
         "qq":11223456
     }
      */
+
     private Integer type;
     private Integer subType;
     /** 原始数据 */
@@ -65,7 +66,7 @@ public class Resp_friendAdd extends AbstractFriendAdd {
     }
 
     @Override
-    public long getTime() {
+    public Long getTime() {
         return time;
     }
 

@@ -1,7 +1,5 @@
 package com.forte.qqrobot.component.forhttpapi;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.forte.plusutils.consoleplus.console.Colors;
 import com.forte.qqrobot.BaseApplication;
 import com.forte.qqrobot.BaseConfiguration;
@@ -9,10 +7,9 @@ import com.forte.qqrobot.beans.messages.msgget.MsgGet;
 import com.forte.qqrobot.beans.messages.result.LoginQQInfo;
 import com.forte.qqrobot.component.forhttpapi.http.HttpSender;
 import com.forte.qqrobot.component.forhttpapi.http.QQHttpMsgSender;
-import com.forte.qqrobot.component.forhttpapi.http.QQHttpServer;
 import com.forte.qqrobot.component.forhttpapi.http.QQJSONMsgCreator;
 import com.forte.qqrobot.component.forhttpapi.utils.ListenBeansUtil;
-import com.forte.qqrobot.exception.RobotRuntionException;
+import com.forte.qqrobot.exception.RobotRuntimeException;
 import com.forte.qqrobot.listener.invoker.ListenerManager;
 import com.forte.qqrobot.log.QQLog;
 import com.forte.qqrobot.log.QQLogBack;
@@ -21,7 +18,6 @@ import com.forte.qqrobot.sender.senderlist.SenderList;
 import com.forte.qqrobot.sender.senderlist.SenderSendList;
 import com.forte.qqrobot.sender.senderlist.SenderSetList;
 
-import java.io.IOException;
 import java.util.function.Consumer;
 
 
@@ -150,7 +146,7 @@ public class NoServerHttpApplication extends BaseApplication<NoServerHttpConfigu
      */
     public Consumer<String> jsonGetFunction(){
         if(this.jsonGet == null){
-            throw new RobotRuntionException("您尚未启动服务或者启动服务过程中出现异常。");
+            throw new RobotRuntimeException("您尚未启动服务或者启动服务过程中出现异常。");
         }
         return this.jsonGet;
     }

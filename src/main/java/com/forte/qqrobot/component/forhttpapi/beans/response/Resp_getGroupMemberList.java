@@ -239,6 +239,9 @@ result[i].headimg	string	QQ头像
 
         @Override
         public PowerType getPower() {
+            if(power == null){
+                return null;
+            }
             return power == 1 ? PowerType.MEMBER : power == 2 ? PowerType.ADMIN : PowerType.OWNER;
         }
 

@@ -64,7 +64,7 @@ public class Resp_friendAddRequest extends AbstractFriendAddRequest {
     }
 
     @Override
-    public long getTime() {
+    public Long getTime() {
         return time;
     }
 

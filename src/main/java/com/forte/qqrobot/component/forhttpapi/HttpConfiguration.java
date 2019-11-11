@@ -37,7 +37,7 @@ public class HttpConfiguration extends BaseConfiguration<HttpConfiguration> {
 
     public String getHttpRequestUrl(){
         //服务器IP+端口+请求路径
-        return "http://"+getIp() + ":" + getServerPort(); /*+ getServerPath();*/
+        return "http://"+getIp() + ":" + getServerPort();
     }
 
     /* —————————————— getter && setter ———————————— */

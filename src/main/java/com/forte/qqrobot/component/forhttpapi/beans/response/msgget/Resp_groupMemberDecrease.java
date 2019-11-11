@@ -77,7 +77,7 @@ public class Resp_groupMemberDecrease extends AbstractGroupMemberReduce {
     }
 
     @Override
-    public long getTime() {
+    public Long getTime() {
         return time;
     }
 

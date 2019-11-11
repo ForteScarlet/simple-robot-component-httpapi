@@ -54,7 +54,11 @@ public class HttpApiResourceDispatchCenter extends ResourceDispatchCenter {
      * @return HttpConfiguration单例对象
      */
     public static HttpConfiguration getHttpConfiguration(){
-        return get(HttpConfiguration.class);
+        HttpConfiguration httpConfiguration = get(HttpConfiguration.class);
+        if(httpConfiguration == null){
+            httpConfiguration = get(NoServerHttpConfiguration.class);
+        }
+        return httpConfiguration;
     }
 
     /**

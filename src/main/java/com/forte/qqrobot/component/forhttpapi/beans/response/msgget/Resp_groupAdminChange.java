@@ -82,7 +82,7 @@ public class Resp_groupAdminChange extends AbstractGroupAdminChange {
     }
 
     @Override
-    public long getTime() {
+    public Long getTime() {
         return time;
     }
 

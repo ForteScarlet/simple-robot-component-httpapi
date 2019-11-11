@@ -14,7 +14,7 @@
     <groupId>io.github.ForteScarlet.simple-robot-core</groupId>
     <artifactId>component-forhttpapi</artifactId>
     <!-- 版本号 版本号规则：forHttpapi版本-核心版本 -->
-    <version>0.7.2-BETA-1.3.5-BETA</version>
+    <version>1.0-1.3.11</version>
 
     <name>component-forhttpapi</name>
     <url>https://github.com/ForteScarlet/simple-robot-component-httpapi</url>
@@ -24,7 +24,7 @@
     <!-- 版本号 -->
     <properties>
         <!--　核心版本号　-->
-        <core.version>1.3.5-BETA</core.version>
+        <core.version>1.3.11</core.version>
     </properties>
 
     <!-- 依赖 -->
@@ -41,7 +41,7 @@
 
 
     <scm>
-        <url>https://github.com/ForteScarlet/simple-robot-component-lemoc</url>
+        <url>https://github.com/ForteScarlet/simple-robot-component-httpapi</url>
     </scm>
 
     <build>

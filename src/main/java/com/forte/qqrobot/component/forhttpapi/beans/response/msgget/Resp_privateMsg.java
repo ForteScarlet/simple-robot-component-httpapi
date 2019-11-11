@@ -190,7 +190,7 @@ public class Resp_privateMsg extends AbstractPrivateMsg implements MsgBean, Imag
      * 获取到的时间, 代表某一时间的秒值。注意是秒值！如果类型不对请自行转化
      */
     @Override
-    public long getTime() {
+    public Long getTime() {
         return time;
     }
 
