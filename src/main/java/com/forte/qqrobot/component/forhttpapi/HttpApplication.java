@@ -4,6 +4,7 @@ import com.forte.plusutils.consoleplus.console.Colors;
 import com.forte.qqrobot.BaseApplication;
 import com.forte.qqrobot.beans.messages.result.LoginQQInfo;
 import com.forte.qqrobot.component.forhttpapi.http.*;
+import com.forte.qqrobot.depend.DependCenter;
 import com.forte.qqrobot.listener.invoker.ListenerManager;
 import com.forte.qqrobot.log.QQLog;
 import com.forte.qqrobot.log.QQLogBack;
@@ -19,7 +20,7 @@ import java.io.IOException;
  * @date Created in 2019/4/4 18:14
  * @since JDK1.8
  **/
-public class HttpApplication extends BaseApplication<HttpConfiguration, HttpSender> {
+public class HttpApplication extends BaseApplication<HttpConfiguration, HttpApiSpecialApi> {
 
 
     /** http 服务器 */
@@ -27,6 +28,9 @@ public class HttpApplication extends BaseApplication<HttpConfiguration, HttpSend
 
     /** 送信器 */
     private HttpSender httpSender;
+
+    /** 特殊API */
+    private HttpApiSpecialApi spApi;
 
     /**
      * 开发者实现的资源初始化
@@ -72,8 +76,8 @@ public class HttpApplication extends BaseApplication<HttpConfiguration, HttpSend
      * 获取真实的完整Sender对象
      */
     @Override
-    public HttpSender getSpecialApi() {
-        return httpSender;
+    public HttpApiSpecialApi getSpecialApi() {
+        return spApi;
     }
 
     /**
@@ -82,7 +86,7 @@ public class HttpApplication extends BaseApplication<HttpConfiguration, HttpSend
      * @param manager 监听管理器，用于分配获取到的消息
      */
     @Override
-    protected String start(ListenerManager manager) {
+    protected String start(DependCenter center, ListenerManager manager) {
         HttpConfiguration configuration = getConfiguration();
         /*
          * 开启服务
@@ -96,8 +100,16 @@ public class HttpApplication extends BaseApplication<HttpConfiguration, HttpSend
         int port = configuration.getJavaPort();
         String listenerPath = configuration.getServerPath();
         int backlog = configuration.getBacklog();
-        String encode = HttpConfiguration.getEncode();
+        String encode = configuration.getEncode();
         String[] method = configuration.getMethod();
+
+        // 将获取机器人信息放在构建服务端之前
+        QQLog.info("尝试获取登录QQ信息...");
+        try {
+            getAndShowQQInfo(configuration);
+        }catch (Exception e){
+            QQLog.error("登录QQ信息获取失败，请确保已经手动配置或检查连接信息是否正确。", e);
+        }
 
         try {
             this.httpServer = QQHttpServer.start(port, listenerPath, backlog, encode, method, manager, httpSender);
@@ -105,8 +117,9 @@ public class HttpApplication extends BaseApplication<HttpConfiguration, HttpSend
             throw new RuntimeException("服务端构建失败", e);
         }
 
-        QQLog.debug("尝试获取登录QQ信息...");
-        getAndShowQQInfo(configuration);
+        // 构建spAPI
+        spApi = new HttpApiSpecialApi(httpSender, httpServer);
+
         return "Http Server";
     }
 
@@ -118,6 +131,7 @@ public class HttpApplication extends BaseApplication<HttpConfiguration, HttpSend
         //获取登录的机器人的信息
         LoginQQInfo loginQQInfo = httpSender.getLoginQQInfo();
         configuration.setLoginQQInfo(loginQQInfo);
+
 
         QQLog.info(Colors.builder().add("QQ    : "+loginQQInfo.getQQ(), Colors.FONT.YELLOW).build());
         QQLog.info(Colors.builder().add("NICK  : "+loginQQInfo.getName(), Colors.FONT.YELLOW).build());
@@ -134,20 +148,10 @@ public class HttpApplication extends BaseApplication<HttpConfiguration, HttpSend
     }
 
     /**
-     * Closes this stream and releases any system resources associated
-     * with it. If the stream is already closed then invoking this
-     * method has no effect.
-     *
-     * <p> As noted in {@link AutoCloseable#close()}, cases where the
-     * close may fail require careful attention. It is strongly advised
-     * to relinquish the underlying resources and to internally
-     * <em>mark</em> the {@code Closeable} as closed, prior to throwing
-     * the {@code IOException}.
-     *
-     * @throws IOException if an I/O error occurs
+     * close 实现方法
      */
     @Override
-    public void close() throws IOException {
+    public void close() {
         httpServer.close();
     }
 
@@ -162,7 +166,6 @@ public class HttpApplication extends BaseApplication<HttpConfiguration, HttpSend
 
     /**
      * 日志拦截构造
-     * @param qqLogBack
      */
     public HttpApplication(QQLogBack qqLogBack) {
         super(qqLogBack);

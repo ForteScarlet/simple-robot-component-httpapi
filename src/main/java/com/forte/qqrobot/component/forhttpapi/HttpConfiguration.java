@@ -1,7 +1,10 @@
 package com.forte.qqrobot.component.forhttpapi;
 
+import com.forte.config.Conf;
 import com.forte.qqrobot.BaseConfiguration;
 import com.forte.qqrobot.sender.MsgSender;
+
+import java.util.Arrays;
 
 /**
  * HTTP API连接使用的配置类
@@ -13,24 +16,29 @@ public class HttpConfiguration extends BaseConfiguration<HttpConfiguration> {
 
 
     /** 服务器端口 */
+    @Conf("httpapi.serverPort")
     private int serverPort = 8877;
 
     /**
      * 服务器请求地址，默认为/coolq
      */
+    @Conf("httpapi.serverPath")
     private String serverPath = "/coolq";
 
     /**
      * java监听端口地址，默认为15514
      */
+    @Conf("httpapi.javaPort")
     private int javaPort = 15514;
 
     /** TCP连接最大并发数, 传 0 或负数表示使用默认值 */
+    @Conf("httpapi.backlog")
     private int backlog = 0;
 
     /**
      * 接收的请求方式，默认为 post
      */
+    @Conf("httpapi.method")
     private String[] method = {"post"};
 
 
@@ -92,4 +100,14 @@ public class HttpConfiguration extends BaseConfiguration<HttpConfiguration> {
         return this;
     }
 
+    @Override
+    public String toString() {
+        return "HttpConfiguration{" +
+                "serverPort=" + serverPort +
+                ", serverPath='" + serverPath + '\'' +
+                ", javaPort=" + javaPort +
+                ", backlog=" + backlog +
+                ", method=" + Arrays.toString(method) +
+                "} " + super.toString();
+    }
 }

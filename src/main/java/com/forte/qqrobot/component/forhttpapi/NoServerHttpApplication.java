@@ -9,6 +9,7 @@ import com.forte.qqrobot.component.forhttpapi.http.HttpSender;
 import com.forte.qqrobot.component.forhttpapi.http.QQHttpMsgSender;
 import com.forte.qqrobot.component.forhttpapi.http.QQJSONMsgCreator;
 import com.forte.qqrobot.component.forhttpapi.utils.ListenBeansUtil;
+import com.forte.qqrobot.depend.DependCenter;
 import com.forte.qqrobot.exception.RobotRuntimeException;
 import com.forte.qqrobot.listener.invoker.ListenerManager;
 import com.forte.qqrobot.log.QQLog;
@@ -91,7 +92,7 @@ public class NoServerHttpApplication extends BaseApplication<NoServerHttpConfigu
      * @param manager 监听管理器，用于分配获取到的消息
      */
     @Override
-    protected String start(ListenerManager manager){
+    protected String start(DependCenter center, ListenerManager manager){
         String msg = "无内置server启动。";
         QQLog.info(Colors.builder().add(msg, Colors.FONT.DARK_GREEN).build());
         NoServerHttpConfiguration configuration = getConfiguration();

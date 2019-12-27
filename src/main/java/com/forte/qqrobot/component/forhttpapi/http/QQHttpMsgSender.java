@@ -7,7 +7,6 @@ import com.forte.qqrobot.beans.messages.types.GroupAddRequestType;
 import com.forte.qqrobot.component.forhttpapi.HttpApiResourceDispatchCenter;
 import com.forte.qqrobot.component.forhttpapi.HttpConfiguration;
 import com.forte.qqrobot.component.forhttpapi.beans.request.get.Req_getRecord;
-import com.forte.qqrobot.component.forhttpapi.beans.request.send.Req_sendDiscussMsg;
 import com.forte.qqrobot.component.forhttpapi.beans.response.*;
 import com.forte.qqrobot.log.QQLog;
 import com.forte.qqrobot.utils.HttpClientUtil;
