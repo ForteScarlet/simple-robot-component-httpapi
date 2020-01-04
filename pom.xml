@@ -14,8 +14,8 @@
     <groupId>io.github.ForteScarlet.simple-robot-core</groupId>
     <artifactId>component-forhttpapi</artifactId>
     <!-- 版本号 版本号规则：forHttpapi版本-核心版本 -->
-    <!-- 下次应该大于1.1-1.5.0 -->
-    <version>1.1-1.5.0</version>
+    <!-- 下次应该大于1.1-1.6.0 -->
+    <version>1.1-1.6.0</version>
 
     <name>component-forhttpapi</name>
     <url>https://github.com/ForteScarlet/simple-robot-component-httpapi</url>
@@ -25,7 +25,7 @@
     <!-- 版本号 -->
     <properties>
         <!--　核心版本号　-->
-        <core.version>1.5.0</core.version>
+        <core.version>1.6.0</core.version>
     </properties>
 
     <!-- 依赖 -->
