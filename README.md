@@ -1,5 +1,5 @@
 # 基于simple-robot与HTTP TO CQ插件的Java开发框架
-[![](https://img.shields.io/badge/simple--robot-core-green)](https://github.com/ForteScarlet/simple-robot-core)  [![img](https://camo.githubusercontent.com/f8464f5d605886b8369ab6daf28d7130a72fd80e/68747470733a2f2f696d672e736869656c64732e696f2f6d6176656e2d63656e7472616c2f762f696f2e6769746875622e466f727465536361726c65742f73696d706c652d726f626f742d636f7265)](https://search.maven.org/artifact/io.github.ForteScarlet/simple-robot-core) [![](https://img.shields.io/maven-central/v/io.github.ForteScarlet.simple-robot-core/component-forhttpapi)](https://search.maven.org/artifact/io.github.ForteScarlet.simple-robot-core/component-forhttpapi)  [![](https://img.shields.io/badge/%E7%9C%8B%E4%BA%91%E6%96%87%E6%A1%A3-doc-green)](https://www.kancloud.cn/forte-scarlet/simple-coolq-doc)
+[![](https://img.shields.io/badge/simple--robot-core-green)](https://github.com/ForteScarlet/simple-robot-core)  [![img](https://camo.githubusercontent.com/f8464f5d605886b8369ab6daf28d7130a72fd80e/68747470733a2f2f696d672e736869656c64732e696f2f6d6176656e2d63656e7472616c2f762f696f2e6769746875622e466f727465536361726c65742f73696d706c652d726f626f742d636f7265)](https://search.maven.org/artifact/io.github.ForteScarlet/simple-robot-core) [![](https://img.shields.io/maven-central/v/io.github.ForteScarlet.simple-robot-core/component-forhttpapi)](https://search.maven.org/artifact/io.github.ForteScarlet.simple-robot-core/component-forhttpapi)  [![](https://img.shields.io/badge/%E7%9C%8B%E4%BA%91%E6%96%87%E6%A1%A3-doc-green)](https://www.kancloud.cn/forte-scarlet/simple-coolq-doc)  [![](https://img.shields.io/badge/QQ%E7%BE%A4-782930037-blue)](https://jq.qq.com/?_wv=1027&k=57ynqB1)
 
 > 如果需要获得更好的阅读体验，请前往 [原文档](https://www.kancloud.cn/forte-scarlet/simple-coolq-doc/) -> `组件-酷Q-HTTP TO CQ` -> `快速开始` 处阅读
 > 或尝试直接进入[快速开始](https://www.kancloud.cn/forte-scarlet/simple-coolq-doc/1519579)
@@ -84,7 +84,7 @@ implementation 'io.github.ForteScarlet.simple-robot-core:component-forhttpapi:${
 
 首先，创建一个类，实现`com.forte.qqrobot.component.forhttpapi.HttpApp`接口，并实现接口中的`before`与`after`方法。
 
->[info] 现在假定你这个类叫做 **`RunApp**` , 方便后续的代称。当然，它实际上叫做什么都无所谓。
+>[info] 现在假定你这个类叫做 **`RunApp`** , 方便后续的代称。当然，它实际上叫做什么都无所谓。
 
 可以发现，`before`方法中存在一个叫做`HttpConfiguration`的参数，我们就要通过这个参数对象进行配置。
 以下我将会列举**最常见的**几项配置信息，而全面的配置可选项请查看[核心通用配置](./%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6.md) 与 [组件额外配置](./%E7%BB%84%E4%BB%B6CoolQ%20HTTP%20API%E9%85%8D%E7%BD%AE.md)
@@ -130,8 +130,7 @@ public class TestListener {
     @Filter("hello.*")
     public void testListen1(PrivateMsg msg, MsgSender sender) {
         System.out.println(msg);
-        // 以下三种方法均可
-，效果相同
+        // 以下三种方法均可，效果相同
         sender.SENDER.sendPrivateMsg(msg, msg.getMsg());
 //        sender.SENDER.sendPrivateMsg(msg.getQQ(), msg.getMsg());
 //        sender.SENDER.sendPrivateMsg(msg.getQQCode(), msg.getMsg());
@@ -147,3 +146,4 @@ public class TestListener {
 ## **7\. 失败了？**
 
 如果跟着上述流程完整无误的操作却无法成功，也不要气馁，尝试根据[常见问题汇总](./%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB.md)进行排查或者加入QQ群`782930037`进行咨询。
+
