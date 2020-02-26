@@ -1,8 +1,8 @@
-# 基于simple-robot与CQ HTTP API插件的Java开发框架
+# 基于simple-robot与HTTP TO CQ插件的Java开发框架
 [![](https://img.shields.io/badge/simple--robot-core-green)](https://github.com/ForteScarlet/simple-robot-core)  [![img](https://camo.githubusercontent.com/f8464f5d605886b8369ab6daf28d7130a72fd80e/68747470733a2f2f696d672e736869656c64732e696f2f6d6176656e2d63656e7472616c2f762f696f2e6769746875622e466f727465536361726c65742f73696d706c652d726f626f742d636f7265)](https://search.maven.org/artifact/io.github.ForteScarlet/simple-robot-core) [![](https://img.shields.io/maven-central/v/io.github.ForteScarlet.simple-robot-core/component-forhttpapi)](https://search.maven.org/artifact/io.github.ForteScarlet.simple-robot-core/component-forhttpapi)  [![](https://img.shields.io/badge/%E7%9C%8B%E4%BA%91%E6%96%87%E6%A1%A3-doc-green)](https://www.kancloud.cn/forte-scarlet/simple-coolq-doc)
 
 > 如果需要获得更好的阅读体验，请前往 [原文档](https://www.kancloud.cn/forte-scarlet/simple-coolq-doc/) -> `组件-酷Q-HTTP TO CQ` -> `快速开始` 处阅读
-> 或尝试直接进入[快速开始](https://www.kancloud.cn/forte-scarlet/simple-coolq-doc/1519392)
+> 或尝试直接进入[快速开始](https://www.kancloud.cn/forte-scarlet/simple-coolq-doc/1519579)
 
 
 
