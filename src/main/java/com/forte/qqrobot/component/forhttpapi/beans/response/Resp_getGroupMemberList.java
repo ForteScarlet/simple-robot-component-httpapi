@@ -6,6 +6,8 @@ import com.forte.qqrobot.beans.messages.result.inner.GroupMember;
 import com.forte.qqrobot.beans.messages.types.PowerType;
 import com.forte.qqrobot.beans.messages.types.SexType;
 
+import java.util.Arrays;
+
 /**
  * @author Ricardo
  * @create 2019-03-22 16:44
@@ -17,6 +19,16 @@ public class Resp_getGroupMemberList extends AbstractGroupMemberList implements 
     private String errMsg;
 
     private String originalData;
+
+    @Override
+    public String toString() {
+        return "Resp_getBanList{" +
+                "status=" + status +
+                ", result=" + Arrays.toString(getList()) +
+                ", errMsg='" + errMsg + '\'' +
+                ", originalData='" + originalData + '\'' +
+                "} " + super.toString();
+    }
 
     @Override
     public String getOriginalData() {

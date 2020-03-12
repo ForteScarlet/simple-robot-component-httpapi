@@ -1,6 +1,7 @@
 package com.forte.qqrobot.component.forhttpapi.beans.response.msgget;
 
 import com.forte.qqrobot.beans.messages.msgget.AbstractGroupMemberIncrease;
+import com.forte.qqrobot.beans.messages.msgget.GroupMemberIncrease;
 import com.forte.qqrobot.beans.messages.types.IncreaseType;
 
 import java.time.Instant;
@@ -10,15 +11,7 @@ import java.time.Instant;
  * @author ForteScarlet <[email]ForteScarlet@163.com>
  * @since JDK1.8
  **/
-public class Resp_groupMemberIncrease extends AbstractGroupMemberIncrease {
-
-    private Integer type;
-    private Integer subType;
-    /** 原始数据 */
-    private String originalData;
-    /** 没有时间参数，通过程序获取 */
-    private Long time = Instant.now().getEpochSecond();
-
+public class Resp_groupMemberIncrease extends BaseMsgGet implements GroupMemberIncrease {
     /*
         {
             "type":103,
@@ -41,36 +34,14 @@ public class Resp_groupMemberIncrease extends AbstractGroupMemberIncrease {
     @Override
     public IncreaseType getType() {
         /* 1/管理员已同意，2/管理员邀请 */
-        if(subType == 1){
+        if(getSubType() == 1){
             return IncreaseType.AGREE;
         }
-        if(subType == 2){
+        if(getSubType() == 2){
             return IncreaseType.INVITE;
         }
 
         return null;
-    }
-
-    public void setType(Integer type) {
-        this.type = type;
-    }
-
-    public Integer getSubType() {
-        return subType;
-    }
-
-    public void setSubType(Integer subType) {
-        this.subType = subType;
-    }
-
-    @Override
-    public String getOriginalData() {
-        return originalData;
-    }
-
-    @Override
-    public void setOriginalData(String originalData) {
-        this.originalData = originalData;
     }
 
     /**
@@ -78,17 +49,7 @@ public class Resp_groupMemberIncrease extends AbstractGroupMemberIncrease {
      */
     @Override
     public String getId() {
-        return type+"_"+subType;
-    }
-
-    @Override
-    public Long getTime() {
-        return time;
-    }
-
-    @Override
-    public void setTime(Long time) {
-        this.time = time;
+        return getBigType()+"_"+getSubType();
     }
 
     public String getQq() {
@@ -120,7 +81,6 @@ public class Resp_groupMemberIncrease extends AbstractGroupMemberIncrease {
         return beingOperateQQ;
     }
 
-    @Override
     public void setGroup(String group) {
         this.group = group;
     }

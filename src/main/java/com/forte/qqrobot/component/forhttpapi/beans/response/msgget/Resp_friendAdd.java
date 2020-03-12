@@ -10,7 +10,6 @@ import java.time.Instant;
  * @since JDK1.8
  **/
 public class Resp_friendAdd extends AbstractFriendAdd {
-
     /*
     {
         "type":201,
@@ -19,61 +18,9 @@ public class Resp_friendAdd extends AbstractFriendAdd {
     }
      */
 
-    private Integer type;
-    private Integer subType;
-    /** 原始数据 */
-    private String originalData;
-    /** 没有时间参数，通过程序获取 */
-    private Long time = Instant.now().getEpochSecond();
-
     /** 好友的qq号 */
     private String qq;
 
-
-
-    public Integer getType() {
-        return type;
-    }
-
-    public void setType(Integer type) {
-        this.type = type;
-    }
-
-    public Integer getSubType() {
-        return subType;
-    }
-
-    public void setSubType(Integer subType) {
-        this.subType = subType;
-    }
-
-    @Override
-    public String getOriginalData() {
-        return originalData;
-    }
-
-    @Override
-    public void setOriginalData(String originalData) {
-        this.originalData = originalData;
-    }
-
-    /**
-     * 获取ID，如果没有此参数推荐使用UUID等来代替
-     */
-    @Override
-    public String getId() {
-        return type + "_" + subType;
-    }
-
-    @Override
-    public Long getTime() {
-        return time;
-    }
-
-    @Override
-    public void setTime(Long time) {
-        this.time = time;
-    }
 
     @Override
     public String getQq() {

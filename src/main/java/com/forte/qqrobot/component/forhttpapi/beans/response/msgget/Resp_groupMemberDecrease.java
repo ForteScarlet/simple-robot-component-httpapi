@@ -1,23 +1,14 @@
 package com.forte.qqrobot.component.forhttpapi.beans.response.msgget;
 
-import com.forte.qqrobot.beans.messages.msgget.AbstractGroupMemberReduce;
+import com.forte.qqrobot.beans.messages.msgget.GroupMemberReduce;
 import com.forte.qqrobot.beans.messages.types.ReduceType;
-
-import java.time.Instant;
 
 /**
  * 群成员减少
  * @author ForteScarlet <[email]ForteScarlet@163.com>
  * @since JDK1.8
  **/
-public class Resp_groupMemberDecrease extends AbstractGroupMemberReduce {
-
-    private Integer type;
-    private Integer subType;
-    /** 原始数据 */
-    private String originalData;
-    /** 没有时间参数，通过程序获取 */
-    private Long time = Instant.now().getEpochSecond();
+public class Resp_groupMemberDecrease extends BaseMsgGet implements GroupMemberReduce {
     /*
         {
             "type":102,
@@ -27,6 +18,7 @@ public class Resp_groupMemberDecrease extends AbstractGroupMemberReduce {
             "beingOperateQQ":11223456
         }
      */
+
     private String qq;
     private String group;
     private String beingOperateQQ;
@@ -36,36 +28,14 @@ public class Resp_groupMemberDecrease extends AbstractGroupMemberReduce {
     public ReduceType getType() {
         /* 1/群员离开，2/群员被踢 */
 
-        if(subType == 1){
+        if(getSubType() == 1){
             return ReduceType.LEAVE;
         }
-        if(subType == 2){
+        if(getSubType() == 2){
             return ReduceType.KICK_OUT;
         }
 
         return null;
-    }
-
-    public void setType(Integer type) {
-        this.type = type;
-    }
-
-    public Integer getSubType() {
-        return subType;
-    }
-
-    public void setSubType(Integer subType) {
-        this.subType = subType;
-    }
-
-    @Override
-    public String getOriginalData() {
-        return originalData;
-    }
-
-    @Override
-    public void setOriginalData(String originalData) {
-        this.originalData = originalData;
     }
 
     /**
@@ -73,17 +43,7 @@ public class Resp_groupMemberDecrease extends AbstractGroupMemberReduce {
      */
     @Override
     public String getId() {
-        return type + "_" + subType;
-    }
-
-    @Override
-    public Long getTime() {
-        return time;
-    }
-
-    @Override
-    public void setTime(Long time) {
-        this.time = time;
+        return getBigType() + "_" + getSubType();
     }
 
     public String getQq() {
@@ -107,6 +67,7 @@ public class Resp_groupMemberDecrease extends AbstractGroupMemberReduce {
         return qq;
     }
 
+
     /**
      * 被操作者的QQ号
      */
@@ -115,7 +76,6 @@ public class Resp_groupMemberDecrease extends AbstractGroupMemberReduce {
         return beingOperateQQ;
     }
 
-    @Override
     public void setGroup(String group) {
         this.group = group;
     }

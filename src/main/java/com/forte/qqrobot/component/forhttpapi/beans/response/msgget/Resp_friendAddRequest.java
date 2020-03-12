@@ -1,6 +1,7 @@
 package com.forte.qqrobot.component.forhttpapi.beans.response.msgget;
 
 import com.forte.qqrobot.beans.messages.msgget.AbstractFriendAddRequest;
+import com.forte.qqrobot.beans.messages.msgget.FriendAddRequest;
 
 import java.time.Instant;
 
@@ -10,19 +11,7 @@ import java.time.Instant;
  * @author ForteScarlet <[email]ForteScarlet@163.com>
  * @since JDK1.8
  **/
-public class Resp_friendAddRequest extends AbstractFriendAddRequest {
-
-    private Integer type;
-    private Integer subType;
-    /**
-     * 原始数据
-     */
-    private String originalData;
-    /**
-     * 没有时间参数，通过程序获取
-     */
-    private Long time = Instant.now().getEpochSecond();
-
+public class Resp_friendAddRequest extends BaseMsgGet implements FriendAddRequest {
     /*
         {
             "type":301,
@@ -32,53 +21,15 @@ public class Resp_friendAddRequest extends AbstractFriendAddRequest {
             "responseFlag":"2479"
         }
      */
+
     private String qq;
     private String msg;
     private String responseFlag;
 
-
-    public Integer getType() {
-        return type;
-    }
-
-    public void setType(Integer type) {
-        this.type = type;
-    }
-
-    public Integer getSubType() {
-        return subType;
-    }
-
-    public void setSubType(Integer subType) {
-        this.subType = subType;
-    }
-
-    @Override
-    public String getOriginalData() {
-        return originalData;
-    }
-
-    @Override
-    public void setOriginalData(String originalData) {
-        this.originalData = originalData;
-    }
-
-    @Override
-    public Long getTime() {
-        return time;
-    }
-
-    @Override
-    public void setTime(Long time) {
-        this.time = time;
-    }
-
-    @Override
     public String getQq() {
         return qq;
     }
 
-    @Override
     public void setQq(String qq) {
         this.qq = qq;
     }
@@ -96,7 +47,7 @@ public class Resp_friendAddRequest extends AbstractFriendAddRequest {
      */
     @Override
     public String getId() {
-        return responseFlag;
+        return getFlag();
     }
 
     @Override

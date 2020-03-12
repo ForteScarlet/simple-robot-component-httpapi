@@ -1,7 +1,10 @@
 package com.forte.qqrobot.component.forhttpapi.beans.response;
 
 import com.forte.qqrobot.beans.messages.result.AbstractBanList;
+import com.forte.qqrobot.beans.messages.result.inner.AbstractBanInfo;
 import com.forte.qqrobot.beans.messages.result.inner.BanInfo;
+
+import java.util.Arrays;
 
 /**
  * 禁言列表
@@ -17,6 +20,15 @@ public class Resp_getBanList extends AbstractBanList implements RespBean<Resp_ge
     /** 原生数据 */
     private String originalData;
 
+    @Override
+    public String toString() {
+        return "Resp_getBanList{" +
+                "status=" + status +
+                ", result=" + Arrays.toString(getList()) +
+                ", errMsg='" + errMsg + '\'' +
+                ", originalData='" + originalData + '\'' +
+                "} " + super.toString();
+    }
 
     @Override
     public String getErrMsg() {
@@ -70,7 +82,7 @@ public class Resp_getBanList extends AbstractBanList implements RespBean<Resp_ge
     /**
      * ——————————内部类
      */
-    public static class BanList implements BanInfo {
+    public static class BanList extends AbstractBanInfo {
         /*
             manager	int	该成员是否为管理，此字段固定为1；当成员非管理时，此字段不存在
             nick	string	该成员的群名片
@@ -81,19 +93,10 @@ public class Resp_getBanList extends AbstractBanList implements RespBean<Resp_ge
         private String nick;
         private Integer t;
         private String uin;
-        private String originalData;
 
         @Override
-        public String getOriginalData() {
-            return originalData;
-        }
-
-        public void setOriginalData(String originalData) {
-            this.originalData = originalData;
-        }
-
-        public Integer getManager() {
-            return manager;
+        public Boolean getManager() {
+            return manager != null;
         }
 
         public void setManager(Integer manager) {

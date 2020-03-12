@@ -1,7 +1,9 @@
 package com.forte.qqrobot.component.forhttpapi.beans.response.msgget;
 
 import com.forte.qqrobot.beans.messages.msgget.AbstractGroupFileUpload;
+import com.forte.qqrobot.beans.messages.msgget.GroupFileUpload;
 import com.forte.qqrobot.beans.messages.result.AbstractFileInfo;
+import com.forte.qqrobot.beans.messages.result.FileInfo;
 
 import java.time.Instant;
 
@@ -10,15 +12,7 @@ import java.time.Instant;
  * @author ForteScarlet <[email]ForteScarlet@163.com>
  * @since JDK1.8
  **/
-public class Resp_groupUpload extends AbstractGroupFileUpload {
-
-
-    private Integer type;
-    private Integer subType;
-    /** 原始数据 */
-    private String originalData;
-    /** 没有时间参数，通过程序获取 */
-    private Long time = Instant.now().getEpochSecond();
+public class Resp_groupUpload extends BaseMsgGet implements GroupFileUpload {
 
 
     /** qq号 */
@@ -31,28 +25,10 @@ public class Resp_groupUpload extends AbstractGroupFileUpload {
     private FileInfo fileInfo;
 
 
-    public Integer getType() {
-        return type;
-    }
-
-    public void setType(Integer type) {
-        this.type = type;
-    }
-
-    public Integer getSubType() {
-        return subType;
-    }
-
-    public void setSubType(Integer subType) {
-        this.subType = subType;
-    }
-
-    @Override
     public String getQq() {
         return qq;
     }
 
-    @Override
     public void setQq(String qq) {
         this.qq = qq;
     }
@@ -94,7 +70,6 @@ public class Resp_groupUpload extends AbstractGroupFileUpload {
         return fileInfo.getBusid();
     }
 
-    @Override
     public void setGroup(String group) {
         this.group = group;
     }
@@ -115,16 +90,6 @@ public class Resp_groupUpload extends AbstractGroupFileUpload {
         this.fileInfo = fileInfo;
     }
 
-    @Override
-    public String getOriginalData() {
-        return originalData;
-    }
-
-    @Override
-    public void setOriginalData(String originalData) {
-        this.originalData = originalData;
-    }
-
     /**
      * 获取ID，如果没有此参数推荐使用UUID等来代替
      */
@@ -133,23 +98,11 @@ public class Resp_groupUpload extends AbstractGroupFileUpload {
         return fileInfo.getId();
     }
 
-    /**
-     * 获取到的时间, 代表某一时间的秒值。注意是秒值！如果类型不对请自行转化
-     */
-    @Override
-    public Long getTime() {
-        return time;
-    }
-
-    @Override
-    public void setTime(Long time) {
-        this.time = time;
-    }
 
     /** 群文件上传的文件信息
      *  内部类
      * */
-    public static class FileInfo extends AbstractFileInfo {
+    public static class FileInfo extends BaseMsgGet implements com.forte.qqrobot.beans.messages.result.FileInfo {
 
         /** size */
         private Long size;
@@ -160,8 +113,6 @@ public class Resp_groupUpload extends AbstractGroupFileUpload {
         /** id */
         private String id;
 
-        private String originalData;
-
         public Long getSize() {
             return size;
         }
@@ -170,7 +121,6 @@ public class Resp_groupUpload extends AbstractGroupFileUpload {
             this.size = size;
         }
 
-        @Override
         public String getBusid() {
             return busid;
         }
@@ -183,7 +133,6 @@ public class Resp_groupUpload extends AbstractGroupFileUpload {
             return size;
         }
 
-        @Override
         public void setBusid(String busid) {
             this.busid = busid;
         }
@@ -209,22 +158,12 @@ public class Resp_groupUpload extends AbstractGroupFileUpload {
             return id;
         }
 
-        @Override
         public void setId(String id) {
             this.id = id;
         }
 
-        @Override
-        public void setOriginalData(String originalData) {
-            this.originalData = originalData;
-        }
 
-        /**
-         * 获取原本的数据 originalData
-         */
-        @Override
-        public String getOriginalData() {
-            return originalData;
-        }
+
+
     }
 }

@@ -5,6 +5,8 @@ import com.forte.qqrobot.beans.messages.result.GroupLinkList;
 import com.forte.qqrobot.beans.messages.result.inner.AbstractGroupLink;
 import com.forte.qqrobot.beans.messages.result.inner.GroupLink;
 
+import java.util.Arrays;
+
 /**
  * @author Ricardo
  * @create 2019-03-22 16:44
@@ -15,6 +17,16 @@ public class Resp_getGroupLinkList extends AbstractGroupLinkList implements Resp
     private GroupLinkList[] result;
     private String errMsg;
     private String originalData;
+
+    @Override
+    public String toString() {
+        return "Resp_getBanList{" +
+                "status=" + status +
+                ", result=" + Arrays.toString(getList()) +
+                ", errMsg='" + errMsg + '\'' +
+                ", originalData='" + originalData + '\'' +
+                "} " + super.toString();
+    }
 
     @Override
     public String getOriginalData() {

@@ -1,6 +1,7 @@
 package com.forte.qqrobot.component.forhttpapi.beans.request.get;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.annotation.JSONField;
 import com.forte.qqrobot.component.forhttpapi.beans.request.ReqBean;
 import com.forte.qqrobot.component.forhttpapi.beans.response.RespBean;
 
@@ -11,6 +12,7 @@ import com.forte.qqrobot.component.forhttpapi.beans.response.RespBean;
  **/
 public interface ReqGetBean<T extends RespBean<?>> extends ReqBean {
 
+    @JSONField(serialize = false)
     Class<T> getResponseType();
 
     /**

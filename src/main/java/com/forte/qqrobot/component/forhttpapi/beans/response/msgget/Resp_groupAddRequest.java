@@ -3,27 +3,12 @@ package com.forte.qqrobot.component.forhttpapi.beans.response.msgget;
 import com.forte.qqrobot.beans.messages.msgget.GroupAddRequest;
 import com.forte.qqrobot.beans.messages.types.GroupAddRequestType;
 
-import java.time.Instant;
-
 /**
  * 群添加请求
  * @author ForteScarlet <[email]ForteScarlet@163.com>
  * @since JDK1.8
  **/
-public class Resp_groupAddRequest implements GroupAddRequest {
-
-    private Integer type;
-    /** 事件子类型，1/他人申请入群，2/自己(即登录号)受邀入群 */
-    private Integer subType;
-    /**
-     * 原始数据
-     */
-    private String originalData;
-    /**
-     * 没有时间参数，通过程序获取
-     */
-    private Long time = Instant.now().getEpochSecond();
-
+public class Resp_groupAddRequest extends BaseMsgGet implements GroupAddRequest {
     /*
     {
         "type":302,
@@ -43,41 +28,6 @@ public class Resp_groupAddRequest implements GroupAddRequest {
     /** 标识 */
     private String responseFlag;
 
-
-
-    public Integer getType() {
-        return type;
-    }
-
-    public void setType(Integer type) {
-        this.type = type;
-    }
-
-    public Integer getSubType() {
-        return subType;
-    }
-
-    public void setSubType(Integer subType) {
-        this.subType = subType;
-    }
-
-    @Override
-    public String getOriginalData() {
-        return originalData;
-    }
-
-    public void setOriginalData(String originalData) {
-        this.originalData = originalData;
-    }
-
-    @Override
-    public Long getTime() {
-        return time;
-    }
-
-    public void setTime(Long time) {
-        this.time = time;
-    }
 
     public String getQq() {
         return qq;
@@ -123,7 +73,7 @@ public class Resp_groupAddRequest implements GroupAddRequest {
     @Override
     public GroupAddRequestType getRequestType() {
         //事件子类型，1/他人申请入群，2/自己(即登录号)受邀入群
-        return subType == 1 ? GroupAddRequestType.ADD : subType == 2 ? GroupAddRequestType.INVITE : null;
+        return getSubType() == 1 ? GroupAddRequestType.ADD : getSubType() == 2 ? GroupAddRequestType.INVITE : null;
     }
 
 

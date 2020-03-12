@@ -1,11 +1,10 @@
 package com.forte.qqrobot.component.forhttpapi.beans.response;
 
 import com.forte.qqrobot.beans.messages.result.AbstractFriendList;
-import com.forte.qqrobot.beans.messages.result.FriendList;
 import com.forte.qqrobot.beans.messages.result.inner.AbstractFriend;
+import com.forte.qqrobot.beans.messages.result.inner.Friend;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * TODO ※ 本类可能存在一些问题
@@ -13,12 +12,22 @@ import java.util.stream.Collectors;
  * @create 2019-03-22 16:44
  **/
 
-public class Resp_getFriendList extends AbstractFriendList implements RespBean<Resp_getFriendList.FriendList[]> {
+public class Resp_getFriendList extends AbstractFriendList implements RespBean<Resp_getFriendList.Resp_FriendList[]> {
     private Integer status;
-    private FriendList[] result;
+    private Resp_FriendList[] result;
     private String errMsg;
+    private Integer errcode;
     private String originalData;
 
+    @Override
+    public String toString() {
+        return "Resp_getBanList{" +
+                "status=" + status +
+                ", result=" + getFriendList() +
+                ", errMsg='" + errMsg + '\'' +
+                ", originalData='" + originalData + '\'' +
+                "} " + super.toString();
+    }
 
     @Override
     public String getErrMsg() {
@@ -38,13 +47,13 @@ public class Resp_getFriendList extends AbstractFriendList implements RespBean<R
         this.status = status;
     }
 
-    public void setResult(FriendList[] result) {
+    public void setResult(Resp_FriendList[] result) {
         this.result = result;
     }
 
     @Override
-    public FriendList[] getResult() {
-        return result == null ? new FriendList[0] : result;
+    public Resp_FriendList[] getResult() {
+        return result == null ? new Resp_FriendList[0] : result;
     }
 
     @Override
@@ -57,13 +66,25 @@ public class Resp_getFriendList extends AbstractFriendList implements RespBean<R
         this.originalData = originalData;
     }
 
+    public Integer getErrcode() {
+        return errcode;
+    }
+
+    public void setErrcode(Integer errcode) {
+        this.errcode = errcode;
+    }
+
     /**
      * 各个分组下的好友列表
      */
     @Override
-    public Map<String, com.forte.qqrobot.beans.messages.result.inner.Friend[]> getFriendList() {
-        Map<String, List<List<Friend>>> collect = Arrays.stream(result).collect(Collectors.groupingBy(FriendList::getGname, Collectors.mapping(FriendList::getMems, Collectors.toList())));
-        return collect.entrySet().stream().map(e -> new AbstractMap.SimpleEntry<>(e.getKey(), e.getValue().toArray(new Friend[0]))).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+    public Map<String, Friend[]> getFriendList() {
+        Map<String, Friend[]> map = new HashMap<>(result.length / 2);
+        for (Resp_FriendList fList : result) {
+            Resp_Friend[] mems = fList.getMems();
+            map.put(fList.getGname(), Arrays.copyOf(mems, mems.length));
+        }
+        return map;
     }
 
     /**
@@ -72,10 +93,11 @@ public class Resp_getFriendList extends AbstractFriendList implements RespBean<R
      * @param group
      */
     @Override
-    public Friend[] getFirendList(String group) {
-        for (FriendList friendList : result) {
+    public Resp_Friend[] getFirendList(String group) {
+        for (Resp_FriendList friendList : result) {
             if(friendList.getGname().equals(group)){
-                return friendList.getMems().toArray(new Friend[0]);
+                Resp_Friend[] mems = friendList.getMems();
+                return Arrays.copyOf(mems, mems.length);
             }
         }
         return null;
@@ -113,10 +135,10 @@ public class Resp_getFriendList extends AbstractFriendList implements RespBean<R
              result[i].mems[n].name	string	该用户的备注
              result[i].mems[n].uin	number	该用户的QQ号
                       */
-    public static class FriendList {
+    public static class Resp_FriendList {
         private String gname;
         //这里是一个分组下的所有好友
-        private List<Friend> mems = new ArrayList<>();
+        private Resp_Friend[] mems;
 
         public String getGname() {
             return gname;
@@ -126,11 +148,11 @@ public class Resp_getFriendList extends AbstractFriendList implements RespBean<R
             this.gname = gname;
         }
 
-        public List<Friend> getMems() {
+        public Resp_Friend[] getMems() {
             return mems;
         }
 
-        public void setMems(List<Friend> mems) {
+        public void setMems(Resp_Friend[] mems) {
             this.mems = mems;
         }
     }
@@ -138,7 +160,7 @@ public class Resp_getFriendList extends AbstractFriendList implements RespBean<R
     /**
      * 好友对象
      */
-    public static class Friend extends AbstractFriend {
+    public static class Resp_Friend extends AbstractFriend {
 
         private String name;
 

@@ -13,7 +13,7 @@ import java.time.Instant;
  * @author ForteScarlet <[email]ForteScarlet@163.com>
  * @since JDK1.8
  **/
-public class Resp_privateMsg extends AbstractPrivateMsg implements MsgBean, Imageable, Anonable {
+public class Resp_privateMsg extends BaseMsgGet implements PrivateMsg, Imageable, Anonable {
     /*
         "type":2,
         "subType":1,
@@ -23,14 +23,6 @@ public class Resp_privateMsg extends AbstractPrivateMsg implements MsgBean, Imag
         "font":182084192,
         "msgID":999
      */
-    /**
-     * 主类型
-     */
-    private Integer type;
-    /**
-     * 子类型
-     */
-    private Integer subType;
     /**
      * qq号
      */
@@ -53,11 +45,6 @@ public class Resp_privateMsg extends AbstractPrivateMsg implements MsgBean, Imag
     private String msgID;
 
     /**
-     * 原始数据字符串
-     */
-    private String originalData;
-
-    /**
      * 图片消息原文
      */
     private String originalMsg;
@@ -66,11 +53,6 @@ public class Resp_privateMsg extends AbstractPrivateMsg implements MsgBean, Imag
      * 图片消息封装类
      */
     private MsgImage[] imageInfo;
-
-    /**
-     * 秒级时间戳，数据中没有，所以获取此类创建时的时间
-     */
-    private Long time = Instant.now().getEpochSecond();
 
     /*
         可能存在匿名消息
@@ -96,6 +78,7 @@ public class Resp_privateMsg extends AbstractPrivateMsg implements MsgBean, Imag
       */
     private Resp_getStrangerInfo strangerInfo;
 
+
     @Override
     public PrivateMsgType getType() {
         /* 事件子类型，11/来自好友，1/普通消息，2/匿名消息，3/系统消息 */
@@ -105,6 +88,7 @@ public class Resp_privateMsg extends AbstractPrivateMsg implements MsgBean, Imag
         }
 
         //不区分讨论组、好友、在线之类的，则普通消息、匿名消息认为是好友消息
+        Integer subType = getSubType();
         if (subType == 11 || subType == 1 || subType == 2) {
             return PrivateMsgType.FROM_FRIEND;
         }
@@ -118,12 +102,6 @@ public class Resp_privateMsg extends AbstractPrivateMsg implements MsgBean, Imag
         return null;
     }
 
-    @Override
-    public Integer getBigType() {
-        return type;
-    }
-
-
     /**
      * 获取发送人的QQ号
      */
@@ -132,25 +110,10 @@ public class Resp_privateMsg extends AbstractPrivateMsg implements MsgBean, Imag
         return qq;
     }
 
-    public void setType(Integer type) {
-        this.type = type;
-    }
-
-    @Override
-    public Integer getSubType() {
-        return subType;
-    }
-
-    public void setSubType(Integer subType) {
-        this.subType = subType;
-    }
-
-    @Override
     public String getQq() {
         return qq;
     }
 
-    @Override
     public void setQq(String qq) {
         this.qq = qq;
     }
@@ -176,7 +139,7 @@ public class Resp_privateMsg extends AbstractPrivateMsg implements MsgBean, Imag
         return msg;
     }
 
-    @Override
+//    @Override
     public void setMsg(String msg) {
         this.msg = msg;
     }
@@ -186,15 +149,6 @@ public class Resp_privateMsg extends AbstractPrivateMsg implements MsgBean, Imag
         return font;
     }
 
-    /**
-     * 获取到的时间, 代表某一时间的秒值。注意是秒值！如果类型不对请自行转化
-     */
-    @Override
-    public Long getTime() {
-        return time;
-    }
-
-    @Override
     public void setFont(String font) {
         this.font = font;
     }
@@ -234,16 +188,6 @@ public class Resp_privateMsg extends AbstractPrivateMsg implements MsgBean, Imag
     }
 
     @Override
-    public void setOriginalData(String originalData) {
-        this.originalData = originalData;
-    }
-
-    @Override
-    public void setTime(Long time) {
-        this.time = time;
-    }
-
-    @Override
     public String getFromAnonymous() {
         return fromAnonymous;
     }
@@ -261,11 +205,4 @@ public class Resp_privateMsg extends AbstractPrivateMsg implements MsgBean, Imag
         this.anonymousInfo = anonymousInfo;
     }
 
-    /**
-     * 获取原本的数据 originalData
-     */
-    @Override
-    public String getOriginalData() {
-        return originalData;
-    }
 }

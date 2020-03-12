@@ -5,6 +5,7 @@ import com.forte.qqrobot.beans.messages.result.GroupNoteList;
 import com.forte.qqrobot.beans.messages.result.inner.AbstractGroupNote;
 import com.forte.qqrobot.beans.messages.result.inner.GroupNote;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,6 +21,16 @@ public class Resp_getGroupNoteList extends AbstractGroupNoteList implements Resp
     private String errMsg;
 
     private String originalData;
+
+    @Override
+    public String toString() {
+        return "Resp_getBanList{" +
+                "status=" + status +
+                ", result=" + Arrays.toString(getList()) +
+                ", errMsg='" + errMsg + '\'' +
+                ", originalData='" + originalData + '\'' +
+                "} " + super.toString();
+    }
 
     @Override
     public String getOriginalData() {

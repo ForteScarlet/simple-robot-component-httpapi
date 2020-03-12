@@ -4,6 +4,7 @@ import com.forte.qqrobot.ResourceDispatchCenter;
 import com.forte.qqrobot.beans.messages.msgget.MsgGet;
 import com.forte.qqrobot.component.forhttpapi.utils.ListenBeansUtil;
 import com.forte.qqrobot.listener.invoker.ListenerManager;
+import com.forte.qqrobot.log.QQLog;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import org.apache.commons.io.IOUtils;
@@ -11,6 +12,8 @@ import org.apache.commons.io.IOUtils;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.InetSocketAddress;
+import java.net.URI;
 import java.net.URLDecoder;
 import java.util.Arrays;
 
@@ -69,11 +72,13 @@ public class QQHttpHandler implements HttpHandler {
 
             //判断请求方式
             if(Arrays.stream(this.METHODS).anyMatch(m -> m.toLowerCase().equals(method.toLowerCase()))){
+                final InetSocketAddress localAddress = httpExchange.getLocalAddress();
                 //获取接收到的参数
                 InputStream requestBody = httpExchange.getRequestBody();
                 //编码转义
                 String paramsUrl = IOUtils.toString(requestBody, ENCODING);
                 String params = URLDecoder.decode(paramsUrl, ENCODING);
+                QQLog.debug("接收到请求：[" + localAddress + "] " + params);
 
                 //参数
                 MsgGet msgGet = ListenBeansUtil.jsonToMsgGet(params);
@@ -88,7 +93,6 @@ public class QQHttpHandler implements HttpHandler {
                 String body = apply.getBody();
 
                 // 设置响应头
-                //httpExchange.getResponseHeaders().add("Content-Type", "text/html; charset=" + ENCODING);
 
                 // 设置响应code和内容长度
                 httpExchange.sendResponseHeaders(headerLeft, headerRight);
@@ -99,7 +103,6 @@ public class QQHttpHandler implements HttpHandler {
                 IOUtils.write(body, out, ENCODING);
 
                 // 关闭处理器, 同时将关闭请求和响应的输入输出流（如果还没关闭）
-//                httpExchange.close();
             }
         }catch (Exception e){
             try {
@@ -110,7 +113,6 @@ public class QQHttpHandler implements HttpHandler {
                 // 响应信息
                 IOUtils.write("error", out, ENCODING);
                 // 关闭处理器, 同时将关闭请求和响应的输入输出流（如果还没关闭）
-//                httpExchange.close();
             } catch (IOException e1) {
                 e1.printStackTrace();
             }

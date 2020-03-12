@@ -490,7 +490,6 @@ public class QQJSONMsgCreator {
      * 取好友列表 (尚且有异常
      * @return 好友列表
      */
-    @Deprecated
     String getResponseJson_Req_getFriendList(){
         Map<String, Object> paramMap = createParamMap(0);
         return mapToBeanJson(new Req_getFriendList(), paramMap);

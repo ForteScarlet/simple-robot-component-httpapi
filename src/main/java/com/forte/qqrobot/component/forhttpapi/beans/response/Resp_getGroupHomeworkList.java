@@ -6,6 +6,7 @@ import com.forte.qqrobot.beans.messages.result.inner.AbstractGroupHomework;
 import com.forte.qqrobot.beans.messages.result.inner.GroupHomework;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -19,6 +20,16 @@ public class Resp_getGroupHomeworkList extends AbstractGroupHomeworkList impleme
     private GroupHomeworkList[] result;
     private String errMsg;
     private String originalData;
+
+    @Override
+    public String toString() {
+        return "Resp_getBanList{" +
+                "status=" + status +
+                ", result=" + Arrays.toString(getList()) +
+                ", errMsg='" + errMsg + '\'' +
+                ", originalData='" + originalData + '\'' +
+                "} " + super.toString();
+    }
 
     @Override
     public String getErrMsg() {

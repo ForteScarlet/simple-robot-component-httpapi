@@ -1,6 +1,7 @@
 package com.forte.qqrobot.component.forhttpapi.beans.response.msgget;
 
 import com.forte.qqrobot.beans.messages.msgget.AbstractDiscussMsg;
+import com.forte.qqrobot.beans.messages.msgget.DiscussMsg;
 
 import java.time.Instant;
 
@@ -9,8 +10,7 @@ import java.time.Instant;
  * @author ForteScarlet <[email]ForteScarlet@163.com>
  * @since JDK1.8
  **/
-public class Resp_discussMsg extends AbstractDiscussMsg implements Imageable, Anonable{
-
+public class Resp_discussMsg extends BaseMsgGet implements DiscussMsg, Imageable, Anonable {
     /*
         {
             "type":4,
@@ -22,8 +22,7 @@ public class Resp_discussMsg extends AbstractDiscussMsg implements Imageable, An
             "msgID":999
         }
      */
-    private Integer type;
-    private Integer subType;
+
     /** qq号 */
     private String qq;
     /** 群号 */
@@ -35,9 +34,6 @@ public class Resp_discussMsg extends AbstractDiscussMsg implements Imageable, An
     /** 消息ID */
     private String msgID;
 
-
-    /** 没有时间参数，通过程序获取 */
-    private Long time = Instant.now().getEpochSecond();
     /** 图片消息字符串 */
     private String originalMsg;
     /** 图片消息 */
@@ -46,32 +42,12 @@ public class Resp_discussMsg extends AbstractDiscussMsg implements Imageable, An
     private String fromAnonymous;
     /** 匿名消息 */
     private AnonMsg anonymousInfo;
-    /** 原始数据 */
-    private String originalData;
 
 
-    public Integer getType() {
-        return type;
-    }
-
-    public void setType(Integer type) {
-        this.type = type;
-    }
-
-    public Integer getSubType() {
-        return subType;
-    }
-
-    public void setSubType(Integer subType) {
-        this.subType = subType;
-    }
-
-    @Override
     public String getQq() {
         return qq;
     }
 
-    @Override
     public void setQq(String qq) {
         this.qq = qq;
     }
@@ -89,7 +65,6 @@ public class Resp_discussMsg extends AbstractDiscussMsg implements Imageable, An
         return qq;
     }
 
-    @Override
     public void setGroup(String group) {
         this.group = group;
     }
@@ -107,7 +82,7 @@ public class Resp_discussMsg extends AbstractDiscussMsg implements Imageable, An
         return msg;
     }
 
-    @Override
+//    @Override
     public void setMsg(String msg) {
         this.msg = msg;
     }
@@ -117,7 +92,6 @@ public class Resp_discussMsg extends AbstractDiscussMsg implements Imageable, An
         return font;
     }
 
-    @Override
     public void setFont(String font) {
         this.font = font;
     }
@@ -128,16 +102,6 @@ public class Resp_discussMsg extends AbstractDiscussMsg implements Imageable, An
 
     public void setMsgID(String msgID) {
         this.msgID = msgID;
-    }
-
-    @Override
-    public Long getTime() {
-        return time;
-    }
-
-    @Override
-    public void setTime(Long time) {
-        this.time = time;
     }
 
     @Override
@@ -174,15 +138,5 @@ public class Resp_discussMsg extends AbstractDiscussMsg implements Imageable, An
 
     public void setAnonymousInfo(AnonMsg anonymousInfo) {
         this.anonymousInfo = anonymousInfo;
-    }
-
-    @Override
-    public String getOriginalData() {
-        return originalData;
-    }
-
-    @Override
-    public void setOriginalData(String originalData) {
-        this.originalData = originalData;
     }
 }

@@ -5,6 +5,8 @@ import com.forte.qqrobot.beans.messages.result.GroupList;
 import com.forte.qqrobot.beans.messages.result.inner.AbstractGroup;
 import com.forte.qqrobot.beans.messages.result.inner.Group;
 
+import java.util.Arrays;
+
 /**
  * @author Ricardo
  * @create 2019-03-22 16:44
@@ -16,6 +18,16 @@ public class Resp_getGroupList extends AbstractGroupList implements RespBean<Res
     private String errMsg;
 
     private String originalData;
+
+    @Override
+    public String toString() {
+        return "Resp_getBanList{" +
+                "status=" + status +
+                ", result=" + Arrays.toString(getList()) +
+                ", errMsg='" + errMsg + '\'' +
+                ", originalData='" + originalData + '\'' +
+                "} " + super.toString();
+    }
 
     @Override
     public String getOriginalData() {

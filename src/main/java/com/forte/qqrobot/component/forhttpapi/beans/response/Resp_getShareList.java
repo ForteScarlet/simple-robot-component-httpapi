@@ -5,6 +5,8 @@ import com.forte.qqrobot.beans.messages.result.ShareList;
 import com.forte.qqrobot.beans.messages.result.inner.AbstractShare;
 import com.forte.qqrobot.beans.messages.result.inner.Share;
 
+import java.util.Arrays;
+
 /**
  *
  * @author Ricardo
@@ -16,6 +18,16 @@ public class Resp_getShareList extends AbstractShareList implements RespBean<Res
     private ShareList[] result;
     private String errMsg;
     private String originalData;
+
+    @Override
+    public String toString() {
+        return "Resp_getBanList{" +
+                "status=" + status +
+                ", result=" + Arrays.toString(getList()) +
+                ", errMsg='" + errMsg + '\'' +
+                ", originalData='" + originalData + '\'' +
+                "} " + super.toString();
+    }
 
     @Override
     public String getOriginalData() {
