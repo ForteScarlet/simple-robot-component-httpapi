@@ -16,7 +16,6 @@ import com.forte.qqrobot.utils.HttpClientUtil;
 import java.util.Collection;
 import java.util.Optional;
 import java.util.function.BiFunction;
-import java.util.function.Function;
 
 /**
  * http送信器
